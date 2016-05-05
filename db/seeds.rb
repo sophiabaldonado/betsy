@@ -161,21 +161,25 @@ BILLING.each do |bill|
   Billing.create(bill)
 end
 
+def random_number
+  rand(10000..99999)
+end
+
 ORDERS = [
   {
-    status: "pending", confirmation_date: Time.now, user_id: 3, billing_id: 1
+    status: "pending", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
   },
   {
-    status: "paid", confirmation_date: Time.now, user_id: 3, billing_id: 4
+    status: "paid", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 4
   },
   {
-    status: "complete", confirmation_date: Time.now, user_id: 3, billing_id: 2
+    status: "complete", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 2
   },
   {
-    status: "cancelled", confirmation_date: Time.now, user_id: 3, billing_id: 1
+    status: "cancelled", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
   },
   {
-    status: "paid", confirmation_date: Time.now, user_id: 2, billing_id: 11
+    status: "paid", confirmation_date: Time.now, order_number: random_number, user_id: 2, billing_id: 11
   }
 ]
 
