@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(version: 20160505200119) do
     t.string   "email",           null: false
     t.string   "password_digest", null: false
     t.boolean  "merchant",        null: false
-    t.string   "photo_url",       null: false
-    t.string   "biography",       null: false
+    t.string   "photo_url"
+    t.string   "biography"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
