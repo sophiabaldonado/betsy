@@ -16,7 +16,7 @@ CATEGORIES = [
 
 
 CATEGORIES.each do |cat|
-  Catergory.create(name: cat)
+  Category.create(name: cat)
 end
 
 USERS = [
