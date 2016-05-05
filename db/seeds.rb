@@ -142,7 +142,7 @@ BILLING = [
   },
   {
     first_name: "Cindy",  last_name: "Brady", email: "ccbrady@tv.com", credit_card: 4444555566667777,
-    cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
+    cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
