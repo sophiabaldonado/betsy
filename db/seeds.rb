@@ -101,57 +101,57 @@ end
 
 BILLING = [
   {
-    first_name: "Mike",   last_name: "Brady", email: "mbrady@tv.com", cc: 4444555566667777,
+    first_name: "Mike",   last_name: "Brady", email: "mbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Carol",  last_name: "Brady", email: "cbrady@tv.com", cc: 4444555566667777,
+    first_name: "Carol",  last_name: "Brady", email: "cbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Alice",  last_name: "Nelson", email: "anelson@tv.com", cc: 4444555566667777,
+    first_name: "Alice",  last_name: "Nelson", email: "anelson@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Greg",   last_name: "Brady", email: "gbrady@tv.com", cc: 4444555566667777,
+    first_name: "Greg",   last_name: "Brady", email: "gbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Marcia", last_name: "Brady", email: "mlbrady@tv.com", cc: 4444555566667777,
+    first_name: "Marcia", last_name: "Brady", email: "mlbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Peter",  last_name: "Brady", email: "pbrady@tv.com", cc: 4444555566667777,
+    first_name: "Peter",  last_name: "Brady", email: "pbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Jan",    last_name: "Brady", email: "jbrady@tv.com", cc: 4444555566667777,
+    first_name: "Jan",    last_name: "Brady", email: "jbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Bobby",  last_name: "Brady", email: "bbrady@tv.com", cc: 4444555566667777,
+    first_name: "Bobby",  last_name: "Brady", email: "bbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Cindy",  last_name: "Brady", email: "ccbrady@tv.com", cc: 4444555566667777,
+    first_name: "Cindy",  last_name: "Brady", email: "ccbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Cindy",  last_name: "Brady", email: "ccbrady@tv.com", cc: 4444555566667777,
+    first_name: "Cindy",  last_name: "Brady", email: "ccbrady@tv.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
     zip: 12345, user_id: 2
   },
   {
-    first_name: "Jude",  last_name: "Queso", email: "im_the_man@boss.com", cc: 4444555566667777,
+    first_name: "Jude",  last_name: "Queso", email: "im_the_man@boss.com", cc: "4444555566667777",
     cvv: 123, billing_zip: 54321, address1: "888 Wow Dr", city: "Costa Mesa", state: "CA",
     zip: 78787
   }
