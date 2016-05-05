@@ -1,0 +1,8 @@
+<h2>Order #<%= @order.order_number %></h2>
+
+<p>Items:</p>
+  <ul>
+  <% @order.order_items.each do |item| %>
+    <%= item.status %>, <%= item.name %>, <%= item.quantity %>, <%# item.user %></li>
+  <% end %>
+  </ul>
