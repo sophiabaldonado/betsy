@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   resources :products, only: [:index, :show]
+  resources :orders
   resources :users do
     resources :products
+    resources :orders
   end
-  resources :orders
 
-  get '/products/categories/:name' => 'products#categories'
-  get '/checkout' => 'home#checkout'
 
 
   # You can have the root of your site routed with "root"
