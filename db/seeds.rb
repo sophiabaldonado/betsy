@@ -66,32 +66,32 @@ PRODUCTS = [
   {
     name: "product1", price: 1.50, description: "I'm a cool description!",
     inventory: 3, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 1
+    retired: false, user_id: 1
   },
   {
     name: "product2", price: 1.50, description: "I'm a cool description!",
     inventory: 1, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 3
+    retired: false, user_id: 3
   },
   {
     name: "product3", price: 1.50, description: "I'm a cool description!",
     inventory: 50, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 1
+    retired: false, user_id: 1
   },
   {
     name: "product4", price: 1.50, description: "I'm a cool description!",
     inventory: 0, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 3
+    retired: false, user_id: 3
   },
   {
     name: "product5", price: 1.50, description: "I'm a cool description!",
     inventory: 1, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 2
+    retired: false, user_id: 2
   },
   {
     name: "product6", price: 1.50, description: "I'm a cool description!",
     inventory: 101, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
-    retired: false, member_id: 2
+    retired: false, user_id: 2
   }
 ]
 
@@ -207,4 +207,17 @@ ORDER_ITEMS = [
 
 ORDER_ITEMS.each do |order_item|
   OrderItem.create(order_item)
+end
+
+CART_ITEMS = [
+  {
+    quantity: 1, product_id: 3
+  },
+  {
+    quantity: 3, product_id: 2
+  }
+]
+
+CART_ITEMS.each do |cart_item|
+  CartItem.create(cart_item)
 end

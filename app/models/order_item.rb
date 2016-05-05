@@ -1,6 +1,6 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :order
-  belgons_to :product
+  belongs_to :product
 
   validates :quantity,   presence: true, numericality: { greater_than: 0 }
   validates :name,       presence: true
