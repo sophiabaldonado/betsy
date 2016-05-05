@@ -5,5 +5,5 @@ class Billing < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :cc, uniqueness: true, length: [is: 16]
+  validates :cc, uniqueness: true, length: { is: 16 }
 end
