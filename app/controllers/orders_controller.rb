@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @cart_items = CartItem.all # temp - CartItem.session_id(session[:id])
+    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
   end
 
@@ -21,15 +21,16 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @cart_items = CartItem.all # temp - CartItem.session_id(session[:id])
+    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @user_id = 3 # temp -session[:user_id] if session[:user_id]
     @billing_id = 1 # temp - params[:billing_id]
     @order_number = order_number
     @order = Order.new(status: "pending", confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
     if @order.save
       @cart_items.each do |item|
-        @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price, status: "pending", order_id: @order.id, product_id: item.product.id)
+        @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
         @order_item.save
+        @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
       end
       redirect_to order_path(@order.id)
     else
@@ -38,10 +39,13 @@ class OrdersController < ApplicationController
   end
 
   def update_cart
+    @cart_item = CartItem.find(update_cart_params[:id])
+    @cart_item.update(quantity: update_cart_params[:quantity])
+    redirect_to action: "new"
   end
 
   private
-  # def create_order_params
-  #   params.permit(order_item: [: ])
-  # end
+  def update_cart_params
+    params.permit(:quantity, :id)
+  end
 end

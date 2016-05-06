@@ -70,7 +70,7 @@ PRODUCTS = [
   },
   {
     name: "product2", price: 1.50, description: "I'm a cool description!",
-    inventory: 1, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
+    inventory: 10, photo_url: "https://i.imgur.com/KWl6pqT.jpg",
     retired: false, user_id: 3, deleted: false
   },
   {

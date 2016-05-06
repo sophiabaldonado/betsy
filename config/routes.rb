@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post  '/products/:id' => 'products#create_cart', as: :create_cart
-  patch '/cart' => 'orders#update_cart'
+  post '/cart' => 'orders#update_cart'
+  get '/checkout' => 'orders#new', as: :new_order
 
   resources :products, only: [:index, :show]
-  resources :orders
+  resources :orders, except: [:new]
   resources :users do
     resources :products
     resources :orders

@@ -3,12 +3,13 @@
   <% @cart_items.each do |cart_item| %>
     <li>Name: <%= cart_item.product.name %></li>
     <li>Quantity:
-      <%= form_tag ({controller: "orders", action: "update_cart", method: "patch"}) do %>
+      <%= form_tag(controller: "orders", action: "update_cart", method: "patch") do %>
         <div class="form-group">
+          <%= hidden_field_tag(:id, cart_item.id) %>
           <%= select_tag(
-            cart_item.quantity,
-            options_for_select(1..30, cart_item.quantity)
-            ) %>
+            :quantity,
+            options_for_select(1..30, cart_item.quantity),
+            id: "quantity") %>
         </div>
         <%= submit_tag"Update" %>
       <% end %>
@@ -23,7 +24,7 @@
 
 <%= render 'billing' %>
 <%= form_for @order do |f| %>
-  <%= f.submit %>
+  <%= f.submit "Checkout", class: "btn btn-success" %>
 <% end %>
 
 <%= params %>
