@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @cart_items = CartItem.all # temp - CartItem.session_id(session[:id])
+    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
   end
 
@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @cart_items = CartItem.all # temp - CartItem.session_id(session[:id])
+    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @user_id = 3 # temp -session[:user_id] if session[:user_id]
     @billing_id = 1 # temp - params[:billing_id]
     @order_number = order_number
