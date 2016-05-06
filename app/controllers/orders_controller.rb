@@ -37,6 +37,9 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update_cart
+  end
+
   private
   # def create_order_params
   #   params.permit(order_item: [: ])

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  patch '/cart' => 'orders#update_cart'
+
   resources :products, only: [:index, :show]
   resources :orders
   resources :users do

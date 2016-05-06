@@ -3,13 +3,14 @@
   <% @cart_items.each do |cart_item| %>
     <li>Name: <%= cart_item.product.name %></li>
     <li>Quantity:
-      <%= form_tag ({controller: "products", action: "update_cart", method: "patch"}) do %>
+      <%= form_tag ({controller: "orders", action: "update_cart", method: "patch"}) do %>
         <div class="form-group">
           <%= select_tag(
             cart_item.quantity,
             options_for_select(1..30, cart_item.quantity)
             ) %>
         </div>
+        <%= submit_tag"Update" %>
       <% end %>
 
     </li>

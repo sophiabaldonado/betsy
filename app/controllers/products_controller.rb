@@ -11,4 +11,8 @@ class ProductsController < ApplicationController
   def categories
 
   end
+
+  def update_cart
+    
+  end
 end
