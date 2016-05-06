@@ -15,6 +15,15 @@
   <link rel="stylesheet" href="build.css">
 </head>
 <body>
+  <header>
+    <!-- Temporary nav bar for convenience, Mindy pls make it beautiful and better :D -->
+    <ul>
+      <li><%= link_to "HOME", root_path %></li>
+      <li><%= link_to "PRODUCTS", products_path %></li>
+      <li><%= link_to "ORDERS", orders_path %></li>
+      <li><%= link_to "USERS", new_user_path %></li>
+    </ul>
+  </header>
 
 <article class="container">
   <%= yield %>

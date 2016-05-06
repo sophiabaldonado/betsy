@@ -7,7 +7,7 @@
         <div class="form-group">
           <%= select_tag(
             cart_item.quantity,
-            options_for_select(1..30, cart_item.quantity)
+            options_for_select(1..30, cart_item.quantity, name: "quantity")
             ) %>
         </div>
         <%= submit_tag"Update" %>

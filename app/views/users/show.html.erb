@@ -1,22 +1,22 @@
-<h1>Welcome</h1>
+<h1>Welcome <%= @user.username.capitalize %></h1>
 <h2>Account Information</h2>
 <% if @user.photo_url %>
   <div>
-    <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="42" width="42">
+    <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="150" width="150">
   </div>
 <% end %>
 <div>
   <table>
     <tr>
-      <td>Username</td>
+      <td>Name</td>
       <td><%= @user.username %></td>
     </tr>
     <tr>
-      <td>email</td>
+      <td>Email</td>
       <td><%= @user.email %></td>
     </tr>
     <tr>
-      <td>bio</td>
+      <td>Bio</td>
       <td><%= @user.biography %></td>
     </tr>
   </table>

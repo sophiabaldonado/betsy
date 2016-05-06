@@ -38,10 +38,13 @@ class OrdersController < ApplicationController
   end
 
   def update_cart
+    @cart_item = CartItem.find(update_cart_params[:id])
+    raise
+    render :new
   end
 
   private
-  # def create_order_params
-  #   params.permit(order_item: [: ])
-  # end
+  def update_cart_params
+    params.permit(cart_item: [:quantity, :id])
+  end
 end
