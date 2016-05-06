@@ -1,8 +1,16 @@
 <h2>Order #<%= @order.order_number %></h2>
 
 <p>Items:</p>
-  <ul>
   <% @order.order_items.each do |item| %>
-    <%= item.status %>, <%= item.name %>, <%= item.quantity %>, <%# item.user %></li>
-  <% end %>
+  <ul>
+    <li>Product: <%= item.name %></li>
+    <li>Quantity: <%= item.quantity %></li>
+    <li>Price: <%= item.price %></li>
+    <li>Status: <%= item.status %></li>
+    <li>Buyer: <%= @order.user.username %></li>
   </ul>
+  <% end %>
+
+<h3>Order Total: <%= total_revenue(@order) %></h3>
+
+<%= params %>

@@ -1,0 +1,16 @@
+<ul>
+  <% @cart_items.each do |cart_item| %>
+    <li>Name: <%= cart_item.product.name %></li>
+    <li>Quantity: <%= select_tag :quantity, options_for_select(1..30, cart_item.quantity) %>
+
+
+    </li>
+    <li>Price: <%= price_by_quantity(cart_item) %></li>
+  <% end %>
+</ul>
+<p>Subtotal: <%= @subtotal %></p>
+<%= form_for @order do |f| %>
+  <%= f.submit %>
+<% end %>
+
+<%= params %>
