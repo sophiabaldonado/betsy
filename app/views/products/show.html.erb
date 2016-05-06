@@ -1,7 +1,12 @@
 <h1><%= @product.name %></h1>
   <%= @product.description %><br />
+  <%= "$#{@product.price}" %><br />
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
 
-  <%= f.select(:inventory) do %>
-  <%=      options_from_collection_for_select(Person.all, :id, :name ) %>
+  <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
+
+  <%= hidden_field_tag(:quantity, :value => 1) %>
+  <%= hidden_field_tag(:product_id, :value => @product.id) %>
+  <%= submit_tag("Add to Cart") %>
+  <%end%>
