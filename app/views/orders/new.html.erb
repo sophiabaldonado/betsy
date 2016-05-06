@@ -24,7 +24,7 @@
 
 <%= render 'billing' %>
 <%= form_for @order do |f| %>
-  <%= f.submit %>
+  <%= f.submit "Checkout", class: "btn btn-success" %>
 <% end %>
 
 <%= params %>
