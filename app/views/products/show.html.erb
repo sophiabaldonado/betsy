@@ -1,0 +1,7 @@
+<h1><%= @product.name %></h1>
+  <%= @product.description %><br />
+  <%= "In Stock: #{@product.inventory}" %><br />
+  <%= "Sold By: #{User.find(@product.user_id).username}" %>
+
+  <%= f.select(:inventory) do %>
+  <%=      options_from_collection_for_select(Person.all, :id, :name ) %>
