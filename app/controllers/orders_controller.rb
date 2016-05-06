@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @order = Order.new(status: "pending", confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
     if @order.save
       @cart_items.each do |item|
-        @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price, status: "pending", order_id: @order.id, product_id: item.product.id)
+        @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
         @order_item.save
         @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
       end
