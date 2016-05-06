@@ -1,12 +1,12 @@
 <h1><%= @product.name %></h1>
+  <img class="img-responsive" width="15%" src=<%="#{@product.photo_url}"%> /><br />
   <%= @product.description %><br />
   <%= "$#{@product.price}" %><br />
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
 
   <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
-
-  <%= text_field_tag :quantity, params[:quantity], :id => 'quantity' %>
-  <%= hidden_field_tag(:product_id, @product.id) %>
-  <%= submit_tag("Add to Cart") %>
+    <%= text_field_tag :quantity, params[:quantity], :id => 'quantity' %>
+    <%= hidden_field_tag(:product_id, @product.id) %>
+    <%= submit_tag("Add to Cart") %>
   <%end%>
