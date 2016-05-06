@@ -1,5 +1,14 @@
 <h1>Products</h1>
 
-<% @products.each do |product| %>
-  <%= link_to product.name,product_path(product) %><br />
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+      <!-- col-sm-4 -->
+        <% @products.each do |product| %>
+        <a class="thumbnail">
+      <img class="img-responsive" src=<%="#{product.photo_url}"%> /></a>
+      <%= link_to product.name,product_path(product) %><br />
+    <% end %>
+    </div>
+  </div>
+</div>
