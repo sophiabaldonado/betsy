@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  post  '/cart' => 'products#create_cart', as: :create_cart
+  post  '/products/:id' => 'products#create_cart', as: :create_cart
   patch '/cart' => 'orders#update_cart'
 
   resources :products, only: [:index, :show]
