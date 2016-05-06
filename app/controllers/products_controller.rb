@@ -11,9 +11,8 @@ class ProductsController < ApplicationController
   end
 
   def create_cart
-    @cart_items = CartItem.new(cart_params[:cart_item])
+    @cart_items = CartItem.new(cart_params)
     @product = Product.find(params[:id]) || Product.find(@product.id)
-    raise
     if @cart_items.save
       redirect_to product_path(@product.id), :notice => 'Products added to cart.'
     else
