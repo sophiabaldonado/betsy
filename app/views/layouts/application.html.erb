@@ -15,15 +15,33 @@
   <link rel="stylesheet" href="build.css">
 </head>
 <body>
-  <header>
-    <!-- Temporary nav bar for convenience, Mindy pls make it beautiful and better :D -->
-    <ul>
-      <li><%= link_to "HOME", root_path %></li>
-      <li><%= link_to "PRODUCTS", products_path %></li>
-      <li><%= link_to "ORDERS", orders_path %></li>
-      <li><%= link_to "USERS", new_user_path %></li>
-    </ul>
-  </header>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Traverse!</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><%= link_to "HOME", root_path %></li>
+        <li><%= link_to "PRODUCTS", products_path %></li>
+        <li><%= link_to "ORDERS", orders_path %></li>
+        <li><%= link_to "USERS", new_user_path %></li>
+      </ul>
+
+      <% if current_user %>
+         <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span><% end %></li>
+          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-in"></span><% end %></li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right"> 
+          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-out"></span><% end %></li>
+        </ul>
+      <% end %>
+    </div>
+
+
+
 
 <article class="container">
   <%= yield %>
