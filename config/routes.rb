@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root 'home#index'
-  post '/products/:id/cart' => 'products#create_cart', as: :create_cart
+
+  post  '/cart' => 'products#create_cart', as: :create_cart
+  patch '/cart' => 'orders#update_cart'
+
   resources :products, only: [:index, :show]
   resources :orders
   resources :users do
