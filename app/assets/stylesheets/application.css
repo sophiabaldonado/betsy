@@ -16,4 +16,5 @@
 
  .navbar {
    margin-top: 10rem;
+   min-height: 10px;
  }
