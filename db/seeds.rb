@@ -99,6 +99,30 @@ PRODUCTS.each do |prod|
   Product.create(prod)
 end
 
+PRODUCTCATEGORIES = [
+  {
+    product_id: 1 , category_id: 4
+  },
+  {
+    product_id: 1 , category_id: 2
+  },
+  {
+    product_id: 3 , category_id: 1
+  },
+  {
+    product_id: 3 , category_id: 4
+  },
+  {
+    product_id: 3 , category_id: 2
+  }
+]
+
+PRODUCTCATEGORIES.each do |bridge|
+  ProductCategory.create(bridge)
+end
+
+
+
 BILLING = [
   {
     first_name: "Mike",   last_name: "Brady", email: "mbrady@tv.com", cc: "4444555566667777",
