@@ -5,8 +5,9 @@
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
       <!-- col-sm-4 -->
         <% @products.each do |product| %>
-        <a class="thumbnail">
-      <img class="img-responsive" src=<%="#{product.photo_url}"%> /></a>
+          <%= link_to product_path(product), class: 'thumbnail' do %>
+      <img class="img-responsive" src=<%="#{product.photo_url}"%> />
+      <%end%>
       <%= link_to product.name,product_path(product) %><br />
     <% end %>
     </div>
