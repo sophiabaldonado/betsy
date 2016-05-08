@@ -1,4 +1,5 @@
 module OrdersHelper
+  
   def order_number
     rand(10000..99999)
   end

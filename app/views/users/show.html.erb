@@ -1,5 +1,7 @@
 <h1>Welcome <%= @user.username.capitalize %></h1>
 <h2>Account Information</h2>
+<%= session.fetch(:session_id) %>
+
 <% if @user.photo_url %>
   <div>
     <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="150" width="150">

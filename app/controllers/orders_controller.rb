@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  helper_method :order_number
 
   def index
     @orders = Order.all # temp
@@ -30,7 +31,7 @@ class OrdersController < ApplicationController
       @cart_items.each do |item|
         @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
         @order_item.save
-        item.destroy 
+        item.destroy
         @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
       end
       redirect_to order_path(@order.id)
