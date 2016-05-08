@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  helper_method :order_number
+  include OrdersHelper
 
   def index
     @orders = Order.all # temp
@@ -15,10 +15,6 @@ class OrdersController < ApplicationController
     @order = Order.new
     @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
-  end
-
-  def order_number
-    rand(10000..99999)
   end
 
   def create
