@@ -6,14 +6,16 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @cart_items = CartItem.new
-    @cart_items = CartItem.all
+    @cart_item = CartItem.new
+    @cart_item = CartItem.all
   end
 
   def create_cart
-    @cart_items = CartItem.new(cart_params)
+    @cart_item = CartItem.new(cart_params)
     @product = Product.find(params[:id]) || Product.find(@product.id)
-    if @cart_items.save
+    if @cart_item.save
+      @cart_item.update(session_id: session[:session_id])
+      @cart_item.update(user_id: session[:user_id]) if session[:user_id]
       redirect_to product_path(@product.id), :notice => 'Products added to cart.'
     else
       render :show
