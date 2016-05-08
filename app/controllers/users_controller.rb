@@ -5,15 +5,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @cart_items = CartItem.find_by(session_id: session[:session_id])
+    @cart_items = CartItem.where(session_id: session[:session_id])
     @user = User.new(user_create_params[:user])
     if @user.save
       session[:user_id] = @user.id
-      unless @cart_items.nil?
-        @cart_items.each do |item|
-          item.update(user_id: @user.id) if item @user_id.nil?
-        end
-      end
+      keep_cart_items(@cart_items)
       redirect_to user_path(@user)
     else
       render :new

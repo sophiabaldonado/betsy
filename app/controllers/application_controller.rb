@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
 
 
   def current_user
-    @user ||= User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def keep_cart_items
-    unless @cart_items.nil?
-      @cart_items.each do |item|
-        item.update(user_id: @user.id) if item @user_id.nil?
+  def keep_cart_items(cart_items)
+    unless cart_items.nil?
+      cart_items.each do |item|
+        item.update(user_id: @user.id)
       end
     end
   end

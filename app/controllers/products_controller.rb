@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id]) || Product.find(@product.id)
     if @cart_item.save
       @cart_item.update(session_id: session[:session_id])
-      @cart_item.update(user_id: session[:user_id]) if session[:user_id]
+      @cart_item.update(user_id: session[:user_id])
       redirect_to product_path(@product.id), :notice => 'Products added to cart.'
     else
       render :show

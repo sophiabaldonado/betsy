@@ -26,17 +26,17 @@
         <li><%= link_to "PRODUCTS", products_path %></li>
         <li><%= link_to "ORDERS", orders_path %></li>
         <li><%= link_to "USERS", new_user_path %></li>
-        <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= CartItem.all.length %><% end %></li>
+        <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
       </ul>
 
       <% if current_user %>
-         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span><% end %></li>
-          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-in"></span><% end %></li>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-out"></span> Log Out<% end %></li>
         </ul>
       <% else %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-out"></span><% end %></li>
+          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> Sign Up<% end %></li>
+          <li><%= link_to root_path do %><span class="glyphicon glyphicon-log-in"></span> Log In<% end %></li>
         </ul>
       <% end %>
     </div>
