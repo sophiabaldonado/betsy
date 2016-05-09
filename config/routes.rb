@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   post '/cart' => 'orders#update_cart'
   get '/checkout' => 'orders#new', as: :new_order
 
+  get '/sign_up' => 'users#new'
+
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
+
   resources :products, only: [:index, :show]
   resources :orders, except: [:new]
   resources :users do

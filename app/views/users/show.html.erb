@@ -4,7 +4,7 @@
 
 <% if @user.photo_url %>
   <div>
-    <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="150" width="150">
+    <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="150" width="150">  <!-- if no image generate a generic one -->
   </div>
 <% end %>
 <div>
