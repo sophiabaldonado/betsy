@@ -7,9 +7,9 @@
         <th>Order #</th>
         <th>Time</th>
         <th>Status</th>
-        <tr class="success">
+        <tr class="main-order">
           <td>Order <%= link_to order.order_number, @path %></td>
-          <td><%= order.created_at %></td>
+          <td><%= order.created_at.strftime("%B %d, %Y") %></td>
           <td><%= order.status %></td>
           <tr class="info subheader">
             <th>Item</th>
@@ -19,7 +19,7 @@
           <tr>
           <% @order_items.each do |item| %>
               <td class="info"> • <%= link_to item.product.name, product_path(item.product.id) %></td>
-              <td class="info"><%= price_by_quantity(item) %></td>
+              <td class="info"><%= number_to_currency(price_by_quantity(item)) %></td>
               <td class="info"><%= item.complete? ? "alrdy shipped chkbox" : (link_to("Shipped!", sold_order_path(item.id), method: :patch)) %></td>
             </tr>
           <% end %>

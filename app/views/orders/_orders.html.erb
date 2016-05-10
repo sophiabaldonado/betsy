@@ -1,0 +1,7 @@
+<ul>
+  <% @orders.each do |order| %>
+  <% '/sold' == request.env['PATH_INFO'] ? @path = sold_order_path(@order.id) : @path = user_order_path(@user.id, order.id) %>
+      <%# link_to order.product, order_path(order.id) %>
+      <li>Order: <%= link_to order.order_number, @path %></li>
+  <% end %>
+</ul>
