@@ -1,7 +1,17 @@
 class ProductsController < ApplicationController
+  skip_before_action :require_login, only: [:index, :show, :create_cart, :browse_by]
+
+  BROWSE = ['All Products', 'Category', 'Merchant']
 
   def index
-    @products = Product.where(deleted: false, retired: false).order(name: :asc)
+    @browser = BROWSE
+    if params[:browse] == BROWSE[1]
+      @show = Category.uniq.order(name: :asc)
+    elsif params[:browse] == BROWSE[2]
+      @show = User.where(merchant: true)
+    else
+      @show = Product.where(deleted: false, retired: false).order(name: :asc)
+    end
   end
 
   def show
@@ -22,6 +32,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def browse_by
+
+  end
   def update_cart
   end
 

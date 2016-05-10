@@ -1,17 +1,31 @@
 <h1>Products</h1>
 
-<%= session[:user_id].inspect %>
+<h2>Browse By:</h2>
+<%= form_tag(controller: "products", action: "index", method: "post") do %>
+  <div class="form-group">
+    <%= select_tag(
+      :browse,
+      options_for_select(@browser),
+      id: "browse") %>
+  </div>
+  <%= submit_tag"Update" %>
+<% end %>
 
 
 <div class="container">
   <div class="row">
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
       <!-- col-sm-4 -->
-        <% @products.each do |product| %>
-          <%= link_to product_path(product), class: 'thumbnail' do %>
-      <img class="img-responsive" src=<%="#{product.photo_url}"%> />
+        <% @show.each do |thing| %>
+          <%= link_to product_path(thing), class: 'thumbnail' do %>
+      <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
       <%end%>
-      <%= link_to product.name,product_path(product) %><br />
+      <% if thing[:name]%>
+       <%= link_to thing[:name],product_path(thing)%>
+       <%else%>
+       <%= link_to thing[:username],user_path(thing) %>
+        <%end%>
+       <br />
     <% end %>
     </div>
   </div>
