@@ -4,23 +4,24 @@ class SessionsController < ApplicationController
 
   # #destroy signs out a user by destroying the sessions[:user_id]
 
-  def new #renders view
+  def new
   end
-
 
   def create
-    @user = User.find_by_email(params[:session][:email])
-    if @user && @user.authenticate(params[:session][:password])
-      redirect_to user_path(@user.id)
+    user = User.log_in(params[:session][:email], params[:session][:password])
+    if user
+      session[:user_id] = user.id
+      redirect_to root_path
     else
-      redirect_to login_path
+      flash.now[:danger] = 'Invalid email/password combination'
+      render 'new'
     end
   end
-
 
   def destroy
     session.delete :user_id
     redirect_to root_path
   end
+
 
 end

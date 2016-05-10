@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def self.log_in(email, password)
+    somebody = User.find_by(email: email.downcase)
+    somebody && somebody.authenticate(password)
+  end
 end

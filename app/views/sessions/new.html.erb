@@ -3,13 +3,17 @@
     <div class = "form">
 
       <h1> Log In </h1>
+      <% if flash.now[:danger] %>
+        <div class="alert alert-danger "><%=  flash.now[:danger] %></div>
+      <% end %>
 
       <%= form_for(:session, url: login_path) do |f| %>
         <%= f.email_field :email, :placeholder => "Email" %>
         <%= f.password_field :password, :placeholder => "Password" %>
         <%= f.submit "Log in", class: "btn-submit" %>
       <% end %>
-
+      <p>New user? <%= link_to "Sign up now!", '/sign_up' %></p>
     </div>
   </div>
+
 </div>
