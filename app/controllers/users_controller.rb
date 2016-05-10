@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create, :show]
   def new
-    @user = User.new
+    raise
+
+    if params[:id]
+      render :show
+    else
+      @user = User.new
+    end
   end
 
   def create

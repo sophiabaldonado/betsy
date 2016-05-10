@@ -1,11 +1,3 @@
 <%= render partial: "browse" %>
 
-<% @show.each do |thing| %>
-  <%= link_to product_path(thing), class: 'thumbnail' do %>
-    <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
-  <%end%>
-
-  <%= link_to thing[:name],product_path(thing) %>
-   <br />
-
-<% end %>
+<%= render '/shared/products' %>
