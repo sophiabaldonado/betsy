@@ -2,16 +2,25 @@ class OrdersController < ApplicationController
   include OrdersHelper
 
   def index
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
     @order_items = OrderItem.where(:product_id => @user.products)
-    @order_items_orders = @order_items.map { |item| item.order_id }
-    @orders = Order.where(id: @order_items_orders)
+    if '/sold' == request.env['PATH_INFO']
+      @order_items_orders = @order_items.map { |item| item.order_id }
+      @orders = Order.where(id: @order_items_orders)
+    else
+      @orders = Order.where(user_id: @user.id)
+   end
   end
 
   def show
-    @order = Order.find(params[:id])
     @user = User.find(session[:user_id])
-    @order_items = OrderItem.where(:product_id => @user.products)
+    if '/sold' == request.env['PATH_INFO']
+      @order = Order.find(params[:order_id])
+      @order_items = OrderItem.where(:product_id => @user.products)
+    else
+      @order = Order.find(params[:id])
+      @order_items = OrderItem.where(:order_id => @order.id)
+    end
   end
 
   def new

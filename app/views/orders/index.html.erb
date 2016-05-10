@@ -1,7 +1,36 @@
 <h2>Orders</h2>
-<ul>
-  <% @orders.each do |order| %>
-      <%# link_to order.product, order_path(order.id) %>
-      <li>Order: <%= link_to order.order_number, order_path(order.id) %></li>
-  <% end %>
-</ul>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <% @orders.each do |order| %>
+    <% '/sold' == request.env['PATH_INFO'] ? @path = sold_order_path(order.id) : @path = user_order_path(@user.id, order.id) %>
+        <th>Order #</th>
+        <th>Time</th>
+        <th>Status</th>
+        <tr class="success">
+          <td>Order <%= link_to order.order_number, @path %></td>
+          <td><%= order.created_at %></td>
+          <td><%= order.status %></td>
+          <tr class="info subheader">
+            <th>Item</th>
+            <th>Item Subtotal</th>
+            <th>Shipping Status</th>
+          </tr>
+          <tr>
+          <% @order_items.each do |item| %>
+              <td class="info"> • <%= link_to item.product.name, product_path(item.product.id) %></td>
+              <td class="info"><%= price_by_quantity(item) %></td>
+              <td class="info"><%= item.complete? ? "alrdy shipped chkbox" : (link_to("Shipped!", sold_order_path(item.id), method: :patch)) %></td>
+            </tr>
+          <% end %>
+
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+Each order item sold by me with a quantity and line-item subtotal
+A link to the item description page
+DateTime the order was placed
+Link to transition the order item to marked as shipped
+The current status of the order ("pending", "paid", "complete", "cancelled") - use bootstrap classes to make certain ones colored
