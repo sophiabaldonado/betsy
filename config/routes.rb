@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post  '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
   get '/checkout' => 'orders#new', as: :new_order
+  post '/browse' => 'products#index'
 
   get '/sign_up' => 'users#new'
 

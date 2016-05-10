@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user, :keep_cart_items
-  # before_action :require_login
+  before_action :require_login
 
 
   def current_user
@@ -23,12 +23,12 @@ class ApplicationController < ActionController::Base
   #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
   # end
   #
-  # def require_login
-  #   if current_user.nil?
-  #     flash[:error] = "You must be logged in to view this section"
-  #     redirect_to new_session_path
-  #   end
-  # end
+  def require_login
+    if current_user.nil?
+      flash[:error] = "You must be logged in to view this section"
+      redirect_to new_user_path
+    end
+  end
 
   # @cart_items = CartItem.all
 end
