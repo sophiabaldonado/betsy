@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+
   # #create signs in a user by finding the id in User model and assigning session[:user_id]
   # use keep_cart_items
 
