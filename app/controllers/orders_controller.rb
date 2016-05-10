@@ -2,13 +2,16 @@ class OrdersController < ApplicationController
   include OrdersHelper
 
   def index
-    @orders = Order.all # temp
-    # @user = User.find(session[:user_id])
-    # @orders = @user.orders
+    @user = User.find(params[:user_id])
+    @order_items = OrderItem.where(:product_id => @user.products)
+    @order_items_orders = @order_items.map { |item| item.order_id }
+    @orders = Order.where(id: @order_items_orders)
   end
 
   def show
     @order = Order.find(params[:id])
+    @user = User.find(session[:user_id])
+    @order_items = OrderItem.where(:product_id => @user.products)
   end
 
   def new

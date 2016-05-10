@@ -1,7 +1,7 @@
 <h2>Order #<%= @order.order_number %></h2>
 
 <p>Items:</p>
-  <% @order.order_items.each do |item| %>
+  <% @order_items.each do |item| %>
   <ul>
     <li>Product: <%= item.name %></li>
     <li>Quantity: <%= item.quantity %></li>
