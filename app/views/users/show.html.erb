@@ -24,6 +24,8 @@
   </table>
 </div>
 
-<% if @user.merchant == 1 %>
+<% if @user.merchant == true %>
   <h3>MERCHANT INFO STUFF</h3>
+  <%= link_to "Create New Product",  new_user_product_path(@user), class: 'btn btn-success'%>
+
 <% end %>

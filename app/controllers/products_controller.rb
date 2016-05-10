@@ -3,6 +3,20 @@ class ProductsController < ApplicationController
 
   BROWSE = ['All Products', 'Category', 'Merchant']
 
+  def new
+    @user = User.find(params[:user_id])
+    @product = Product.new
+  end
+
+  def create
+    @product = Product.new(product_create_params[:product])
+    if @product.save
+      redirect_to user_products_path(params[:product][:user_id])
+    else
+      render :new
+    end
+  end
+
   def index
     @browser = BROWSE
     if params[:browse] == BROWSE[1]
@@ -56,6 +70,10 @@ class ProductsController < ApplicationController
 
   def cart_params
     params.permit(:quantity, :product_id)
+  end
 
+  private
+  def product_create_params
+    params.permit(product: [:name, :price, :description, :inventory, :photo_url, :user_id, :retired, :deleted])
   end
 end
