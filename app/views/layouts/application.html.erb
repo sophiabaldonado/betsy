@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><%= link_to "HOME", root_path %></li>
         <li><%= link_to "PRODUCTS", products_path %></li>
-        <li><%= link_to "ORDERS", orders_path %></li>
+        <li><%= link_to "ORDERS", user_orders_path(session[:user_id]) %></li>
         <li><%= link_to "USERS", new_user_path %></li>
         <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
       </ul>
