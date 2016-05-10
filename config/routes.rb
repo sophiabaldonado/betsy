@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/cart' => 'orders#update_cart'
   get '/checkout' => 'orders#new', as: :new_order
   post '/browse' => 'products#index'
-
+  get '/browse/categories/:id' => 'products#category', as: :category
   get '/sign_up' => 'users#new'
 
   get '/login' => 'sessions#new'

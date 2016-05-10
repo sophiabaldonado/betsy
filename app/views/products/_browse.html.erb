@@ -1,0 +1,10 @@
+<h2>Browse By:</h2>
+<%= form_tag(controller: "products", action: "index", method: "post") do %>
+  <div class="form-group">
+    <%= select_tag(
+      :browse,
+      options_for_select(@browser, selected: params[:browse]),
+      id: "browse") %>
+  </div>
+  <%= submit_tag"Update" %>
+<% end %>
