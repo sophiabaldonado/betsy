@@ -40,10 +40,13 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @review = Review.where(product_id: @product.id)
     @cart_item = CartItem.new
     # @cart_items = CartItem.all
     @item_exists_in_cart = CartItem.where(session_id: session[:session_id], product_id: params[:id])
+
   end
+
 
   def create_cart
     @cart_item = CartItem.new(cart_params)
@@ -68,6 +71,7 @@ class ProductsController < ApplicationController
   end
 
   private
+
 
   def cart_params
     params.permit(:quantity, :product_id)

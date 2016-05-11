@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   #joined table
   has_many :product_categories
   has_many :categories, :through => :product_categories
+  has_many :reviews
   #other associations
   belongs_to :order_item
   belongs_to :user
