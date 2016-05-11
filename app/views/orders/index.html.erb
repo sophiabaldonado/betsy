@@ -20,7 +20,14 @@
           <% @order_items.each do |item| %>
               <td class="info"> • <%= link_to item.product.name, product_path(item.product.id) %></td>
               <td class="info"><%= number_to_currency(price_by_quantity(item)) %></td>
-              <td class="info"><%= item.complete? ? "alrdy shipped chkbox" : (link_to("Shipped!", sold_order_path(item.id), method: :patch)) %></td>
+              <td class="info">
+                <% unless item.complete? %>
+                    <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
+                    <%= label_tag :Shipped %>
+                    <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
+                    <%= submit_tag("Update") %>
+                  <% end %>
+                <% end %></td>
             </tr>
           <% end %>
 
@@ -28,9 +35,3 @@
     <% end %>
   </table>
 </div>
-
-Each order item sold by me with a quantity and line-item subtotal
-A link to the item description page
-DateTime the order was placed
-Link to transition the order item to marked as shipped
-The current status of the order ("pending", "paid", "complete", "cancelled") - use bootstrap classes to make certain ones colored

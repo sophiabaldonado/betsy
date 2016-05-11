@@ -54,8 +54,18 @@ class OrdersController < ApplicationController
     redirect_to action: "new"
   end
 
+  def item_shipped
+    @order_item = OrderItem.find(update_item_params[:OrderItem][:shipped])
+    @order_item.update(status: "complete")
+    redirect_to sold_path
+  end
+
   private
   def update_cart_params
     params.permit(:quantity, :id)
+  end
+
+  def update_item_params
+    params.permit(OrderItem: [:shipped])
   end
 end

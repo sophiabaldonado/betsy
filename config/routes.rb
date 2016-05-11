@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
   get '/sold/:order_id' => 'orders#show', as: :sold_order
-  patch '/sold/:order_id' => 'orders#update'
+  patch '/sold' => 'orders#item_shipped'
   get '/sold' => 'orders#index'
 
 
