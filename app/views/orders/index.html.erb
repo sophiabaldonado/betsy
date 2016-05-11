@@ -25,7 +25,7 @@
                     <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
                     <%= label_tag :Shipped %>
                     <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
-                    <%= submit_tag("Update") %>
+                    <%= submit_tag "Update", class: "btn btn-primary" %>
                   <% end %>
                 <% end %></td>
             </tr>
