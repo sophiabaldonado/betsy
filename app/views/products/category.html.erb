@@ -1,8 +1,8 @@
-
 <%= render partial: "browse" %>
 
+<div class="displaycontainer">
 
 <% @show.each do |thing| %>
     <%= link_to thing[:name], category_path(thing)%>
-
 <% end %>
+</div>

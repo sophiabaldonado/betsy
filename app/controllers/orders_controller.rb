@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   include OrdersHelper
 
+  skip_before_action :require_login, only: [:index, :show, :new, :create_cart, :update_cart]
+
   def index
     @orders = Order.all # temp
     # @user = User.find(session[:user_id])
@@ -12,6 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @products = Product.where(deleted: false, retired: false).where("inventory > 0")
     @order = Order.new
     @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
     @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
