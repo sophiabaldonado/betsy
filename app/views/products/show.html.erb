@@ -6,8 +6,14 @@
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
 
+
+<% if @item_exists_in_cart.empty? %>
+  <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
   <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
-    <%= text_field_tag :quantity, params[:quantity], :id => 'quantity' %>
+    <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
     <%= hidden_field_tag(:product_id, @product.id) %>
     <%= submit_tag("Add to Cart") %>
   <%end%>
+<%else%>
+  <p>Added to cart.</p>
+<%end%>
