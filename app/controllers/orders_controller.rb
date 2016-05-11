@@ -1,8 +1,6 @@
 class OrdersController < ApplicationController
   include OrdersHelper
 
-  skip_before_action :require_login, only: [:index, :show, :new, :create_cart, :update_cart]
-
   def index
     @user = User.find(session[:user_id])
     @order = Order.new
@@ -16,7 +14,7 @@ class OrdersController < ApplicationController
     @total = orders_revenue
     @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
     @status = params[:status] if params[:status]
-    params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status]) || [0]
+    params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
   end
 
   def orders_revenue
