@@ -14,3 +14,29 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+// :javascript
+  function fillAnswerNumber(){
+    var question_type_name = $("#question_question_type_id :selected").text()
+    if(question_type_name == "Single Input"){
+      $("#answer_number")
+        .find('option')
+        .remove()
+        .end()
+        .append($('<option selected="selected"></option>').val("1").html("1"))
+        .append($('<option></option>').val("2").html("2"))
+        .append($('<option></option>').val("3").html("3"))
+        .append($('<option></option>').val("4").html("4"))
+      ;
+    }else if(question_type_name == "Multiple Choice"){
+       $("#answer_number")
+        .find('option')
+        .remove()
+        .end()
+        .append($('<option></option>').val("3").html("3"))
+        .append($('<option selected="selected"></option>').val("4").html("4"))
+        .append($('<option></option>').val("5").html("5"))
+        .append($('<option></option>').val("6").html("6"))
+      ;
+    }
+  }

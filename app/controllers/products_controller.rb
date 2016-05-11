@@ -41,7 +41,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @cart_item = CartItem.new
-    @cart_item = CartItem.all
+    # @cart_items = CartItem.all
+    @item_exists_in_cart = CartItem.where(session_id: session[:session_id], product_id: params[:id])
   end
 
   def create_cart
