@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post  '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
+  #post '/products/:id' => 'products#create_review', as: :create_review
   get '/checkout' => 'orders#new', as: :new_order
   post '/browse' => 'products#index'
 
@@ -15,11 +16,18 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+      resources :reviews, :only => [:new, :create]
+  end
+
   resources :orders, except: [:new]
   resources :users do
     resources :products
     resources :orders
+  end
+
+  resources :billings do
+    
   end
 
 

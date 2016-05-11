@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :cart_items
+  has_many :reviews
+  has_one :billing
 
   validates :username, presence: true
   validates :email, presence: true, uniqueness: true
