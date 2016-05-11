@@ -3,13 +3,26 @@ class OrdersController < ApplicationController
 
   def index
     @user = User.find(session[:user_id])
+    @order = Order.new
     @order_items = OrderItem.where(:product_id => @user.products)
     if '/sold' == request.env['PATH_INFO']
       @order_items_orders = @order_items.map { |item| item.order_id }
       @orders = Order.where(id: @order_items_orders)
     else
       @orders = Order.where(user_id: @user.id)
-   end
+    end
+    @total = orders_revenue
+    @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
+    @status = params[:status] if params[:status]
+    params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status]) || [0]
+  end
+
+  def orders_revenue
+    @orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
+  end
+
+  def orders_by_status(status)
+    @orders.map { |order| order if order.status == status }
   end
 
   def show
@@ -52,6 +65,7 @@ class OrdersController < ApplicationController
     @cart_item = CartItem.find(update_cart_params[:id])
     @cart_item.update(quantity: update_cart_params[:quantity])
     redirect_to action: "new"
+
   end
 
   def item_shipped

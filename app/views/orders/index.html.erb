@@ -1,37 +1,56 @@
 <h2>Orders</h2>
 
 <div class="table-responsive">
+<table class="table">
+  <tr>
+    <%= form_tag({}, {method: :get}) do %>
+      <%= label_tag :status %>
+      <%= select_tag(:status, options_for_select(@statuses, selected: params[:status])) %>
+      <%= submit_tag "Update", class: "btn" %>
+    <% end %>
+    <p>Total Revenue: </p><%= number_to_currency(@total) %>
+    <p>Number of Orders: </p><%= @orders.count %>
+  </tr>
+</table>
+</div>
+<div class="table-responsive">
   <table class="table table-hover">
-    <% @orders.each do |order| %>
-    <% '/sold' == request.env['PATH_INFO'] ? @path = sold_order_path(order.id) : @path = user_order_path(@user.id, order.id) %>
-        <th>Order #</th>
-        <th>Time</th>
-        <th>Status</th>
-        <tr class="main-order">
-          <td>Order <%= link_to order.order_number, @path %></td>
-          <td><%= order.created_at.strftime("%B %d, %Y") %></td>
-          <td><%= order.status %></td>
-          <tr class="info subheader">
-            <th>Item</th>
-            <th>Item Subtotal</th>
-            <th>Shipping Status</th>
-          </tr>
-          <tr>
-          <% @order_items.each do |item| %>
-              <td class="info"> • <%= link_to item.product.name, product_path(item.product.id) %></td>
-              <td class="info"><%= number_to_currency(price_by_quantity(item)) %></td>
-              <td class="info">
-                <% unless item.complete? %>
-                    <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
-                    <%= label_tag :Shipped %>
-                    <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
-                    <%= submit_tag "Update", class: "btn btn-primary" %>
-                  <% end %>
-                <% end %></td>
+    <% if @display_orders.any? == false %>
+      <h2>No <%= @status.capitalize %> Orders </h2>
+    <% else %>
+      <% @display_orders.each do |order| %>
+      <% if order %>
+        <% '/sold' == request.env['PATH_INFO'] ? @path = sold_order_path(order.id) : @path = user_order_path(@user.id, order.id)  %>
+      <% end %>
+          <th>Order #</th>
+          <th>Time</th>
+          <th>Status</th>
+          <tr class="main-order">
+            <td>Order <%= link_to order.order_number, @path %></td>
+            <td><%= order.created_at.strftime("%B %d, %Y") %></td>
+            <td><%= order.status %></td>
+            <tr class="info subheader">
+              <th>Item</th>
+              <th>Item Subtotal</th>
+              <th>Shipping Status</th>
             </tr>
-          <% end %>
+            <tr>
+            <% @order_items.each do |item| %>
+                <td class="info"> • <%= link_to item.product.name, product_path(item.product.id) %></td>
+                <td class="info"><%= number_to_currency(price_by_quantity(item)) %></td>
+                <td class="info">
+                  <% unless item.complete? %>
+                      <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
+                      <%= label_tag :Shipped %>
+                      <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
+                      <%= submit_tag "Update", class: "btn btn-primary" %>
+                    <% end %>
+                  <% end %></td>
+              </tr>
+            <% end %>
 
-        </tr>
+          </tr>
+      <% end %>
     <% end %>
   </table>
 </div>

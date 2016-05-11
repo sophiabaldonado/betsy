@@ -12,4 +12,5 @@ module OrdersHelper
     cart_item.product.price * cart_item.quantity
   end
 
+
 end
