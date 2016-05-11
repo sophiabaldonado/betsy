@@ -2,13 +2,25 @@ class OrdersController < ApplicationController
   include OrdersHelper
 
   def index
-    @orders = Order.all # temp
-    # @user = User.find(session[:user_id])
-    # @orders = @user.orders
+    @user = User.find(session[:user_id])
+    @order_items = OrderItem.where(:product_id => @user.products)
+    if '/sold' == request.env['PATH_INFO']
+      @order_items_orders = @order_items.map { |item| item.order_id }
+      @orders = Order.where(id: @order_items_orders)
+    else
+      @orders = Order.where(user_id: @user.id)
+   end
   end
 
   def show
-    @order = Order.find(params[:id])
+    @user = User.find(session[:user_id])
+    if '/sold' == request.env['PATH_INFO']
+      @order = Order.find(params[:order_id])
+      @order_items = OrderItem.where(:product_id => @user.products)
+    else
+      @order = Order.find(params[:id])
+      @order_items = OrderItem.where(:order_id => @order.id)
+    end
   end
 
   def new
@@ -42,8 +54,18 @@ class OrdersController < ApplicationController
     redirect_to action: "new"
   end
 
+  def item_shipped
+    @order_item = OrderItem.find(update_item_params[:OrderItem][:shipped])
+    @order_item.update(status: "complete")
+    redirect_to sold_path
+  end
+
   private
   def update_cart_params
     params.permit(:quantity, :id)
+  end
+
+  def update_item_params
+    params.permit(OrderItem: [:shipped])
   end
 end
