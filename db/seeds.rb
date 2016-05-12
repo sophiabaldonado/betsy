@@ -141,16 +141,12 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
     first_name: "Carol",  last_name: "Brady", email: "cbrady@tv.com", cc: "4444555566667777",
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
     zip: 12345, user_id: 2
   },
@@ -159,16 +155,12 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
     first_name: "Greg",   last_name: "Brady", email: "gbrady@tv.com", cc: "4444555566667777",
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
     zip: 12345, user_id: 2
   },
@@ -177,16 +169,12 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
     first_name: "Peter",  last_name: "Brady", email: "pbrady@tv.com", cc: "4444555566667777",
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
     zip: 12345, user_id: 2
   },
@@ -195,16 +183,12 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
     first_name: "Bobby",  last_name: "Brady", email: "bbrady@tv.com", cc: "4444555566667777",
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
     zip: 12345, user_id: 2
   },
@@ -213,8 +197,6 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
@@ -222,16 +204,12 @@ BILLING = [
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
 
-    cvv: 123, billing_zip: 54321, address: "123 Sunshine St", address2: "Suite 8", city: "Seattle", state: "WA",
-
     zip: 12345, user_id: 2
   },
   {
     first_name: "Jude",  last_name: "Queso", email: "im_the_man@boss.com", cc: "4444555566667777",
 
     cvv: 123, expiration_date: "09/16", billing_zip: 54321, address: "888 Wow Dr", city: "Costa Mesa", state: "CA",
-
-    cvv: 123, billing_zip: 54321, address: "888 Wow Dr", city: "Costa Mesa", state: "CA",
 
     zip: 78787
   }
