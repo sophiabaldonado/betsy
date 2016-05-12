@@ -16,4 +16,8 @@ class Order < ActiveRecord::Base
     @orders.map { |order| order.order_number if order.status == status }
   end
 
+  def billing
+    Billing.find(self.billing_id)
+  end
+
 end

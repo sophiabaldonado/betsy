@@ -30,5 +30,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # @cart_items = CartItem.all
+  def orders_revenue(orders)
+    return 0 if orders.nil?
+    orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
+  end
+
+  def orders_by_status(status)
+    self.select { |order| order if order.status == status }
+  end
+
 end

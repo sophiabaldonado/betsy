@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   include OrdersHelper
 
   def index
-    # raise
     if params[:user_id].to_i == current_user.id
       @user = User.find(current_user.id)
       @order = Order.new
@@ -13,7 +12,7 @@ class OrdersController < ApplicationController
       else
         @orders = Order.where(user_id: @user.id)
       end
-      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
+      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = @display_orders.orders_by_status(params[:status])
       @total = orders_revenue(@display_orders)
       @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
       @status = params[:status] if params[:status]
@@ -22,22 +21,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def orders_revenue(orders)
-    return 0 if orders.nil?
-    orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
-  end
-
-  def orders_by_status(status)
-    @orders.select { |order| order if order.status == status }
-  end
-
   def show
     @user = User.find(session[:user_id])
-    if '/sold' == request.env['PATH_INFO']
-      @order = Order.find(params[:order_id])
+    @order = Order.find(params[:id])
+    if "/users/#{current_user.id}/sold/#{@order.id}" == request.env['PATH_INFO']
       @order_items = OrderItem.where(:product_id => @user.products)
     else
-      @order = Order.find(params[:id])
       @order_items = OrderItem.where(:order_id => @order.id)
     end
   end

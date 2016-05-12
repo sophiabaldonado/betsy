@@ -12,5 +12,9 @@ module OrdersHelper
     cart_item.product.price * cart_item.quantity
   end
 
+  def merchant_fulfillment_view
+    "/users/#{current_user.id}/sold" == request.env['PATH_INFO'] ||
+    "/users/#{current_user.id}/sold/#{@order.id}" == request.env['PATH_INFO']
+  end
 
 end

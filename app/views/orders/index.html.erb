@@ -1,6 +1,6 @@
 <h2>Orders</h2>
   <div class="table-responsive">
-  <% if "/users/#{current_user.id}/sold" == request.env['PATH_INFO'] %>
+  <% if merchant_fulfillment_view %>
     <table class="table">
       <tr>
         <th></th>
@@ -48,12 +48,17 @@
                     <% if item.complete? %>
                       Shipped
                     <% else %>
-                      <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
-                      <%= label_tag :Shipped? %>
-                      <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
-                      <%= submit_tag "Update", class: "btn btn-primary" %>
+                      <% if merchant_fulfillment_view %>
+                        <%= form_tag({controller: "orders", action: "item_shipped"}, {method: "patch"} ) do %>
+                          <%= label_tag :Shipped? %>
+                          <%= check_box(item.class, "shipped", {}, checked_value = item.id, unchecked_value = "0") %>
+                          <%= submit_tag "Update", class: "btn btn-primary" %>
+                        <% end %>
+                      <% else %>
+                        Not Shipped
+                      <% end %>
                     <% end %>
-                  <% end %></td>
+                  </td>
                 </tr>
               <% end %>
 
