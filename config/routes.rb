@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   post '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
+  #post '/products/:id' => 'products#create_review', as: :create_review
   get '/checkout' => 'orders#new', as: :new_order
   post '/browse' => 'products#index'
   get '/browse/categories/:id' => 'products#category', as: :category
@@ -16,10 +17,26 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
   delete '/checkout' => 'orders#destroy'
   resources :products, only: [:index, :show]
+
+
+  resources :products, only: [:index, :show] do
+      resources :reviews, :only => [:new, :create]
+  end
+
   resources :orders, except: [:new]
+
+  get '/sold/:order_id' => 'orders#show', as: :sold_order
+  patch '/sold' => 'orders#item_shipped'
+  get '/sold' => 'orders#index'
+
+
   resources :users do
     resources :products
     resources :orders
+  end
+
+  resources :billings do
+
   end
 
 

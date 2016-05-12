@@ -1,7 +1,15 @@
-<h1><%= @product.name %></h1>
-  <img class="img-responsive" width="15%" src=<%="#{@product.photo_url}"%> /><br />
-  <%= @product.description %><br />
-  <%= "$#{@product.price}" %><br />
+<%= render '/shared/showproduct' %>
+
+<% if request.env['PATH_INFO'] != "/users/#{params[:user_id]}/products" && current_user == params[:user_id]%>
+  <% @user = params[:user_id] %>
+  <% @product.in_stock? ? inventory_class ="success" : inventory_class = "danger" %>
+  <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
+  <%= link_to "Edit Product here",  edit_user_product_path(@user, @product), class: 'btn btn-success'%>
+  <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
+    <i class="glyphicon glyphicon-trash"></i> Delete
+  <% end %>
+<% else %>
+
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
 
@@ -13,6 +21,30 @@
     <%= hidden_field_tag(:product_id, @product.id) %>
     <%= submit_tag("Add to Cart") %>
   <%end%>
+
+
 <%else%>
   <p>Added to cart.</p>
 <%end%>
+
+
+  <% if @review == nil %>
+    <p> No reviews yet </p>
+  <% else %>
+    <% @review.each do |review| %>
+        <p> Reviewed by: <%= User.find(review.user_id).username %></p>
+
+        <p> Rating: <%= review.rating %> </p>
+        <p> Comment: <%= review.comment %> </p>
+
+    <% end %>
+  <% end %>
+
+
+  <%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
+
+<%else%>
+  <p>Added to cart.</p>
+<%end%>
+
+<% end %>

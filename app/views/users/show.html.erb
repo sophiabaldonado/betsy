@@ -1,31 +1,87 @@
-<h1>Welcome <%= @user.username.capitalize %></h1>
-<h2>Account Information</h2>
-<%= session.fetch(:session_id) %>
+<% if @user.current_user?(current_user) %>
+<div class="container">
+    <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+					<img src=<%= @user.profile_pic %> class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						<%= @user.username %>
+					</div>
+					<div class="profile-usertitle-job">
+            <%= @user.email %>
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
 
-<% if @user.photo_url %>
-  <div>
-    <img src= "<%= @user.photo_url %>" alt="@user profile pic" height="150" width="150">  <!-- if no image generate a generic one -->
-  </div>
-<% end %>
-<div>
-  <table>
-    <tr>
-      <td>Name</td>
-      <td><%= @user.username %></td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td><%= @user.email %></td>
-    </tr>
-    <tr>
-      <td>Bio</td>
-      <td><%= @user.biography %></td>
-    </tr>
-  </table>
+
+				<!-- END SIDEBAR BUTTONS -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li class="active">
+							<a href="#">
+							<i class="glyphicon glyphicon-home"></i>
+							Overview </a>
+						</li>
+            <li>
+              <%= link_to edit_user_path(@user) do%>
+              <i class="glyphicon glyphicon-user"></i>
+              Update Account
+              <% end %>
+            </li>
+            <% if @user.merchant == true %>
+              <li>
+                <%= link_to new_user_product_path(@user) do%>
+                  <i class="glyphicon glyphicon-grain"></i>
+  							  Create New Product
+                <% end %>
+              </li>
+              <li>
+                <%= link_to user_products_path(@user) do%>
+                  <i class="glyphicon glyphicon-tags"></i>
+                  View Products
+                <% end %>
+              </li>
+            <% else %>
+            <li>
+              <%= link_to new_user_path(@user), :controller => "user", :action => "show", :merchant_request => "true" do%>
+                <i class="glyphicon glyphicon-tags"></i>
+                Merchant Sign up
+              <% end %>
+            </li>
+            <% end %>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-flag"></i>
+							Help </a>
+						</li>
+					</ul>
+				</div>
+				<!-- END MENU -->
+			</div>
+		</div>
+		<div class="col-md-9">
+      <div class="profile-content">
+        <h2>Welcome <%= @user.username.capitalize %></h2>
+        <p>Biography: <%= @user.biography %></p>
+      </div>
+		</div>
+	</div>
 </div>
-
-<% if @user.merchant == true %>
-  <h3>MERCHANT INFO STUFF</h3>
-  <%= link_to "Create New Product",  new_user_product_path(@user), class: 'btn btn-success'%>
-
+<center>
+<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">TEAm</a></strong>
+</center>
+<br>
+<br>
+<% else %>
+<div class="alert alert-danger">
+  <strong>INVALID ACCOUNT USER!</strong> Please login to view account information.
+</div>
 <% end %>
