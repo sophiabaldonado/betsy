@@ -1,0 +1,51 @@
+<h3> Billing/Shipping Info: </h3>
+<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state %><br>
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.label :billing_zip %><br>
+    <%= f.text_field :billing_zip %>
+  </p>
+  <p>
+    <%= f.label :cc %><br>
+    <%= f.text_field :cc %>
+  </p>
+  <p>
+    <%= f.label :cvv %><br>
+    <%= f.text_field :cvv %>
+  </p>
+
+    <% if current_user %>
+      <%= f.hidden_field :user_id, value: @user.id %><br>
+    <% end %>
+  <p>
+    <%= f.submit "Checkout" %>
+  </p>
+<% end %>
