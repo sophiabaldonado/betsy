@@ -9,7 +9,6 @@
     <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 <% else %>
-
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
 <%end%>
@@ -28,17 +27,17 @@
 <% end %>
 
 
-  <% if @review == nil %>
-    <p> No reviews yet </p>
-  <% else %>
-    <% @review.each do |review| %>
-        <p> Reviewed by: <%= User.find(review.user_id).username %></p>
+<% if @review == nil %>
+  <p> No reviews yet </p>
+<% else %>
+  <% @review.each do |review| %>
+      <p> Reviewed by: <%= User.find(review.user_id).username %></p>
 
-        <p> Rating: <%= review.rating %> </p>
-        <p> Comment: <%= review.comment %> </p>
+      <p> Rating: <%= review.rating %> </p>
+      <p> Comment: <%= review.comment %> </p>
 
-    <% end %>
   <% end %>
+<% end %>
 
 
-  <%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
+<%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
