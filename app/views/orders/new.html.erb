@@ -60,7 +60,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th colspan="2">$<%= @subtotal %></th>
+                                            <th colspan="2"><%= number_to_currency(@subtotal) %></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -76,6 +76,9 @@
                                     <button class="btn btn-default"><i class="fa fa-refresh"></i>Update Cart</button>
 
                                         <!-- submit button code -->
+                                        <%= form_for @order, url: checkout_path do |f| %>
+                                          <%= f.submit "Proceed to Checkout", class: "btn btn-primary" %>
+                                        <% end %>
                                 </div>
                             </div>
 
@@ -138,7 +141,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Order subtotal</td>
-                                        <th>$<%= @subtotal %></th>
+                                        <th><%= number_to_currency(@subtotal) %></th>
                                     </tr>
                                     <tr>
                                         <td>Shipping and handling</td>
@@ -146,11 +149,11 @@
                                     </tr>
                                     <tr>
                                         <td>Tax</td>
-                                        <th>$<%= (@subtotal.to_i * 0.10).round(3) %></th>
+                                        <th><%= number_to_currency(@subtotal.to_i * 0.10) %></th>
                                     </tr>
                                     <tr class="total">
                                         <td>Total</td>
-                                        <th>$<%= (@subtotal.to_i * 1.1 + 10).round(3) %></th>
+                                        <th><%= number_to_currency(@subtotal.to_i * 1.1 + 10) %></th>
                                     </tr>
                                 </tbody>
                             </table>

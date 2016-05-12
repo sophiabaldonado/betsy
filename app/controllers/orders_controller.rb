@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
         item.destroy
         @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
       end
-      redirect_to order_path(@order.id)
+      redirect_to user_order_path(current_user.id, @order.id)
     else
       render :new
     end
