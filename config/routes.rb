@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  post  '/products/:id' => 'products#create_cart', as: :create_cart
+  post '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
   get '/checkout' => 'orders#new', as: :new_order
   post '/browse' => 'products#index'
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
-
+  delete '/checkout' => 'orders#destroy'
   resources :products, only: [:index, :show]
   resources :orders, except: [:new]
   resources :users do
