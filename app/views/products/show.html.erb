@@ -1,6 +1,6 @@
 <%= render '/shared/showproduct' %>
 
-<% if request.env['PATH_INFO'] != "/users/#{params[:user_id]}/products" && current_user == params[:user_id]%>
+<% if request.env['PATH_INFO'] != "/users/#{params[:user_id]}/products" && current_user == params[:user_id] && params[:user_id] != nil%>
   <% @user = params[:user_id] %>
   <% @product.in_stock? ? inventory_class ="success" : inventory_class = "danger" %>
   <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
@@ -9,38 +9,27 @@
     <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 <% else %>
-
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
-
-
-<% if @item_exists_in_cart.empty? %>
-  <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-  <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
-    <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
-    <%= hidden_field_tag(:product_id, @product.id) %>
-    <%= submit_tag("Add to Cart") %>
+  <% if @item_exists_in_cart.empty? %>
+    <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
+    <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
+      <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
+      <%= hidden_field_tag(:product_id, @product.id) %>
+      <%= submit_tag("Add to Cart") %>
+    <%end%>
+  <%else%>
+    <p>Added to cart.</p>
   <%end%>
-
-
-<%else%>
-  <p>Added to cart.</p>
-<%end%>
-
 <% end %>
-
-
-  <% if @review == nil %>
-    <p> No reviews yet </p>
-  <% else %>
-    <% @review.each do |review| %>
-        <p> Reviewed by: <%= User.find(review.user_id).username %></p>
-
-        <p> Rating: <%= review.rating %> </p>
-        <p> Comment: <%= review.comment %> </p>
-
-    <% end %>
+<!-- REVIEW  -->
+<% if @review == nil %>
+  <p> No reviews yet </p>
+<% else %>
+  <% @review.each do |review| %>
+    <p> Reviewed by: <%= User.find(review.user_id).username %></p>
+    <p> Rating: <%= review.rating %> </p>
+    <p> Comment: <%= review.comment %> </p>
   <% end %>
-
-
-  <%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
+<% end %>
+<%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>

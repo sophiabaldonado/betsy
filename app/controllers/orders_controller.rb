@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   include OrdersHelper
+  skip_before_action :require_login, only: [:new, :update_cart, :destroy]
+
 
   def index
     if params[:user_id].to_i == current_user.id

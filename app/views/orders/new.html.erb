@@ -1,316 +1,288 @@
-    <div id="all">
-        <div id="content">
-            <div class="container">
-                <div class="col-md-9" id="basket">
-                    <div class="box">
+<div id="all">
+  <div id="content">
+    <div class="container">
+      <div class="col-md-9" id="basket">
+        <div class="box">
 
-                        <!-- <form method="post" action="checkout1.html"> -->
+          <h1>Shopping cart</h1>
+          <p class="text-muted">You currently have <%= number_of_cart_items %> item(s) in your cart.</p>
 
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2">Product</th>
+                  <th>Quantity</th>
+                  <th>Unit price</th>
+                  <th>Discount</th>
+                  <th colspan="2">Total</th>
+                </tr>
+              </thead>
 
-                            <h1>Shopping cart</h1>
-                            <p class="text-muted">You currently have <%= number_of_cart_items %> item(s) in your cart.</p>
+              <tbody>
+              <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td>
+                  <a href="#">
+                      <img src=<%="#{cart_item.product.photo_url}"%> alt="">
+                  </a>
+                </td>
+                <td><a href=<%="/products/#{cart_item.product.id}"%>><%=cart_item.product.name.capitalize%></a>
+                </td>
+                <td>
+                    <%= form_tag(controller: "orders", action: "update_cart", method: "patch") do %>
+                    <div class="form-group">
+                    <%= hidden_field_tag(:id, cart_item.id) %>
+                    <%= select_tag(:quantity,  options_for_select((1..cart_item.product.inventory).to_a, cart_item.quantity), id: "quantity"  ) %></div>
+                    <%= submit_tag"update    "   %>
+                </td>
 
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Product</th>
-                                            <th>Quantity</th>
-                                            <th>Unit price</th>
-                                            <th>Discount</th>
-                                            <th colspan="2">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                <td>$<%= cart_item.product.price %></td>
+                <td>$0.00</td>
+                <td>$<%= price_by_quantity(cart_item) %></td>
 
+                <td>
+                  <%= link_to new_order_path(:todelete => "#{(cart_item.id)}"), method: :delete, data: { confirm: 'Are you sure you want to remove this item from your cart?'}  do %>
+                    <i class="fa fa-trash-o"></i>
+                  <%end%>
+                </td>
+              <% end %>
+              </tr>
+              <%end%>
+              </tbody>
 
-                                    <% @cart_items.each do |cart_item| %>
+              <tfoot>
+                <tr>
+                  <th colspan="5">Total</th>
+                  <th colspan="2"><%= number_to_currency(@subtotal) %></th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
 
-                                        <tr>
-                                            <td>
-                                                <a href="#">
-                                                    <img src=<%="#{cart_item.product.photo_url}"%> alt="">
-                                                </a>
-                                            </td>
-                                            <td><a href=<%="/products/#{cart_item.product.id}"%>><%=cart_item.product.name.capitalize%></a>
-                                            </td>
-                                            <td>
-                                                <%= form_tag(controller: "orders", action: "update_cart", method: "patch") do %>
-                                                <div class="form-group">
-                                                <%= hidden_field_tag(:id, cart_item.id) %>
-
-                                                <%= select_tag(:quantity,  options_for_select((1..cart_item.product.inventory).to_a, cart_item.quantity), id: "quantity"  ) %></div>
-                                                <%= submit_tag"UPDATE" %>
-                                            </td>
-
-                                            <td>$<%= cart_item.product.price %></td>
-                                            <td>$0.00</td>
-                                            <td>$<%= price_by_quantity(cart_item) %></td>
-
-                                            <td>
-                                              <%= link_to new_order_path(:todelete => "#{(cart_item.id)}"), method: :delete, data: { confirm: 'Are you sure you want to delete this product?'}  do %>
-                                                <i class="fa fa-trash-o"></i>
-
-                                            <%end%>
-                                            </td>
-                                          <% end %>
-
-                                        </tr>
-                                        <%end%>
-
-                                    </tbody>
-
-                                    <tfoot>
-                                        <tr>
-                                            <th colspan="5">Total</th>
-                                            <th colspan="2"><%= number_to_currency(@subtotal) %></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-
-                            </div>
-                            <!-- /.table-responsive -->
-
-                            <div class="box-footer">
-                                <div class="pull-left">
-                                    <a href="/products" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="/billings/new" class="btn btn-default"> Checkout</a>
-                                </div>
-                                <div class="pull-right">
-                                    <button class="btn btn-default"><i class="fa fa-refresh"></i>Update Cart</button>
-
-                                        <!-- submit button code -->
-                                        <%= form_for @order, url: checkout_path do |f| %>
-                                          <%= f.submit "Proceed to Checkout", class: "btn btn-primary" %>
-                                        <% end %>
-                                </div>
-                            </div>
-
-                        <!-- </form> -->
-
-                    </div>
-                    <!-- /.box -->
-
-
-                    <div class="row same-height-row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="box same-height">
-                                <h3>You may also like these products</h3>
-                            </div>
-                        </div>
-
-                      <% (0..2).each do |x| %>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="product same-height">
-                                <div class="flip-container">
-                                    <div class="flipper">
-                                        <div class="front">
-                                            <a href=<%="products/#{@products[x].id}"%>>
-                                                <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="back">
-                                            <a href=<%="products/#{@products[x].id}"%>>
-                                                <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href=<%="products/#{@products[x].id}"%> class="invisible">
-                                    <img src="#{@products[x].photo_url}"%> alt="" class="img-responsive">
-                                </a>
-                                <div class="text">
-                                    <h3><%="#{@products[x].name}"%></h3>
-                                    <p class="price"><%="$#{@products[x].price}"%></p>
-                                </div>
-                            </div>
-                            <!-- /.product -->
-                        </div>
-
-                        <%end%>
-                    </div>
-
-                </div>
-                <!-- /.col-md-9 -->
-
-                <div class="col-md-3">
-                    <div class="box" id="order-summary">
-                        <div class="box-header">
-                            <h3>Order summary</h3>
-                        </div>
-                        <p class="text-muted">Shipping and additional costs are calculated based on company policies.</p>
-
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Order subtotal</td>
-                                        <th><%= number_to_currency(@subtotal) %></th>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping and handling</td>
-                                        <th>$10.00</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Tax</td>
-                                        <th><%= number_to_currency(@subtotal.to_i * 0.10) %></th>
-                                    </tr>
-                                    <tr class="total">
-                                        <td>Total</td>
-                                        <th><%= number_to_currency(@subtotal.to_i * 1.1 + 10) %></th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- /.col-md-3 -->
-
+          <div class="box-footer">
+            <div class="pull-left">
+                <a href="/products" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
             </div>
-            <!-- /.container -->
-        </div>
-        <!-- /#content -->
 
-        <!-- *** FOOTER ***
- _________________________________________________________ -->
-        <div id="footer" data-animate="fadeInUp">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <h4>Pages</h4>
-
-                        <ul>
-                            <li><a href="text.html">About us</a>
-                            </li>
-                            <li><a href="text.html">Terms and conditions</a>
-                            </li>
-                            <li><a href="faq.html">FAQ</a>
-                            </li>
-                            <li><a href="contact.html">Contact us</a>
-                            </li>
-                        </ul>
-
-                        <hr>
-
-                        <h4>User section</h4>
-
-                        <ul>
-                            <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                            </li>
-                            <li><a href="register.html">Regiter</a>
-                            </li>
-                        </ul>
-
-                        <hr class="hidden-md hidden-lg hidden-sm">
-
-                    </div>
-                    <!-- /.col-md-3 -->
-
-                    <div class="col-md-3 col-sm-6">
-
-                        <h4>Top categories</h4>
-
-                        <h5>Men</h5>
-
-                        <ul>
-                            <li><a href="category.html">T-shirts</a>
-                            </li>
-                            <li><a href="category.html">Shirts</a>
-                            </li>
-                            <li><a href="category.html">Accessories</a>
-                            </li>
-                        </ul>
-
-                        <h5>Ladies</h5>
-                        <ul>
-                            <li><a href="category.html">T-shirts</a>
-                            </li>
-                            <li><a href="category.html">Skirts</a>
-                            </li>
-                            <li><a href="category.html">Pants</a>
-                            </li>
-                            <li><a href="category.html">Accessories</a>
-                            </li>
-                        </ul>
-
-                        <hr class="hidden-md hidden-lg">
-
-                    </div>
-                    <!-- /.col-md-3 -->
-
-                    <div class="col-md-3 col-sm-6">
-
-                        <h4>Where to find us</h4>
-
-                        <p><strong>Obaju Ltd.</strong>
-                            <br>13/25 New Avenue
-                            <br>New Heaven
-                            <br>45Y 73J
-                            <br>England
-                            <br>
-                            <strong>Great Britain</strong>
-                        </p>
-
-                        <a href="contact.html">Go to contact page</a>
-
-                        <hr class="hidden-md hidden-lg">
-
-                    </div>
-                    <!-- /.col-md-3 -->
-
-
-
-                    <div class="col-md-3 col-sm-6">
-
-                        <h4>Get the news</h4>
-
-                        <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-                        <form>
-                            <div class="input-group">
-
-                                <input type="text" class="form-control">
-
-                                <span class="input-group-btn">
-
-			    <button class="btn btn-default" type="button">Subscribe!</button>
-
-			</span>
-
-                            </div>
-                            <!-- /input-group -->
-                        </form>
-
-                        <hr>
-
-                        <h4>Stay in touch</h4>
-
-                        <p class="social">
-                            <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
-                        </p>
-
-
-                    </div>
-                    <!-- /.col-md-3 -->
-
-                </div>
-                <!-- /.row -->
-
+            <div class="pull-right">
+                <a href="/billings/new" class="btn btn-primary"> Proceed to Checkout</a>
             </div>
-            <!-- /.container -->
+
+            <div class="pull-right">
+              <button class="btn btn-default"><i class="fa fa-refresh"></i>Update Cart</button>
+            </div>
+
+          </div>
+          <!-- </form> -->
         </div>
-        <!-- /#footer -->
-
-        <!-- *** FOOTER END *** -->
+        <!-- /.box -->
 
 
+        <div class="row same-height-row">
+          <div class="col-md-3 col-sm-6">
+            <div class="box same-height">
+              <h3>You may also like these products</h3>
+            </div>
+          </div>
+
+          <% (0..2).each do |x| %>
+          <div class="col-md-3 col-sm-6">
+            <div class="product same-height">
+              <div class="flip-container">
+                <div class="flipper">
+                  <div class="front">
+                    <a href=<%="products/#{@products[x].id}"%>>
+                      <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+                    </a>
+                  </div>
+                  <div class="back">
+                    <a href=<%="products/#{@products[x].id}"%>>
+                      <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <a href=<%="products/#{@products[x].id}"%> class="invisible">
+                <img src="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+              </a>
+              <div class="text">
+                  <h3><%="#{@products[x].name}"%></h3>
+                  <p class="price"><%="$#{@products[x].price}"%></p>
+              </div>
+            </div>
+            <!-- /.product -->
+          </div>
+          <%end%>
+        </div>
+      </div>
+      <!-- /.col-md-9 -->
+
+      <div class="col-md-3">
+        <div class="box" id="order-summary">
+          <div class="box-header">
+            <h3>Order summary</h3>
+          </div>
+          <p class="text-muted">Shipping and additional costs are calculated based on company policies.</p>
+
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Order subtotal</td>
+                  <th><%= number_to_currency(@subtotal) %></th>
+                </tr>
+                <tr>
+                  <td>Shipping and handling</td>
+                  <th>$10.00</th>
+                </tr>
+                <tr>
+                  <td>Tax</td>
+                  <th><%= number_to_currency(@subtotal.to_i * 0.10) %></th>
+                </tr>
+                <tr class="total">
+                  <td>Total</td>
+                  <th><%= number_to_currency(@subtotal.to_i * 1.1 + 10) %></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <!-- /.col-md-3 -->
     </div>
-    <!-- /#all -->
+    <!-- /.container -->
+  </div>
+  <!-- /#content -->
+
+<!-- *** FOOTER ***
+_________________________________________________________ -->
+  <div id="footer" data-animate="fadeInUp">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <h4>Pages</h4>
+
+          <ul>
+              <li><a href="text.html">About us</a>
+              </li>
+              <li><a href="text.html">Terms and conditions</a>
+              </li>
+              <li><a href="faq.html">FAQ</a>
+              </li>
+              <li><a href="contact.html">Contact us</a>
+              </li>
+          </ul>
+
+          <hr>
+
+          <h4>User section</h4>
+
+          <ul>
+            <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+            </li>
+            <li><a href="register.html">Regiter</a>
+            </li>
+          </ul>
+
+          <hr class="hidden-md hidden-lg hidden-sm">
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-6">
+
+          <h4>Top categories</h4>
+
+          <h5>Men</h5>
+
+          <ul>
+            <li><a href="category.html">T-shirts</a>
+            </li>
+            <li><a href="category.html">Shirts</a>
+            </li>
+            <li><a href="category.html">Accessories</a>
+            </li>
+          </ul>
+
+          <h5>Ladies</h5>
+          <ul>
+            <li><a href="category.html">T-shirts</a>
+            </li>
+            <li><a href="category.html">Skirts</a>
+            </li>
+            <li><a href="category.html">Pants</a>
+            </li>
+            <li><a href="category.html">Accessories</a>
+            </li>
+          </ul>
+
+          <hr class="hidden-md hidden-lg">
+
+        </div>
+        <!-- /.col-md-3 -->
+
+        <div class="col-md-3 col-sm-6">
+
+          <h4>Where to find us</h4>
+
+          <p><strong>Obaju Ltd.</strong>
+            <br>13/25 New Avenue
+            <br>New Heaven
+            <br>45Y 73J
+            <br>England
+            <br>
+            <strong>Great Britain</strong>
+          </p>
+
+          <a href="contact.html">Go to contact page</a>
+
+          <hr class="hidden-md hidden-lg">
+
+        </div>
+        <!-- /.col-md-3 -->
+
+
+        <div class="col-md-3 col-sm-6">
+
+          <h4>Get the news</h4>
+
+          <p class="text-muted">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+          <form>
+            <div class="input-group">
+
+              <input type="text" class="form-control">
+
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Subscribe!</button>
+                </span>
+
+            </div>
+            <!-- /input-group -->
+          </form>
+
+          <hr>
+
+          <h4>Stay in touch</h4>
+
+          <p class="social">
+              <a href="#" class="facebook external" data-animate-hover="shake"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="twitter external" data-animate-hover="shake"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="instagram external" data-animate-hover="shake"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="gplus external" data-animate-hover="shake"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="email external" data-animate-hover="shake"><i class="fa fa-envelope"></i></a>
+          </p>
+
+        </div>
+        <!-- /.col-md-3 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </div>
+  <!-- /#footer -->
+</div>
+<!-- /#all -->

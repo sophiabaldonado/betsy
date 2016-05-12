@@ -2,16 +2,21 @@
 
 
 <div class="displaycontainer">
+<ul>
 
 <% @show.each do |thing| %>
 <div class="displayimages">
 
   <%= link_to user_path(thing), class: 'thumbnail' do %>
-    <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
+  <li>
+
+  <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
   <%end%>
 
   <%= link_to thing[:username],user_path(thing) %>
-   <br />
+
+ </li>
 </div>
 <% end %>
+</ul>
 </div>

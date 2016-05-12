@@ -18,6 +18,10 @@
     <%= f.text_field :address %>
   </p>
   <p>
+    <%= f.label :address2 %><br>
+    <%= f.text_field :address2 %>
+  </p>
+  <p>
     <%= f.label :city %><br>
     <%= f.text_field :city %>
   </p>
@@ -40,6 +44,10 @@
   <p>
     <%= f.label :cvv %><br>
     <%= f.text_field :cvv %>
+  </p>
+  <p>
+    <%= f.label :expiration_date %><br>
+    <%= f.text_field :expiration_date %>
   </p>
 
     <% if current_user %>
