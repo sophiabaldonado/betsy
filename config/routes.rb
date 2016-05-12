@@ -16,18 +16,27 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
+
   resources :products, only: [:index, :show] do
       resources :reviews, :only => [:new, :create]
   end
 
   resources :orders, except: [:new]
+
+  get '/sold/:order_id' => 'orders#show', as: :sold_order
+  patch '/sold' => 'orders#item_shipped'
+  get '/sold' => 'orders#index'
+
+
+  resources :products, only: [:index, :show]
+
   resources :users do
     resources :products
     resources :orders
   end
 
   resources :billings do
-    
+
   end
 
 

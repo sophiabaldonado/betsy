@@ -13,6 +13,7 @@ class UsersController < ApplicationController
       redirect_to user_path(user)
     else
       @user = User.new(user_create_params[:user])
+      raise
       render :new
     end
   end
@@ -20,6 +21,17 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     render :show
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    render :new
+  end
+
+  def update
+    user = User.find(params[:id])
+    user.update(user_create_params[:user])
+    redirect_to user_path(user)
   end
 
   private

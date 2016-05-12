@@ -2,9 +2,6 @@
 <html>
 <head>
   <title>Betsy</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -13,6 +10,10 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="build.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
 </head>
 <body>
 
@@ -24,8 +25,15 @@
       <ul class="nav navbar-nav">
         <li class="active"><%= link_to "HOME", root_path %></li>
         <li><%= link_to "PRODUCTS", products_path %></li>
-        <li><%= link_to "ORDERS", orders_path %></li>
-        <li><%= link_to "USERS", new_user_path %></li>
+
+        <li><%= link_to "ORDERS", user_orders_path(current_user.id) %></li>
+        <% if current_user %>
+          <li><%= link_to "USERS", user_path(current_user.id) %></li>
+        <% else %>
+          <li><%= link_to "USERS", new_user_path %></li>
+        <% end %>
+
+
         <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
       </ul>
 
