@@ -1,0 +1,74 @@
+<!-- merhcant viewing their account products -->
+<div class="container">
+    <div class="row profile">
+		  <div class="col-md-3">
+			  <div class="profile-sidebar">
+				  <!-- SIDEBAR USERPIC -->
+				  <div class="profile-userpic">
+					  <img src=<%= @user.profile_pic %> class="img-responsive" alt="">
+				  </div>
+				  <!-- END SIDEBAR USERPIC -->
+				  <!-- SIDEBAR USER TITLE -->
+				  <div class="profile-usertitle">
+					  <div class="profile-usertitle-name">
+						  <%= @user.username %>
+					  </div>
+					  <div class="profile-usertitle-job">
+              <%= @user.email %>
+					  </div>
+				  </div>
+				  <!-- END SIDEBAR BUTTONS -->
+				  <!-- SIDEBAR MENU -->
+				  <div class="profile-usermenu">
+					  <ul class="nav">
+						  <li>
+							  <%= link_to user_path(@user) do%>
+							    <i class="glyphicon glyphicon-home"></i>
+                  Overview
+                  <% end %>
+					    </li>
+              <li class="active">
+              <%= link_to user_products_path(@user) do%>
+                <i class="glyphicon glyphicon-tags"></i>
+                View My Products
+              <% end %>
+              </li>
+						  <li>
+							  <a href="#">
+							    <i class="glyphicon glyphicon-flag"></i>Help
+                </a>
+						  </li>
+
+
+					  </ul>
+				  </div>
+				<!-- END MENU -->
+			</div>
+		</div>
+		<div class="col-md-9">
+      <div class="profile-content">
+        <h2>Welcome <strong><%= @user.username.capitalize %>!</strong> </h2>
+        <strong>Biography:</strong> <%= @user.biography ? @user.biography : "Share something about yourself!"%>
+        <% @products.each do |product|%>
+          <% @product = product %>
+          <%= render '/shared/showproduct' %>
+          <%= "In Stock: #{@product.inventory}" %><br />
+          <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
+          <%= link_to edit_user_product_path(@user, product), class: 'btn btn-success' do %>
+            <i class="glyphicon glyphicon-edit"></i> Edit Product
+          <% end %>
+          <%= link_to user_product_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
+          <i class="glyphicon glyphicon-remove"></i> Retire
+          <% end %>
+          <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
+            <i class="glyphicon glyphicon-trash"></i> Delete
+          <% end %>
+        <%end%>
+      </div>
+		</div>
+	</div>
+</div>
+
+<center>
+  <strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">TEAm</a></strong>
+</center>

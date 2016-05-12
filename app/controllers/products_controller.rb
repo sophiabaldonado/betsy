@@ -22,6 +22,12 @@ class ProductsController < ApplicationController
     if request.env['PATH_INFO'] == "/users/#{params[:user_id]}/products"
       @user = User.find(params[:user_id])
       @products = Product.where(user_id: params[:user_id])
+      if @user.current_user?(current_user)
+        render :accountproducts
+      else
+        @item_exists_in_cart = CartItem.where(session_id: session[:session_id], product_id: params[:id])
+        render :merchantproducts
+      end
     else
       @browser = BROWSE
       if params[:browse] == BROWSE[1]
