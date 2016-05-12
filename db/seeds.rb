@@ -225,19 +225,19 @@ end
 
 ORDERS = [
   {
-    status: "pending", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
+    status: "pending", total: 7.00 confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
   },
   {
-    status: "paid", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 4
+    status: "paid", total: 7.00 confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 4
   },
   {
-    status: "complete", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 2
+    status: "complete", total: 7.00 confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 2
   },
   {
-    status: "cancelled", confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
+    status: "cancelled", total: 7.00 confirmation_date: Time.now, order_number: random_number, user_id: 3, billing_id: 1
   },
   {
-    status: "paid", confirmation_date: Time.now, order_number: random_number, user_id: 2, billing_id: 11
+    status: "paid", total: 7.00 confirmation_date: Time.now, order_number: random_number, user_id: 2, billing_id: 11
   }
 ]
 
