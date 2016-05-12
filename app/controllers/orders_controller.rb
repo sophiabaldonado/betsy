@@ -75,6 +75,12 @@ class OrdersController < ApplicationController
     redirect_to sold_path
   end
 
+  def destroy
+    @cart_item = CartItem.find(params[:todelete])
+    @cart_item.delete
+    redirect_to action: "new"
+  end
+
   private
   def update_cart_params
     params.permit(:quantity, :id)
