@@ -15,7 +15,11 @@ class BillingsController < ApplicationController
     else
       @billing = Billing.new
     end
-    @user = User.find(session[:user_id])
+    if current_user
+      @user = User.find(session[:user_id])
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -29,6 +33,6 @@ end
 
 private
   def billing_params
-    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :email, :billing_zip, :address1, :city, :state, :zip, :user_id])
+    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :address2, :city, :state, :zip, :user_id])
 
   end
