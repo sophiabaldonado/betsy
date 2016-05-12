@@ -26,7 +26,7 @@
 <%else%>
   <p>Added to cart.</p>
 <%end%>
-
+<% end %>
 
   <% if @review == nil %>
     <p> No reviews yet </p>
@@ -42,9 +42,3 @@
 
 
   <%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
-
-<%else%>
-  <p>Added to cart.</p>
-<%end%>
-
-<% end %>
