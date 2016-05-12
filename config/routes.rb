@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
-  get '/sold/:order_id' => 'orders#show', as: :sold_order
-  patch '/sold' => 'orders#item_shipped'
-  get '/sold' => 'orders#index'
+  get 'users/:user_id/sold/:order_id' => 'orders#show', as: :sold_order
+  patch 'users/:user_id/sold' => 'orders#item_shipped'
+  get 'users/:user_id/sold' => 'orders#index', as: :sold_orders
 
 
   resources :products, only: [:index, :show]
