@@ -10,7 +10,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_create_params[:product])
-    raise
+    @user = User.find(params[:user_id])
+
     if @product.save
       redirect_to user_products_path(params[:product][:user_id])
     else
