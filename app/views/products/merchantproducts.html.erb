@@ -21,14 +21,16 @@
 				  <!-- SIDEBAR MENU -->
 				  <div class="profile-usermenu">
 					  <ul class="nav">
-						  <li class="active">
-							  <a href="#">
-							    <i class="glyphicon glyphicon-home"></i>Overview
-                </a>
+						  <li>
+							  <%= link_to user_path(@user) do%>
+							    <i class="glyphicon glyphicon-home"></i>
+                  Overview
+                  <% end %>
 					    </li>
-              <li>
+              <li class="active">
               <%= link_to user_products_path(@user) do%>
-                <i class="glyphicon glyphicon-tags"></i>View My Products
+                <i class="glyphicon glyphicon-tags"></i>
+                View My Products
               <% end %>
               </li>
 						  <li>
@@ -52,7 +54,7 @@
           <%= "Sold By: #{User.find(@product.user_id).username}" %>
           <% if @item_exists_in_cart.empty? %>
             <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-            <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
+            <%= form_tag(controller: "products", method: "post") do%>
               <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
               <%= hidden_field_tag(:product_id, @product.id) %>
               <%= submit_tag("Add to Cart") %>
