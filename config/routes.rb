@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/cart' => 'orders#update_cart'
   #post '/products/:id' => 'products#create_review', as: :create_review
   get '/checkout' => 'orders#new', as: :new_order
+  post '/checkout' => 'orders#create'
   post '/browse' => 'products#index'
   get '/browse/categories/:id' => 'products#category', as: :category
   get '/sign_up' => 'users#new'
@@ -25,9 +26,9 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:new]
 
-  get '/sold/:order_id' => 'orders#show', as: :sold_order
-  patch '/sold' => 'orders#item_shipped'
-  get '/sold' => 'orders#index'
+  get 'users/:user_id/sold/:order_id' => 'orders#show', as: :sold_order
+  patch 'users/:user_id/sold' => 'orders#item_shipped'
+  get 'users/:user_id/sold' => 'orders#index', as: :sold_orders
 
 
   resources :users do

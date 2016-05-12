@@ -2,27 +2,33 @@ class OrdersController < ApplicationController
   include OrdersHelper
 
   def index
-    @user = User.find(session[:user_id])
-    @order = Order.new
-    @order_items = OrderItem.where(:product_id => @user.products)
-    if '/sold' == request.env['PATH_INFO']
-      @order_items_orders = @order_items.map { |item| item.order_id }
-      @orders = Order.where(id: @order_items_orders)
+    # raise
+    if params[:user_id].to_i == current_user.id
+      @user = User.find(current_user.id)
+      @order = Order.new
+      @order_items = OrderItem.where(:product_id => @user.products)
+      if '/sold' == request.env['PATH_INFO']
+        @order_items_orders = @order_items.map { |item| item.order_id }
+        @orders = Order.where(id: @order_items_orders)
+      else
+        @orders = Order.where(user_id: @user.id)
+      end
+      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
+      @total = orders_revenue(@display_orders)
+      @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
+      @status = params[:status] if params[:status]
     else
-      @orders = Order.where(user_id: @user.id)
+      redirect_to login_path
     end
-    @total = orders_revenue
-    @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
-    @status = params[:status] if params[:status]
-    params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
   end
 
-  def orders_revenue
-    @orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
+  def orders_revenue(orders)
+    return 0 if orders.nil?
+    orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
   end
 
   def orders_by_status(status)
-    @orders.map { |order| order if order.status == status }
+    @orders.select { |order| order if order.status == status }
   end
 
   def show
@@ -44,19 +50,28 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
-    @user_id = 3 # temp -session[:user_id] if session[:user_id]
-    @billing_id = 1 # temp - params[:billing_id]
-    @order_number = order_number
-    @order = Order.new(status: "pending", confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
-    if @order.save
-      @cart_items.each do |item|
-        @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
-        @order_item.save
-        item.destroy
-        @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
+    @billing = Billing.new(billing_params[:billing])
+    if @billing.save
+      if current_user
+        @cart_items = CartItem.all.where(user_id: session[:user_id])
+      else
+        @cart_items = CartItem.all.where(session_id: session[:session_id])
       end
-      redirect_to order_path(@order.id)
+      @user_id = session[:user_id] if session[:user_id]
+      @billing_id = @billing.id
+      @order_number = order_number
+      @order = Order.new(status: "pending", confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      if @order.save
+        @cart_items.each do |item|
+          @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
+          @order_item.save
+          item.destroy
+          @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
+        end
+        redirect_to user_order_path(current_user.id, @order.id)
+      else
+        render :new
+      end
     else
       render :new
     end
@@ -88,5 +103,11 @@ class OrdersController < ApplicationController
 
   def update_item_params
     params.permit(OrderItem: [:shipped])
+  end
+
+
+  def billing_params
+    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
+
   end
 end
