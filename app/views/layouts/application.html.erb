@@ -31,6 +31,7 @@
 
       <% if current_user %>
         <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> User Profile<% end %></li>
           <li><%= link_to logout_path, method: "delete" do %><span class="glyphicon glyphicon-log-out"></span> Log Out<% end %></li>
         </ul>
       <% else %>
