@@ -43,11 +43,23 @@
                 Update Account
                 <% end %>
               </li>
+              <li>
+                <%= link_to user_orders_path(@user) do%>
+                <i class="glyphicon glyphicon-user"></i>
+                View Orders
+                <% end %>
+              </li>
               <% if @user.merchant == true %>
                 <li>
-                  <%= link_to new_user_product_path(@user) do%>
+                  <%= link_to new_user_product_path(@user.id) do%>
                     <i class="glyphicon glyphicon-grain"></i>
     							  Create New Product
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to sold_orders_path(@user.id) do%>
+                  <i class="glyphicon glyphicon-user"></i>
+                  View Sales
                   <% end %>
                 </li>
               <% else %>

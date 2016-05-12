@@ -22,7 +22,7 @@
   <div class="table-responsive">
     <table class="table table-hover">
       <% if @display_orders.any? == false %>
-        <h2>No <%= @status.capitalize %> Orders </h2>
+        <h2>No <%= @status.capitalize if @status %> Orders </h2>
       <% else %>
         <% @display_orders.each do |order| %>
         <% if order %>
