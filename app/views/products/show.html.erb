@@ -12,7 +12,7 @@
 
   <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
-
+<%end%>
 
 <% if @item_exists_in_cart.empty? %>
   <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
@@ -21,8 +21,6 @@
     <%= hidden_field_tag(:product_id, @product.id) %>
     <%= submit_tag("Add to Cart") %>
   <%end%>
-
-
 <%else%>
   <p>Added to cart.</p>
 <%end%>
@@ -42,9 +40,3 @@
 
 
   <%= link_to 'New Review', new_product_review_path(product_id: @product.id) %>
-
-<%else%>
-  <p>Added to cart.</p>
-<%end%>
-
-<% end %>
