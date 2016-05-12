@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
   end
 
   def orders_by_status(status)
-    @orders.map { |order| order if order.status == status }
+    @orders.select { |order| order if order.status == status }
   end
 
   def show
