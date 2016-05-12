@@ -7,7 +7,7 @@ class Billing < ActiveRecord::Base
   validates :last_name, presence: true
   validates :cc, uniqueness: true, length: { is: 16 }
   validates :cvv, presence: true, length: { is: 3 }
-  #validates :email, presence: true
+  validates :email, presence: true
   validates :billing_zip, presence: true, length: { is: 5 }
   validates :address1, presence: true
   validates :city, presence: true

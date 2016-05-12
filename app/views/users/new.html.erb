@@ -1,9 +1,7 @@
 <% if @user %>
   <h1>Signup!</h1>
 
-  <%= session[:user_id].inspect %>
-
-  <%= form_for :user, url: '/users', :html => { :class => "form-horizontal", :class => "form" } do |f| %>
+  <%= form_for @user, :html => { :class => "form-horizontal", :class => "form" } do |f| %>
 
   <!-- ERROR messages-->
 
