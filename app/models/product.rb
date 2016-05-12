@@ -10,4 +10,8 @@ class Product < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true, length: { in: 1..30 }
   validates :inventory, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0}
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  def in_stock?
+    self.inventory >= 0
+  end
 end
