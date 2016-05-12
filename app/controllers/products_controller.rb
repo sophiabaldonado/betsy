@@ -47,8 +47,8 @@ class ProductsController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
-    @product.update(product_create_params[:product])
-    redirect_to user_products_path(params[:product][:user_id])
+    @product.update(retired: true)
+    redirect_to user_products_path(params[:user_id])
   end
 
   def category
@@ -80,7 +80,6 @@ class ProductsController < ApplicationController
     @cart_item = CartItem.new
     # @cart_items = CartItem.all
     @item_exists_in_cart = CartItem.where(session_id: session[:session_id], product_id: params[:id])
-
   end
 
 

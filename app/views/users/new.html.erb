@@ -49,13 +49,7 @@
     <%= f.text_area :biography, :class=>"form-control" %>
   </div>
 
-  <div class="control-group", class="radio">
-    <%= f.label :merchant, "sign up to be a registered merchant" %>
-    <%= f.label :merchant, "Yes" %>
-    <%= f.radio_button :merchant, true %>
-    <%= f.label :merchant, "No" %>
-    <%= f.radio_button :merchant, false %>
-  </div>
+  <%= f.hidden_field :merchant, :value => "false"%>
 
   <div class="form-actions">
     <%= f.submit class:'btn btn-success' %>

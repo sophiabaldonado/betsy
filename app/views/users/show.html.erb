@@ -1,4 +1,3 @@
-<% if @user.current_user?(current_user) %>
 <div class="container">
     <div class="row profile">
 		<div class="col-md-3">
@@ -31,32 +30,48 @@
 							Overview </a>
 						</li>
             <li>
-              <%= link_to edit_user_path(@user) do%>
-              <i class="glyphicon glyphicon-user"></i>
-              Update Account
-              <% end %>
-            </li>
-            <% if @user.merchant == true %>
-              <li>
-                <%= link_to new_user_product_path(@user) do%>
-                  <i class="glyphicon glyphicon-grain"></i>
-  							  Create New Product
-                <% end %>
-              </li>
-              <li>
-                <%= link_to user_products_path(@user) do%>
-                  <i class="glyphicon glyphicon-tags"></i>
-                  View Products
-                <% end %>
-              </li>
-            <% else %>
-            <li>
-              <%= link_to new_user_path(@user), :controller => "user", :action => "show", :merchant_request => "true" do%>
+              <%= link_to user_products_path(@user) do%>
                 <i class="glyphicon glyphicon-tags"></i>
-                Merchant Sign up
+                View My Products
               <% end %>
             </li>
+
+            <% if @user.current_user?(current_user) %>
+              <li>
+                <%= link_to edit_user_path(@user) do%>
+                <i class="glyphicon glyphicon-user"></i>
+                Update Account
+                <% end %>
+              </li>
+              <li>
+                <%= link_to user_orders_path(@user) do%>
+                <i class="glyphicon glyphicon-user"></i>
+                View Orders
+                <% end %>
+              </li>
+              <% if @user.merchant == true %>
+                <li>
+                  <%= link_to new_user_product_path(@user.id) do%>
+                    <i class="glyphicon glyphicon-grain"></i>
+    							  Create New Product
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to sold_orders_path(@user.id) do%>
+                  <i class="glyphicon glyphicon-user"></i>
+                  View Sales
+                  <% end %>
+                </li>
+              <% else %>
+              <li>
+                <%= link_to new_user_path(@user), :controller => "user", :action => "show", :merchant_request => "true" do%>
+                  <i class="glyphicon glyphicon-tags"></i>
+                  Merchant Sign up
+                <% end %>
+              </li>
             <% end %>
+          <% end %>
+
 						<li>
 							<a href="#">
 							<i class="glyphicon glyphicon-flag"></i>
@@ -80,8 +95,3 @@
 </center>
 <br>
 <br>
-<% else %>
-<div class="alert alert-danger">
-  <strong>INVALID ACCOUNT USER!</strong> Please login to view account information.
-</div>
-<% end %>
