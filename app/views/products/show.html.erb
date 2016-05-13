@@ -9,19 +9,25 @@
     <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 <% else %>
-  <%= "In Stock: #{@product.inventory}" %><br />
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
   <% if @item_exists_in_cart.empty? %>
-    <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-    <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
-      <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
-      <%= hidden_field_tag(:product_id, @product.id) %>
-      <%= submit_tag("Add to Cart") %>
+    <% if @product.inventory == 0 %>
+      <p>Out of Stock!</p>
+    <%else%>
+      <%= "In Stock: #{@product.inventory}" %>
+      <% @choice = 1 %>
+      <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
+        <%= select_tag(:quantity, options_for_select((1..@product.inventory).to_a, selected: @choice), id: "quantity") %>
+        <%= hidden_field_tag(:product_id, @product.id) %>
+        <%= submit_tag("Add to Cart") %>
+      <%end%>
     <%end%>
   <%else%>
     <p>Added to cart.</p>
   <%end%>
 <% end %>
+
+
 <!-- REVIEW  -->
 <% if @review == nil %>
   <p> No reviews yet </p>

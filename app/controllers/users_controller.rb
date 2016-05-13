@@ -30,6 +30,11 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update(user_create_params[:user])
+    if user_create_params[:user][:merchant] == false
+      user.products.update_all(retired: "true")
+    else
+      user.products.update_all(retired: "false")
+    end
     redirect_to user_path(user)
   end
 

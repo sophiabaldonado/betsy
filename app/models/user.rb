@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
   end
 
   def profile_pic
-    url = self.photo_url
-    if url != nil || url != ""
+    picture = self.photo_url
+    if picture == nil || picture == ""
       "http://images.cdn4.stockunlimited.net/clipart/add-user-icon_1598354.jpg"
     else
-      url
+      picture
     end
   end
 

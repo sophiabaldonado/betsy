@@ -33,13 +33,41 @@
                 View My Products
               <% end %>
               </li>
-						  <li>
-							  <a href="#">
-							    <i class="glyphicon glyphicon-flag"></i>Help
-                </a>
-						  </li>
-
-
+              <% if @user.current_user?(current_user) %>
+                <li class = "link">
+                  <%= link_to edit_user_path(@user) do%>
+                  <i class="glyphicon glyphicon-user"></i>
+                  Update Account
+                  <% end %>
+                </li>
+                <li class = "link">
+                  <%= link_to user_orders_path(@user) do%>
+                  <i class="glyphicon glyphicon-user"></i>
+                  View Orders
+                  <% end %>
+                </li>
+                <% if @user.merchant == true %>
+                  <li class = "link">
+                    <%= link_to new_user_product_path(@user.id) do%>
+                      <i class="glyphicon glyphicon-grain"></i>
+                      Create New Product
+                    <% end %>
+                  </li>
+                  <li class = "link">
+                    <%= link_to sold_orders_path(@user.id) do%>
+                    <i class="glyphicon glyphicon-user"></i>
+                    View Sales
+                    <% end %>
+                  </li>
+                <% else %>
+                <li class = "link">
+                  <%= link_to new_user_path(@user), :controller => "user", :action => "show", :merchant_request => "true" do%>
+                    <i class="glyphicon glyphicon-tags"></i>
+                    Merchant Sign up
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
 					  </ul>
 				  </div>
 				<!-- END MENU -->
@@ -49,20 +77,29 @@
       <div class="profile-content">
         <h2>Welcome <strong><%= @user.username.capitalize %>!</strong> </h2>
         <strong>Biography:</strong> <%= @user.biography ? @user.biography : "Share something about yourself!"%>
-        <% @products.each do |product|%>
-          <% @product = product %>
-          <%= render '/shared/showproduct' %>
-          <%= "In Stock: #{@product.inventory}" %><br />
-          <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
-          <%= link_to edit_user_product_path(@user, product), class: 'btn btn-success' do %>
-            <i class="glyphicon glyphicon-edit"></i> Edit Product
-          <% end %>
-          <%= link_to user_product_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
-          <i class="glyphicon glyphicon-remove"></i> Retire
-          <% end %>
-          <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
-            <i class="glyphicon glyphicon-trash"></i> Delete
-          <% end %>
+        <% if @user.merchant == true %>
+          <% @products.each do |product|%>
+            <% @product = product %>
+            <%= render '/shared/showproduct' %>
+            <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
+            <%= link_to edit_user_product_path(@user, product), class: 'btn btn-success' do %>
+              <i class="glyphicon glyphicon-edit"></i> Edit Product
+            <% end %>
+            <% if @product.retired == false %>
+              <%= link_to user_product_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
+              <i class="glyphicon glyphicon-remove"></i> Retire
+              <% end %>
+            <% else %>
+              <%= link_to user_product_path(@user, @product.id), class: "btn btn-info", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
+              <i class="glyphicon glyphicon-tag"></i> Live
+              <% end %>
+            <% end %>
+            <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
+              <i class="glyphicon glyphicon-trash"></i> Delete
+            <% end %>
+          <%end%>
+        <%else%>
+          <p>Sign up to be a merchant again!<p>
         <%end%>
       </div>
 		</div>
