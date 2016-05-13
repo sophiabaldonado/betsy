@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_create_params[:product])
-    raise
     if @product.save
       redirect_to user_products_path(params[:product][:user_id])
     else
@@ -52,7 +51,8 @@ class ProductsController < ApplicationController
   def update
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
-    @product.update(retired: true)
+
+    @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
     redirect_to user_products_path(params[:user_id])
   end
 
