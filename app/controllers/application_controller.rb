@@ -38,8 +38,8 @@ class ApplicationController < ActionController::Base
     orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
   end
 
-  def total_order_revenue(order)
-    order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }
+  def total_order_revenue(cart_items)
+    cart_items.reduce(0) { |sum, item| price_by_quantity(item) }
   end
 
   def orders_by_status(status)

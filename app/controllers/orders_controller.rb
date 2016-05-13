@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
       @user_id = session[:user_id] if session[:user_id]
       @billing_id = @billing.id
       @order_number = order_number
-      @order = Order.new(status: "pending", total: total_order_revenue, confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order = Order.new(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
