@@ -33,7 +33,7 @@
   <p> No reviews yet </p>
 <% else %>
   <% @review.each do |review| %>
-    <p> Reviewed by: <%= User.find(review.user_id).username %></p>
+    <p> Reviewed by: <%= current_user.nil?? "Anonymous" : User.find(review.user_id).username%></p>
     <p> Rating: <%= review.rating %> </p>
     <p> Comment: <%= review.comment %> </p>
   <% end %>
