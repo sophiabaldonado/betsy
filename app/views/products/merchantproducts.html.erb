@@ -43,20 +43,22 @@
       <div class="profile-content">
         <h2>Hi, I'm <%= @user.username.capitalize %>! Please browse through my products!</h2>
         <p>Biography: <%= @user.biography %></p>
-        <% @products.each do |product|%>
-          <% @product = product %>
-          <%= render '/shared/showproduct' %>
-          <%= "In Stock: #{@product.inventory}" %><br />
-          <%= "Sold By: #{User.find(@product.user_id).username}" %>
-          <% if @item_exists_in_cart.empty? %>
-            <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-            <%= form_tag(controller: "products", method: "post") do%>
-              <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
-              <%= hidden_field_tag(:product_id, @product.id) %>
-              <%= submit_tag("Add to Cart") %>
+        <% if @user.merchant == true %>
+          <% @products.each do |product|%>
+            <% @product = product %>
+            <%= render '/shared/showproduct' %>
+            <%= "In Stock: #{@product.inventory}" %><br />
+            <%= "Sold By: #{User.find(@product.user_id).username}" %>
+            <% if @item_exists_in_cart.empty? %>
+              <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
+              <%= form_tag(controller: "products", method: "post") do%>
+                <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
+                <%= hidden_field_tag(:product_id, @product.id) %>
+                <%= submit_tag("Add to Cart") %>
+              <%end%>
+            <%else%>
+              <p>Added to cart.</p>
             <%end%>
-          <%else%>
-            <p>Added to cart.</p>
           <%end%>
         <%end%>
       </div>
