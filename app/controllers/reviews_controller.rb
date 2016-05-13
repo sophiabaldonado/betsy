@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+    skip_before_action :require_login, only: [:show, :new, :create]
   def index
   end
 
