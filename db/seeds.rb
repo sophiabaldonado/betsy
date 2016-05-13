@@ -34,39 +34,48 @@ end
 USERS = [
   {
     username: "Mike_bb", email: "mbrady@tv.com",
-    password_digest: BCrypt::Password.create("MikePassword"), merchant: true
+    password_digest: BCrypt::Password.create("MikePassword"), merchant: true,
+    biography: "Messenger bag chillwave viral, pinterest readymade green juice art party tumblr small batch. Kinfolk fixie iPhone kitsch brunch affogato lumbersexual cred 8-bit deep v. Cardigan health goth literally, iPhone craft beer celiac retro migas selvage yuccie normcore meditation. Kinfolk food truck humblebrag skateboard franzen semiotics, distillery yr. Knausgaard yr church-key, organic readymade hoodie quinoa art party fashion axe try-hard forage distillery leggings. Echo park occupy trust fund kale chips, organic farm-to-table cardigan. Plaid chia hoodie, migas fanny pack deep v readymade mlkshk meggings drinking vinegar banh mi sustainable post-ironic."
   },
   {
     username: "Carol_bb", email: "cbrady@tv.com",
-    password_digest: BCrypt::Password.create("CarolPassword"), merchant: true
+    password_digest: BCrypt::Password.create("CarolPassword"), merchant: true,
+    biography: "Shoreditch kitsch intelligentsia hella meditation. Drinking vinegar echo park cliche, single-origin coffee kogi kitsch gochujang direct trade. Quinoa drinking vinegar kinfolk brunch, lumbersexual tousled artisan dreamcatcher umami mustache hammock keffiyeh selvage kitsch gochujang. Normcore intelligentsia mlkshk art party everyday carry kinfolk church-key, lumbersexual pickled jean shorts viral. Chicharrones swag williamsburg salvia, chartreuse godard skateboard scenester vegan ethical pork belly 8-bit bitters organic disrupt. Banjo farm-to-table cray selvage, pork belly mlkshk asymmetrical. 8-bit pop-up kickstarter, kinfolk poutine squid portland beard."
   },
   {
     username: "Alice_bb", email: "anelson@tv.com",
-    password_digest: BCrypt::Password.create("AlicePassword"), merchant: true
+    password_digest: BCrypt::Password.create("AlicePassword"), merchant: true,
+    biography: "PBR&B pickled meditation tumblr, austin man braid church-key pitchfork normcore meggings messenger bag retro kogi pop-up. Locavore pinterest cliche messenger bag, 8-bit fingerstache skateboard tofu beard post-ironic biodiesel hoodie. Jean shorts craft beer readymade austin. Meggings hammock tilde, tote bag scenester bicycle rights ramps pickled chia blog wayfarers pitchfork williamsburg cardigan cronut. Echo park retro PBR&B, distillery lumbersexual four dollar toast kitsch waistcoat sartorial meditation cliche. Four dollar toast bespoke dreamcatcher, hammock mlkshk plaid art party cardigan tacos salvia 3 wolf moon. Freegan blue bottle four loko, slow-carb tofu taxidermy mixtape hammock wayfarers health goth artisan cronut pickled next level tousled."
   },
   {
     username: "Greg_bb", email: "gbrady@tv.com",
-    password_digest: BCrypt::Password.create("GregPassword"), merchant: true
+    password_digest: BCrypt::Password.create("GregPassword"), merchant: true,
+    biography: "Tofu vice wayfarers gochujang synth fap. Tilde viral vegan, forage keytar single-origin coffee tousled hashtag migas austin. Chia locavore biodiesel aesthetic offal. Lumbersexual gentrify 8-bit narwhal. Heirloom occupy leggings kombucha scenester, direct trade craft beer squid fap jean shorts aesthetic intelligentsia blue bottle. Kickstarter next level scenester cronut irony. Tacos try-hard you probably haven't heard of them bicycle rights vegan 8-bit, YOLO taxidermy austin kitsch tofu meggings."
   },
   {
     username: "Marcia_bb", email: "mlbrady@tv.com",
-    password_digest: BCrypt::Password.create("MarciaPassword"), merchant: true
+    password_digest: BCrypt::Password.create("MarciaPassword"), merchant: true,
+    biography: "Scratch at the door then walk away nap all day stare at the wall, play with food and get confused by dust or claws in your leg so poop in litter box, scratch the walls, yet destroy couch. Sit on the laptop stare at wall turn and meow stare at wall some more meow again continue staring or unwrap toilet paper. Meow lick the other cats chase after silly colored fish toys around the house or lick the other cats curl into a furry donut. Eat owner's food refuse to leave cardboard box intently stare at the same spot paw at beetle and eat it before it gets away, spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce, or if it fits, i sits. Lick sellotape ignore the squirrels, you'll never catch them anyway stick butt in face. Chew foot. Meowing non stop for food groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked, be fabulous for the rest of the day - checked! "
   },
   {
     username: "Peter_bb", email: "pbrady@tv.com",
-    password_digest: BCrypt::Password.create("PeterPassword"), merchant: true
+    password_digest: BCrypt::Password.create("PeterPassword"), merchant: true,
+    biography: "yet leave hair everywhere. Soft kitty warm kitty little ball of furr poop in litter box, scratch the walls and leave fur on owners clothes. Lick the other cats hunt by meowing loudly at 5am next to human slave food dispenser stare at the wall, play with food and get confused by dust and stare at wall turn and meow stare at wall some more meow again continue staring . Cat snacks poop on grasses, and flee in terror at cucumber discovered on floor eat owner's food. Stand in front of the computer screen caticus cuteicus or if it fits, i sits knock over christmas tree chirp at birds. Eat prawns daintily with a claw then lick paws clean wash down prawns with a lap of carnation milk then retire to the warmest spot on the couch to claw at the fabric before taking a catnap."
   },
   {
     username: "Jan_bb", email: "jbrady@tv.com",
-    password_digest: BCrypt::Password.create("JanPassword"), merchant: false
+    password_digest: BCrypt::Password.create("JanPassword"), merchant: false,
+    biography: "Eat the fat cats food paw at your fat belly but climb leg, and nap all day make meme, make cute face, yet flee in terror at cucumber discovered on floor. Hide when guests come over inspect anything brought into the house. Need to chase tail sit by the fire hide when guests come over stick butt in face, and howl uncontrollably for no reason, and hide head under blanket so no one can see. Destroy couch as revenge meow. Stare at the wall, play with food and get confused by dust get video posted to internet for chasing red dot eat from dog's food. Groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked, be fabulous for the rest of the day - checked! where is my slave? I'm getting hungry cat is love, cat is life for hopped up on catnip. Shake treat bag find something else more interesting meowzer! meowing non stop for food. Hola te quiero. Stare at ceiling light hide when guests come over, for intently stare at the same spot, but jump off balcony, onto stranger's head if it fits, i sits but hopped up on catnip."
   },
   {
     username: "Bobby_bb", email: "bbrady@tv.com",
-    password_digest: BCrypt::Password.create("BobbyPassword"), merchant: false
+    password_digest: BCrypt::Password.create("BobbyPassword"), merchant: false,
+    biography: "Flop over thinking longingly about tuna brine play riveting piece on synthesizer keyboard but pelt around the house and up and down stairs chasing phantoms. Play time. Sniff other cat's butt and hang jaw half open thereafter swat at dog. Rub face on owner touch water with paw then recoil in horror. Meow all night having their mate disturbing sleeping humans meowzer!, curl into a furry donut. Lick the plastic bag inspect anything brought into the house you call this cat food? meow meow for please stop looking at your phone and pet me unwrap toilet paper. Peer out window, chatter at birds, lure them to mouth stick butt in face. Hola te quiero. Always hungry sit in box and swat turds around the house shove bum in owner's face like camera lens pelt around the house and up and down stairs chasing phantoms, chase ball of string. Immediately regret falling into bathtub put butt in owner's face lounge in doorway or cat is love, cat is life. Intently stare at the same spot leave hair everywhere, yet loves cheeseburgers find something else more interesting, or throwup on your pillow, but i like big cats and i can not lie."
   },
   {
     username: "Cindy_bb", email: "ccbrady@tv.com",
-    password_digest: BCrypt::Password.create("CindyPassword"), merchant: false
+    password_digest: BCrypt::Password.create("CindyPassword"), merchant: false,
+    biography: "The dog smells bad. Kick up litter then cats take over the world, burrow under covers, or this human feeds me, i should be a god sit on the laptop. Ears back wide eyed dream about hunting birds for chase dog then run away yet why must they do that eat from dog's food for refuse to leave cardboard box but pelt around the house and up and down stairs chasing phantoms. Jump around on couch, meow constantly until given food, . Jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed chase dog then run away or sun bathe roll on the floor purring your whiskers off. Refuse to drink water except out of someone's glass give attitude, yet i like big cats and i can not lie, but when in doubt, wash yet leave fur on owners clothes if it smells like fish eat as much as you wish. Pooping rainbow while flying in a toasted bread costume in space use lap as chair, or spread kitty litter all over house intrigued by the shower, so hiss at vacuum cleaner lounge in doorway for knock over christmas tree."
   }
 ]
 

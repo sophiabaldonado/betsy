@@ -1,4 +1,24 @@
-<h1><%= @product.name %></h1>
-  <%= image_tag  @product.photo_url, class: "img-responsive" %> <br />
-  <%= @product.description %><br />
-  <%= number_to_currency(@product.price) %><br />
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1><%= @product.name %></h1>
+    </div>
+    <span>
+    <%= image_tag  @product.photo_url, class: "img-responsive" %> <br />
+  </span>
+    <div class="row product_info">
+      <div class="col-sm-4">
+        <h3>Description</h3>
+          <p><%= @product.description %></p><br />
+      </div>
+
+      <br />
+      <div class="col-sm-4">
+        <h3>Price</h3><br />
+        <br />
+        <span>
+          <p><%= number_to_currency(@product.price) %><br /></p>
+        </span>
+      </div>
+    </div>
+  </div>

@@ -7,9 +7,14 @@
         <div class="alert alert-danger "><%=  flash.now[:danger] %></div>
       <% end %>
 
-      <%= form_for(:session, url: login_path) do |f| %>
+      <%= form_for :session, url: login_path, class: "form" do |f| %>
+      <div class="control-group">
         <%= f.email_field :email, :placeholder => "Email" %>
+      </div>
+      <div class="control-group">
         <%= f.password_field :password, :placeholder => "Password" %>
+      </div>
+
         <%= f.submit "Log in", class: "btn-submit" %>
       <% end %>
       <p>New user? <%= link_to "Sign up now!", '/sign_up' %></p>
