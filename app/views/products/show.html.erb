@@ -19,7 +19,7 @@
       <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
         <%= select_tag(:quantity, options_for_select((1..@product.inventory).to_a, selected: @choice), id: "quantity") %>
         <%= hidden_field_tag(:product_id, @product.id) %>
-        <%= submit_tag("Add to Cart") %>
+        <%= submit_tag("Add to Cart", class: "btn btn-primary") %>
       <%end%>
     <%end%>
   <%else%>
