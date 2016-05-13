@@ -33,8 +33,8 @@
             <th>Order #</th>
             <th>Time</th>
             <th>Status</th>
-            <tr class="main-order">
-              <td>Order <%= link_to order.order_number, @path %></td>
+            <tr class="main-order order-number">
+              <td>Order <%= link_to order.order_number, @path %></span></td>
               <td><%= order.created_at.strftime("%B %d, %Y") %></td>
               <td><%= order.status %></td>
               <tr class="info subheader">
