@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_create_params[:product])
     if @product.save
-      redirect_to user_products_path(params[:product][:user_id])
+      redirect_to user_product_path(params[:product][:user_id], @product.id)
     else
       render :new
     end
@@ -52,13 +52,22 @@ class ProductsController < ApplicationController
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
 
-    @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
-    redirect_to user_product_path(params[:user_id],params[:id])
+
+    if @product.save
+      @product.update(:name => params[:product][:name])
+      @product.update(:price => params[:product][:price])
+      @product.update(:inventory => params[:product][:inventory])
+      @product.update(:description => params[:product][:description])
+      @product.update(:photo_url => params[:product][:photo_url])
+      @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
+      redirect_to user_product_path(params[:user_id],params[:id])
+    else
+      render :new
+    end
   end
 
   def category
     @browser = BROWSE
-
     @category = Category.find(params[:id])
     @show = @category.products
     render :categoryproducts
