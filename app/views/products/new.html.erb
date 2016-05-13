@@ -33,6 +33,17 @@
 		<%= f.label :'Product Picture URL:', :class=>"control-label" %>
 		<%= f.text_field :photo_url, :class=>"form-control" %>
 	</div>
+	<div class="control-group">
+		<%= f.label :'Categories:', :class=>"control-label" %>
+	  <% @categories.each do |cat| %>
+			<%= f.label(:checkname, cat.name) %>
+			<% if @existingcats != nil && @existingcats.where(category_id: cat.id) != [] %>
+		    <%= f.check_box(:"#{cat.name}", :checked=> true) %>
+			<% else %>
+		    <%= f.check_box(:"#{cat.name}", :checked=> false) %>
+		  <% end %>
+	  <% end %>
+	</div>
 	<%= f.hidden_field(:deleted, :value => "false") %>
 	<%= f.hidden_field(:retired, :value => "false") %>
 	<%= f.hidden_field(:user_id, :value => params[:user_id]) %>

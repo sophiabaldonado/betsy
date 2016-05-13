@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
       else
         @orders = Order.where(user_id: @user.id)
       end
-      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = @display_orders.orders_by_status(params[:status])
+      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
       @total = all_orders_revenue(@display_orders)
       @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
       @status = params[:status] if params[:status]
@@ -25,12 +25,12 @@ class OrdersController < ApplicationController
 
   def show
     #if they're a merchant:
-    if current_user && "/users/#{current_user.id}/sold/#{@order.id}" == request.env['PATH_INFO']
+    if current_user && "/users/#{current_user.id}/sold/#{params[:id]}" == request.env['PATH_INFO']
       @order = Order.find(params[:id])
       #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
     else # if they're a customer
-      @order = Order.find(params[:order_id])
+      @order = Order.find(params[:id])
       # if current_user
       #   @user = User.find(session[:user_id])
       # end
@@ -48,7 +48,7 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
     # raise
-    @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)) 
+    @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 
   def create

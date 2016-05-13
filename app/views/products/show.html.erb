@@ -4,8 +4,8 @@
   <% @user = params[:user_id] %>
   <% @product.in_stock? ? inventory_class ="success" : inventory_class = "danger" %>
   <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
-  <%= link_to "Edit Product here",  edit_user_product_path(@user, @product), class: 'btn btn-success'%>
-  <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
+  <%= link_to "Edit Product",  edit_user_product_path(@user, @product), class: 'btn btn-success'%>
+  <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this product?' } do %>
     <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 <% else %>
@@ -19,7 +19,7 @@
       <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
         <%= select_tag(:quantity, options_for_select((1..@product.inventory).to_a, selected: @choice), id: "quantity") %>
         <%= hidden_field_tag(:product_id, @product.id) %>
-        <%= submit_tag("Add to Cart") %>
+        <%= submit_tag("Add to Cart", class: "btn btn-primary") %>
       <%end%>
     <%end%>
   <%else%>

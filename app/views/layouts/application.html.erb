@@ -16,33 +16,82 @@
 
 </head>
 <body>
+  <header>
 
+    <div id="mycarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mycarousel" data-slide-to="1"></li>
+        <li data-target="#mycarousel" data-slide-to="2"></li>
+        <li data-target="#mycarousel" data-slide-to="3"></li>
+        <li data-target="#mycarousel" data-slide-to="4"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <%=image_tag "carousel1.jpg" %>
+          <div class="carousel-caption">
+            <h3>Handmade Items</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%= image_tag "carousel2" %>
+          <div class="carousel-caption">
+            <h3>With Love</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%=image_tag "carousel3.jpg" %>
+          <div class="carousel-caption">
+            <h3>From Us</h3>
+          </div>
+        </div>
+        <div class="item">
+          <%=image_tag "carousel4.jpg" %>
+          <div class="carousel-caption">
+            <h3>To You</h3>
+          </div>
+        </div>
+        <!-- more slides here -->
+      </div>
+
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+
+  </header>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <div class="navbar-brand">Traverse!</div>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "HOME", root_path %></li>
-        <li><%= link_to "PRODUCTS", products_path %></li>
+        <li class="<%= "active" if current_page == '/' %>"><%= link_to "HOME", root_path %></li>
+        <li class="<%= "active" if any_product_path %>"><%= link_to "BROWSE", products_path %></li>
 
-        <% if current_user %>
-          <li><%= link_to "ORDERS", user_orders_path(current_user.id) %></li>
-        <% end %>
-
-
-        <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
+        <li class="<%= "active" if any_checkout_path %>"><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
       </ul>
 
       <% if current_user %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to user_path(current_user.id) do %><span class="glyphicon glyphicon-user"></span> User Profile<% end %></li>
+          <li class="<%= "active" if current_page == "/users/#{current_user.id}" %>"><%= link_to user_path(current_user.id) do %><span class="glyphicon glyphicon-user"></span> User Profile<% end %></li>
           <li><%= link_to logout_path, method: "delete" do %><span class="glyphicon glyphicon-log-out"></span> Log Out<% end %></li>
         </ul>
       <% else %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> Sign Up<% end %></li>
-          <li><%= link_to login_path do %><span class="glyphicon glyphicon-log-in"></span> Log In<% end %></li>
+          <li class="<%= "active" if current_page == '/users/new' %>"><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> Sign Up<% end %></li>
+          <li class="<%= "active" if current_page == '/login' %>"><%= link_to login_path do %><span class="glyphicon glyphicon-log-in"></span> Log In<% end %></li>
         </ul>
       <% end %>
     </div>
