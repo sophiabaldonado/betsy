@@ -39,6 +39,7 @@ class OrdersController < ApplicationController
     elsif current_user.nil? # if they're a customer
       @order = Order.find(params[:order_id])
       @order_items = OrderItem.where(:order_id => @order.id)
+
     else # if they're a customer
       @order = Order.find(params[:user_id])
       # if current_user
