@@ -4,7 +4,7 @@
     <%= select_tag(
       :browse,
       options_for_select(@browser, selected: params[:browse]),
-      id: "browse") %>
+      id: "browse", class: "dropdown") %>
   </div>
   <%= submit_tag"Update", class: "btn btn-primary" %>
 <% end %>
