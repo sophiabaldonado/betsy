@@ -11,6 +11,27 @@
   margin-top: 5rem;
 }
 
+.container span {
+  float: left;
+}
+
+.container p {
+  float: right;
+  font-size: 18px;
+  margin-left: 150px;
+}
+
+.col-sm-4 span {
+    float: left;
+    margin-right: 20px;
+}
+
+.container h3 {
+  float: left;
+  font-size: 24px;
+  margin-left: 100px;
+}
+
 .product {
   height: 30rem;
 }

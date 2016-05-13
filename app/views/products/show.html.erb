@@ -10,11 +10,13 @@
   <% end %>
 <% else %>
   <%= "Sold By: #{User.find(@product.user_id).username}" %>
+  <br />
   <% if @item_exists_in_cart.empty? %>
     <% if @product.inventory == 0 %>
       <p>Out of Stock!</p>
     <%else%>
       <%= "In Stock: #{@product.inventory}" %>
+      <br />
       <% @choice = 1 %>
       <%= form_tag(controller: "products", action:"create_cart", method: "post") do%>
         <%= select_tag(:quantity, options_for_select((1..@product.inventory).to_a, selected: @choice), id: "quantity") %>
@@ -26,6 +28,7 @@
     <p>Added to cart.</p>
   <%end%>
 <% end %>
+
 
 
 <!-- REVIEW  -->
