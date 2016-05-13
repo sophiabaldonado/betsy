@@ -1,10 +1,14 @@
 <% if @review == nil %>
   <p> No reviews yet </p>
 <% else %>
-  <% @review.each do |review| %>
-    <p> Reviewed by: <%= current_user.nil?? "Anonymous" : User.find(review.user_id).username%></p>
-    <p> Rating: <%= review.rating %> </p>
-    <p> Comment: <%= review.comment %> </p>
-  <% end %>
+  <div class="well">
+    <% @review.each do |review| %>
+    <div class="row">
+      <p> Reviewed by: <%= review.user_id ? User.find(review.user_id).username : "Anonymous" %></p>
+      <p> Rating: <%= review.rating %> </p>
+      <p> Comment: <%= review.comment %> </p>
+    </div>
+    <% end %>
+  </div>
 <% end %>
 <%= link_to 'Add New Review', new_product_review_path(product_id: @product.id) %>
