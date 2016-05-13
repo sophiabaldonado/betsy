@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
-    redirect_to user_products_path(params[:user_id])
+    redirect_to user_product_path(params[:user_id],params[:id])
   end
 
   def category
@@ -98,16 +98,6 @@ class ProductsController < ApplicationController
     else
       render :show
     end
-  end
-
-  def browse_by
-
-  end
-  def update_cart
-  end
-
-  def categories
-
   end
 
   private

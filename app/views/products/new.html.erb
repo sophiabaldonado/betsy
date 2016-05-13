@@ -35,7 +35,7 @@
 	</div>
 	<%= f.hidden_field(:deleted, :value => "false") %>
 	<%= f.hidden_field(:retired, :value => "false") %>
-	<%= f.hidden_field(:user_id, :value => @user.id) %>
+	<%= f.hidden_field(:user_id, :value => params[:user_id]) %>
 	<br>
 	<div class="product_button">
 		<%= f.submit class: 'btn btn-success'%>
