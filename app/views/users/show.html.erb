@@ -5,6 +5,7 @@
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
 					<img src=<%= @user.profile_pic %> class="img-responsive" alt="">
+
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -29,7 +30,7 @@
 							<i class="glyphicon glyphicon-home"></i>
 							Overview </a>
 						</li>
-            <li>
+            <li class = "link">
               <%= link_to user_products_path(@user) do%>
                 <i class="glyphicon glyphicon-tags"></i>
                 View My Products
@@ -37,33 +38,33 @@
             </li>
 
             <% if @user.current_user?(current_user) %>
-              <li>
+              <li class = "link">
                 <%= link_to edit_user_path(@user) do%>
                 <i class="glyphicon glyphicon-user"></i>
                 Update Account
                 <% end %>
               </li>
-              <li>
+              <li class = "link">
                 <%= link_to user_orders_path(@user) do%>
                 <i class="glyphicon glyphicon-user"></i>
                 View Orders
                 <% end %>
               </li>
               <% if @user.merchant == true %>
-                <li>
+                <li class = "link">
                   <%= link_to new_user_product_path(@user.id) do%>
                     <i class="glyphicon glyphicon-grain"></i>
     							  Create New Product
                   <% end %>
                 </li>
-                <li>
+                <li class = "link">
                   <%= link_to sold_orders_path(@user.id) do%>
                   <i class="glyphicon glyphicon-user"></i>
                   View Sales
                   <% end %>
                 </li>
               <% else %>
-              <li>
+              <li class = "link">
                 <%= link_to new_user_path(@user), :controller => "user", :action => "show", :merchant_request => "true" do%>
                   <i class="glyphicon glyphicon-tags"></i>
                   Merchant Sign up
@@ -71,12 +72,6 @@
               </li>
             <% end %>
           <% end %>
-
-						<li>
-							<a href="#">
-							<i class="glyphicon glyphicon-flag"></i>
-							Help </a>
-						</li>
 					</ul>
 				</div>
 				<!-- END MENU -->
