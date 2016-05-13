@@ -5,13 +5,27 @@ class ProductsController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
+    @categories = Category.all
     @product = Product.new
   end
 
   def create
     @product = Product.new(product_create_params[:product])
+    @categories = Category.all
+    @existingcats = ProductCategory.where(product_id: @product.id)
+
     if @product.save
-      redirect_to user_products_path(params[:product][:user_id])
+      @product.photo_url.empty?? @product.update(:photo_url =>  "http://www.spotahome.com/blog/wp-content/plugins/wd-instagram-feed/images/missing.png") : @product.update(:photo_url => params[:product][:photo_url])
+      @categories.each do |cat|
+
+        if params[:product][:"#{cat.name}"] == "1" && @existingcats.where(category_id: cat.id).empty?
+          @prodcat = ProductCategory.new
+          @prodcat.product_id = @product.id
+          @prodcat.category_id = cat.id
+          @prodcat.save
+        end
+      end
+      redirect_to user_product_path(params[:product][:user_id], @product.id)
     else
       render :new
     end
@@ -45,20 +59,42 @@ class ProductsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
+    @categories = Category.all
+    @existingcats = ProductCategory.where(product_id: @product.id)
     render :new
   end
 
   def update
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
+    @categories = Category.all
+    @existingcats = ProductCategory.where(product_id: @product.id)
 
-    @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
-    redirect_to user_products_path(params[:user_id])
+
+    if @product.save
+      @product.update(:name => params[:product][:name])
+      @product.update(:price => params[:product][:price])
+      @product.update(:inventory => params[:product][:inventory])
+      @product.update(:description => params[:product][:description])
+      @product.photo_url.empty?? @product.update(:photo_url =>  "http://www.spotahome.com/blog/wp-content/plugins/wd-instagram-feed/images/missing.png") : @product.update(:photo_url => params[:product][:photo_url])
+      @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
+
+      @categories.each do |cat|
+        if params[:product][:"#{cat.name}"] == "1"  && @existingcats.where(category_id: cat.id).empty?
+          @prodcat = ProductCategory.new
+          @prodcat.product_id = @product.id
+          @prodcat.category_id = cat.id
+          @prodcat.save
+        end
+      end
+      redirect_to user_product_path(params[:user_id],params[:id])
+    else
+      render :new
+    end
   end
 
   def category
     @browser = BROWSE
-
     @category = Category.find(params[:id])
     @show = @category.products
     render :categoryproducts
@@ -98,16 +134,6 @@ class ProductsController < ApplicationController
     else
       render :show
     end
-  end
-
-  def browse_by
-
-  end
-  def update_cart
-  end
-
-  def categories
-
   end
 
   private
