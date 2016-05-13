@@ -13,6 +13,5 @@ class Billing < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :zip, presence: true, length: { is: 5 }
-  validates :user_id, presence: true
   validates :expiration_date, presence: true
 end

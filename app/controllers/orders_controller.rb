@@ -24,13 +24,19 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
-    @order = Order.find(params[:id])
-    if "/users/#{current_user.id}/sold/#{@order.id}" == request.env['PATH_INFO']
+    #if they're a merchant:
+    if current_user && "/users/#{current_user.id}/sold/#{@order.id}" == request.env['PATH_INFO']
+      @order = Order.find(params[:id])
+      #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
-    else
+    else # if they're a customer
+      @order = Order.find(params[:order_id])
+      # if current_user
+      #   @user = User.find(session[:user_id])
+      # end
       @order_items = OrderItem.where(:order_id => @order.id)
     end
+
   end
 
   def new
@@ -70,9 +76,11 @@ class OrdersController < ApplicationController
           redirect_to checkout_confirmation_path(@order.id)
         end
       else
+        raise
         redirect_to "/billings/new"
       end
     else
+      raise
       redirect_to "/billings/new"
     end
   end
@@ -107,6 +115,6 @@ class OrdersController < ApplicationController
 
 
   def billing_params
-    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
+    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :address2, :city, :state, :zip, :user_id])
   end
 end
