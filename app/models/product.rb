@@ -14,4 +14,14 @@ class Product < ActiveRecord::Base
   def in_stock?
     self.inventory >= 0
   end
+
+  def product_pic
+    picture = self.photo_url
+    if picture == nil || picture == ""
+      "http://www.apheresis.org/global_graphics/default-store-350x350.jpg"
+    else
+      picture
+    end
+  end
+
 end
