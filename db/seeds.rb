@@ -76,24 +76,29 @@ end
 
 PRODUCTS = [
   {
-    name: "Antler Mirror", price: 25.00, description: "Gold, handmade mirror frame",
-    inventory: 8, photo_url: "antler-mirror.png",
-    retired: false, user_id: 1, deleted: false
-  },
-  {
-    name: "Felted Cat Bed", price: 15.00, description: "Hand dyed felt",
-    inventory: 10, photo_url: "felted-cat-bed.png",
-    retired: false, user_id: 3, deleted: false
-  },
-  {
     name: "Floral Vases", price: 8.00, description: "Ceramic handmade flowers",
     inventory: 50, photo_url: "floral-vases.png",
     retired: false, user_id: 1, deleted: false
   },
   {
-    name: "African Baskets", price: 12.00, description: "hand woven baskets!",
-    inventory: 40, photo_url: "african-baskets.png",
-    retired: false, user_id: 3, deleted: false
+    name: "Quartz Knobs", price: 6.00, description: "One-of-a-kind quartz knobs!",
+    inventory: 35, photo_url: "quartz-knobs.png",
+    retired: false, user_id: 5, deleted: false
+  },
+  {
+    name: "Stained Glass Windchime", price: 32.00, description: "Handmade stained-glass windchime",
+    inventory: 24, photo_url: "stained-glass-wind-chime-2.png",
+    retired: false, user_id: 1, deleted: false
+  },
+  {
+    name: "Incense Holder", price: 12.50, description: "Incense holder!",
+    inventory: 200, photo_url: "incense-holder-2.png",
+    retired: false, user_id: 6, deleted: false
+  },
+  {
+    name: "Needle Point Pillows", price: 32.00, description: "Needle Point Pillows",
+    inventory: 200, photo_url: "needle-point-pillow-1.png",
+    retired: false, user_id: 1, deleted: false
   },
   {
     name: "Tassled Hammock", price: 35.00, description: "Hand dyed and woven hammock",
@@ -101,9 +106,34 @@ PRODUCTS = [
     retired: false, user_id: 4, deleted: false
   },
   {
+    name: "Macrame Plant Hangers", price: 16.00, description: "Handmade macrame plant holders!",
+    inventory: 45, photo_url: "macrame-plant-hangers.png",
+    retired: false, user_id: 3, deleted: false
+  },
+  {
+    name: "Moroccan Tea Set", price: 38.00, description: "Handmade tes set!",
+    inventory: 35, photo_url: "moroccan-tea-set.png",
+    retired: false, user_id: 5, deleted: false
+  },
+  {
+    name: "Felted Cat Bed", price: 15.00, description: "Hand dyed felt",
+    inventory: 10, photo_url: "felted-cat-bed.png",
+    retired: false, user_id: 3, deleted: false
+  },
+  {
     name: "Glass Lanterns", price: 18.00, description: "Glass Lanterns!",
     inventory: 101, photo_url: "glass-lanterns.png",
     retired: false, user_id: 1, deleted: false
+  },
+  {
+    name: "Antler Mirror", price: 25.00, description: "Gold, handmade mirror frame",
+    inventory: 8, photo_url: "antler-mirror.png",
+    retired: false, user_id: 1, deleted: false
+  },
+  {
+    name: "African Baskets", price: 12.00, description: "hand woven baskets!",
+    inventory: 40, photo_url: "african-baskets.png",
+    retired: false, user_id: 3, deleted: false
   },
   {
     name: "Gourd Birdhouses", price: 12.00, description: "Hand carved and painted birdhouses!",
@@ -116,26 +146,6 @@ PRODUCTS = [
     retired: false, user_id: 5, deleted: false
   },
   {
-    name: "Incense Holder", price: 12.50, description: "Incense holder!",
-    inventory: 200, photo_url: "incense-holder-2.png",
-    retired: false, user_id: 6, deleted: false
-  },
-  {
-    name: "Macrame Plant Hangers", price: 16.00, description: "Handmade macrame plant holders!",
-    inventory: 45, photo_url: "macrame-plant-hangers.png",
-    retired: false, user_id: 3, deleted: false
-  },
-  {
-    name: "Moroccan Tea Set", price: 38.00, description: "Handmade tes set!",
-    inventory: 35, photo_url: "moroccan-tea-set-2.png",
-    retired: false, user_id: 5, deleted: false
-  },
-  {
-    name: "Needle Point Pillows", price: 32.00, description: "Needle Point Pillows",
-    inventory: 200, photo_url: "needle-point-pillows-2.png",
-    retired: false, user_id: 1, deleted: false
-  },
-  {
     name: "Handmade Shoes", price: 26.00, description: "Fun, handmade shoes",
     inventory: 45, photo_url: "pointy-fun-shoes.png",
     retired: false, user_id: 4, deleted: false
@@ -146,19 +156,9 @@ PRODUCTS = [
     retired: false, user_id: 2, deleted: false
   },
   {
-    name: "Quartz Knobs", price: 6.00, description: "One-of-a-kind quartz knobs!",
-    inventory: 35, photo_url: "quartz-knobs.png",
-    retired: false, user_id: 5, deleted: false
-  },
-  {
     name: "Skeleton Key Chandelier", price: 55.00, description: "One-of-a-kind key chandelier",
     inventory: 12, photo_url: "skeleton-key-chandelier.png",
     retired: false, user_id: 6, deleted: false
-  },
-  {
-    name: "Stained Glass Windchime", price: 32.00, description: "Handmade stained-glass windchime",
-    inventory: 24, photo_url: "stained-glass-wind-chime-2.png",
-    retired: false, user_id: 1, deleted: false
   },
   {
     name: "Butterfly Chandelier", price: 62.00, description: "Handmade butterfly chandelier",
