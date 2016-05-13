@@ -35,5 +35,13 @@ class BillingTest < ActiveSupport::TestCase
     # puts '!!!!!!!!!!!!'
     assert billing.errors.include?(:address)
   end
+  
+  test "Test that email is required" do
+    invalid_params = valid_params.clone
+    invalid_params[:email] = nil
+    billing = Billing.new(invalid_params)
+    billing.valid?
+    assert billing.errors.include?(:email)
+  end
 
 end
