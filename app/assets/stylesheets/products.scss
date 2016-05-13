@@ -12,31 +12,6 @@
   margin-top: 5rem;
 }
 
-.container span {
-  float: left;
-}
-
-.container p {
-  float: right;
-  font-size: 16px;
-  margin-left: 150px;
-}
-
-.product_info p {
-  font-size: 18px;
-}
-
-.col-sm-4 span {
-    float: left;
-    margin-right: 20px;
-}
-
-.container h3 {
-  float: left;
-  font-size: 24px;
-  margin-left: 100px;
-}
-
 .product {
   height: 30rem;
 }
@@ -73,10 +48,6 @@ text-transform: uppercase;
 font-family: -webkit-pictograph;
 background-color: rgba(158, 158, 158, 0.13);
 margin-bottom: 5px;
-}
-.product:hover{
-    background: lightgray;
-    color: black;
 }
 
 .price {
@@ -285,14 +256,4 @@ label {
     padding: 0;
     // width: 95%;
     display: inline-block !important;
-}
-
-/* reviews*/
-
-.reviews {
-  margin: 5rem;
-}
-
-.new-review {
-  margin-bottom: 2rem;
 }
