@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
       #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
     else # if they're a customer
-      @order = Order.find(params[:id])
+      @order = Order.find(params[:order_id])
       # if current_user
       #   @user = User.find(session[:user_id])
       # end
@@ -76,12 +76,10 @@ class OrdersController < ApplicationController
           redirect_to checkout_confirmation_path(@order.id)
         end
       else
-        raise
-        redirect_to "/billings/new"
+        render "/billings/new"
       end
     else
-      raise
-      redirect_to "/billings/new"
+        render "/billings/new"
     end
   end
 

@@ -4,7 +4,7 @@
 <ul>
 
 <% @show.each do |thing| %>
-  <%= link_to category_path(thing), class: 'thumbnail' do %>
+  <%= link_to category_path(thing), class: 'product-thumbnail' do %>
   <li>
 
   <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
