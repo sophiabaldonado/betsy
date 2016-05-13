@@ -72,10 +72,10 @@ class OrdersController < ApplicationController
         end
         redirect_to user_order_path(current_user.id, @order.id)
       else
-        render :new
+        redirect_to "/billings/new"
       end
     else
-      render :new
+      redirect_to "/billings/new"
     end
   end
 
@@ -109,7 +109,7 @@ class OrdersController < ApplicationController
 
 
   def billing_params
-    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
+    params.permit(billing: [:first_name, :last_name, :cc, :cvv,  :expiration_date, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
 
   end
 end
