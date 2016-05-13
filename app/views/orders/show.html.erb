@@ -14,17 +14,15 @@
 
 <h3>Order Total: <%= number_to_currency(total_revenue(@order)) %></h3>
 
-<%# If im a Merchant viewing my order (sold) page %>
+<%= merchant_fulfillment_view %>
 <h3>Customer Details:</h3>
   <%= @order.user.username %>
   <%= @order.user.email %>
   <%= @order.billing.address %>
   <%= @order.billing.address2 if @order.billing.address2 %>
   <%= @order.billing.cc[-4..-1] %>
-  <%# @order.billing.cc_expiration %>
-
-
-<%# end  %>
+  <%= @order.billing.expiration_date %>
+<%= end  %>
 
 
 <!-- Each item in the order with a quantity and line-item subtotal

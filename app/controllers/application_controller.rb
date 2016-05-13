@@ -13,7 +13,10 @@ class ApplicationController < ActionController::Base
   def keep_cart_items(cart_items)
     unless cart_items.nil?
       cart_items.each do |item|
+        # if item.product is already in the @user.cart_items, update the quantity
+        # of the cart_item in the @user.cart_items to add the item.quantity
         item.update(user_id: @user.id)
+        item.update(session_id: nil)
       end
     end
   end
@@ -30,9 +33,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def orders_revenue(orders)
+  def all_orders_revenue(orders)
     return 0 if orders.nil?
     orders.each.reduce(0) { |sum, order| order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }  }
+  end
+
+  def total_order_revenue(order)
+    order.order_items.reduce(0) { |sum, item| price_by_quantity(item) }
   end
 
   def orders_by_status(status)

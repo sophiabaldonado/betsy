@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   #post '/products/:id' => 'products#create_review', as: :create_review
   get '/checkout' => 'orders#new', as: :new_order
   post '/checkout' => 'orders#create'
+  post '/checkout/:order_id' => 'orders#show'
   post '/browse' => 'products#index'
   get '/browse/categories/:id' => 'products#category', as: :category
   get '/sign_up' => 'users#new'

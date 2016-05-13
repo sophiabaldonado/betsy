@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   include OrdersHelper
-  skip_before_action :require_login, only: [:new, :update_cart, :destroy]
+  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show]
 
 
   def index
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
         @orders = Order.where(user_id: @user.id)
       end
       params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = @display_orders.orders_by_status(params[:status])
-      @total = orders_revenue(@display_orders)
+      @total = all_orders_revenue(@display_orders)
       @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
       @status = params[:status] if params[:status]
     else
@@ -36,7 +36,12 @@ class OrdersController < ApplicationController
   def new
     @products = Product.where(deleted: false, retired: false).where("inventory > 0")
     @order = Order.new
-    @cart_items = CartItem.all.order(id: :desc) # temp - CartItem.session_id(session[:id])
+    if current_user
+      @cart_items = current_user.cart_items
+    else
+      @cart_items = CartItem.where(session_id: session[:session_id])
+    end
+    # raise
     @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
   end
 
@@ -51,7 +56,7 @@ class OrdersController < ApplicationController
       @user_id = session[:user_id] if session[:user_id]
       @billing_id = @billing.id
       @order_number = order_number
-      @order = Order.new(status: "pending", confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order = Order.new(status: "pending", total: total_order_revenue, confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
@@ -59,12 +64,16 @@ class OrdersController < ApplicationController
           item.destroy
           @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
         end
-        redirect_to user_order_path(current_user.id, @order.id)
+        if current_user
+          redirect_to user_order_path(current_user.id, @order.id)
+        else
+          redirect_to checkout_confirmation_path(@order.id)
+        end
       else
-        render :new
+        render '/billing/new'
       end
     else
-      render :new
+      render '/billing/new'
     end
   end
 
@@ -98,7 +107,7 @@ class OrdersController < ApplicationController
 
 
   def billing_params
-    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
+    params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
 
   end
 end
