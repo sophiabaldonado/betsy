@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def orders_by_status(status)
-    self.select { |order| order if order.status == status }
+    @orders.select { |order| order if order.status == status }
   end
 
 end
