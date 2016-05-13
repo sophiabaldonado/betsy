@@ -68,6 +68,7 @@
                 </li>
               <% end %>
             <% end %>
+            <div class = "bio"><strong>Biography:</strong> <%= @user.biography ? @user.biography : "Share something about yourself!"%></div>
 					  </ul>
 				  </div>
 				<!-- END MENU -->
@@ -76,11 +77,34 @@
 		<div class="col-md-9">
       <div class="profile-content">
         <h2>Welcome <strong><%= @user.username.capitalize %>!</strong> </h2>
-        <strong>Biography:</strong> <%= @user.biography ? @user.biography : "Share something about yourself!"%>
         <% if @user.merchant == true %>
           <% @products.each do |product|%>
             <% @product = product %>
-            <%= render '/shared/showproduct' %>
+            <!-- PROD. ITEM -->
+            <div class="product">
+              <div class="thumbnail">
+                <!-- IMAGE CONTAINER-->
+                <img src=<%= product.product_pic %> class="img-responsive" alt="">
+                <!--END IMAGE CONTAINER-->
+                <!-- CAPTION -->
+                <div class="caption">
+                <h3 class=""><%= product.name%></h3>
+                  <p class=""><%= product.description%></p>
+
+                  <div class="row-fluid">
+                    <div class="span6">
+                      <p class="lead"><%= product.price%></p>
+                    </div>
+                    <div class="span6">
+                      <%= "In Stock: #{@product.inventory}" %><br />
+                    </div>
+                  </div>
+                </div>
+                <!--END CAPTION -->
+              </div>
+              <!-- END: THUMBNAIL -->
+            </div>
+            <!-- PROD. ITEM -->
             <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
             <%= link_to edit_user_product_path(@user, product), class: 'btn btn-success' do %>
               <i class="glyphicon glyphicon-edit"></i> Edit Product

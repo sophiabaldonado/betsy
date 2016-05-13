@@ -1,71 +1,93 @@
 <!-- merhcant viewing their account products -->
 <div class="container">
-    <div class="row profile">
-		  <div class="col-md-3">
-			  <div class="profile-sidebar">
+  <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
 				  <!-- SIDEBAR USERPIC -->
-				  <div class="profile-userpic">
-					  <img src=<%= @user.profile_pic %> class="img-responsive" alt="">
-				  </div>
-				  <!-- END SIDEBAR USERPIC -->
-				  <!-- SIDEBAR USER TITLE -->
-				  <div class="profile-usertitle">
-					  <div class="profile-usertitle-name">
-						  <%= @user.username %>
-					  </div>
-					  <div class="profile-usertitle-job">
-              <%= @user.email %>
-					  </div>
-				  </div>
-				  <!-- END SIDEBAR BUTTONS -->
-				  <!-- SIDEBAR MENU -->
-				  <div class="profile-usermenu">
-					  <ul class="nav">
-						  <li>
-							  <%= link_to user_path(@user) do%>
-							    <i class="glyphicon glyphicon-home"></i>
-                  Overview
-                  <% end %>
-					    </li>
-              <li class="active">
+				<div class="profile-userpic">
+					<img src=<%= @user.profile_pic %> class="img-responsive" alt="">
+				</div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						<%= @user.username %>
+					</div>
+					<div class="profile-usertitle-job">
+            <%= @user.email %>
+					</div>
+				</div>
+				<!-- END SIDEBAR BUTTONS -->
+				<!-- SIDEBAR MENU -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li>
+							<%= link_to user_path(@user) do%>
+							  <i class="glyphicon glyphicon-home"></i>
+                Overview
+              <% end %>
+					  </li>
+            <li class="active">
               <%= link_to user_products_path(@user) do%>
                 <i class="glyphicon glyphicon-tags"></i>
                 View My Products
-              <% end %>
-              </li>
-
-					  </ul>
-				  </div>
+                <% end %>
+            </li>
+            <div class = "bio"><strong>Biography:</strong> <%= @user.biography ? @user.biography : "Share something about yourself!"%></div>
+					</ul>
+				</div>
 				<!-- END MENU -->
 			</div>
 		</div>
 		<div class="col-md-9">
       <div class="profile-content">
-        <h2>Hi, I'm <%= @user.username.capitalize %>! Please browse through my products!</h2>
-        <p>Biography: <%= @user.biography %></p>
-        <% if @user.merchant == true %>
+        <h2>Welcome to <strong><%= @user.username.capitalize %>'s</strong> store.</h2>
           <% @products.each do |product|%>
             <% @product = product %>
-            <%= render '/shared/showproduct' %>
-            <%= "In Stock: #{@product.inventory}" %><br />
-            <%= "Sold By: #{User.find(@product.user_id).username}" %>
-            <% if @item_exists_in_cart.empty? %>
-              <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-              <%= form_tag(controller: "products", method: "post") do%>
-                <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
-                <%= hidden_field_tag(:product_id, @product.id) %>
-                <%= submit_tag("Add to Cart") %>
-              <%end%>
-            <%else%>
-              <p>Added to cart.</p>
-            <%end%>
-          <%end%>
+            <div class="product">
+              <div class="thumbnail">
+                <!-- IMAGE CONTAINER-->
+                <img class="prodcut_image" src=<%= product.product_pic %> class="img-responsive" alt="">
+                <!--END IMAGE CONTAINER-->
+              <!-- CAPTION -->
+              </div>
+              <!--END CAPTION -->
+              <!-- CAPTION -->
+            <div class="caption">
+              <h4 class="product_name"><%= @product.name%></h3>
+              <div class="inventory"><%= "In Stock: #{@product.inventory}" %><br /></div>
+
+              <p class="description"><%= @product.description%></p>
+              <div class="row-fluid">
+                <div class="span6">
+                  <div class="price"><p class="lead"><%= number_to_currency(@product.price)%></p></div>
+                </div>
+                <div class="span6">
+                    <% if @item_exists_in_cart.empty? %>
+                      <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
+                      <%= form_tag(controller: "products", method: "post") do%>
+                        <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
+                        <%= hidden_field_tag(:product_id, @product.id) %>
+                        <%= button_tag(type: "submit", class: "btn btn-success") do %>
+                          <i class="glyphicon glyphicon-shopping-cart"></i>
+                          Add to Cart
+                        <% end %>
+                      <%end%>
+                    <%else%>
+                      <p>Added to cart.</p>
+                    <%end%>
+                </div>
+              </div>
+            </div>
+            <!--END CAPTION -->
+          </div>
         <%end%>
+          <!-- END: THUMBNAIL -->
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
 <center>
-  <strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">TEAm</a></strong>
+<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">TEAm</a></strong>
 </center>
