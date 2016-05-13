@@ -71,7 +71,7 @@ class ProductsController < ApplicationController
     @existingcats = ProductCategory.where(product_id: @product.id)
 
 
-    if @product.save
+    if @product.save && params[:product] != nil
       @product.update(:name => params[:product][:name])
       @product.update(:price => params[:product][:price])
       @product.update(:inventory => params[:product][:inventory])
@@ -80,11 +80,14 @@ class ProductsController < ApplicationController
       @product.retired == true ? @product.update(retired: false) : @product.update(retired: true)
 
       @categories.each do |cat|
-        if params[:product][:"#{cat.name}"] == "1"  && @existingcats.where(category_id: cat.id).empty?
+        @search = @existingcats.where(category_id: cat.id)
+        if params[:product][:"#{cat.name}"] == "1" && @search.empty?
           @prodcat = ProductCategory.new
           @prodcat.product_id = @product.id
           @prodcat.category_id = cat.id
           @prodcat.save
+        elsif params[:product][:"#{cat.name}"] == "0" && @search.any?
+          ProductCategory.destroy(@search)
         end
       end
       redirect_to user_product_path(params[:user_id],params[:id])
@@ -110,8 +113,9 @@ class ProductsController < ApplicationController
   def retire
     @user = User.find(params[:user_id])
     @product = Product.find(params[:id])
-    @product.retire == true ? @product.update(retire: :false) :@product.update(retire: :true)
-    redirect_to user_product(params[:product][:user_id])
+    @product.retired == false ? @product.update(retired: true) : @product.update(retired: false)
+    @product.save
+    redirect_to user_products_path(params[:user_id])
     # redirect_to user_products_path(@user)
   end
 
@@ -123,6 +127,26 @@ class ProductsController < ApplicationController
     @item_exists_in_cart = CartItem.where(session_id: session[:session_id], product_id: params[:id])
   end
 
+  def new_cats
+    @new_cat = Category.new
+    @categories = Category.all.order(name: :asc)
+
+  end
+
+  def update_new_cats
+    @new_cat = Category.new
+    # @categories = Category.all.order(name: :asc)
+    @new_cat.update(:name => params[:new])
+    if @new_cat.save
+      redirect_to root_path
+    end
+  end
+
+
+  # def new_cats
+  #   @new_cat = Category.new
+  #   @categories = Category.all.order(name: :asc)
+  # end
 
   def create_cart
     @cart_item = CartItem.new(cart_params)
