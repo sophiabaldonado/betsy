@@ -23,26 +23,21 @@
         <div class="navbar-brand">Traverse!</div>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "HOME", root_path %></li>
-        <li><%= link_to "PRODUCTS", products_path %></li>
+        <li class="<%= "active" if current_page == '/' %>"><%= link_to "HOME", root_path %></li>
+        <li class="<%= "active" if any_product_path %>"><%= link_to "BROWSE", products_path %></li>
 
-        <% if current_user %>
-          <li><%= link_to "ORDERS", user_orders_path(current_user.id) %></li>
-        <% end %>
-
-
-        <li><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
+        <li class="<%= "active" if any_checkout_path %>"><%= link_to new_order_path do %><i class="fa fa-shopping-cart" aria-hidden="true"></i>  <%= number_of_cart_items %><% end %></li>
       </ul>
 
       <% if current_user %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to user_path(current_user.id) do %><span class="glyphicon glyphicon-user"></span> User Profile<% end %></li>
+          <li class="<%= "active" if current_page == "/users/#{current_user.id}" %>"><%= link_to user_path(current_user.id) do %><span class="glyphicon glyphicon-user"></span> User Profile<% end %></li>
           <li><%= link_to logout_path, method: "delete" do %><span class="glyphicon glyphicon-log-out"></span> Log Out<% end %></li>
         </ul>
       <% else %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> Sign Up<% end %></li>
-          <li><%= link_to login_path do %><span class="glyphicon glyphicon-log-in"></span> Log In<% end %></li>
+          <li class="<%= "active" if current_page == '/users/new' %>"><%= link_to new_user_path do %><span class="glyphicon glyphicon-user"></span> Sign Up<% end %></li>
+          <li class="<%= "active" if current_page == '/login' %>"><%= link_to login_path do %><span class="glyphicon glyphicon-log-in"></span> Log In<% end %></li>
         </ul>
       <% end %>
     </div>
