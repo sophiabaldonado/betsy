@@ -70,10 +70,10 @@ class OrdersController < ApplicationController
           redirect_to checkout_confirmation_path(@order.id)
         end
       else
-        render '/billing/new'
+        redirect_to "/billings/new"
       end
     else
-      render '/billing/new'
+      redirect_to "/billings/new"
     end
   end
 
@@ -108,6 +108,5 @@ class OrdersController < ApplicationController
 
   def billing_params
     params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :city, :state, :zip, :user_id])
-
   end
 end
