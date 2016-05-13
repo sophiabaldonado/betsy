@@ -9,21 +9,21 @@ require 'bcrypt'
 
 CATEGORIES = [
   {name: "Jewelry", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Craft Supplies & Tools", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Home & Living", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Art & Collectibles", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Clothing", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Accessories", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Paper & Party Supplies", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Bath & Beauty", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Bags & Purses", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Weddings", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Toys & Games", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Books", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Movies & Music", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Electronics & Accessories", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Pet Supplies", photo_url: "https://i.imgur.com/KWl6pqT.jpg"},
-  {name: "Shoes", photo_url: "https://i.imgur.com/KWl6pqT.jpg"}
+  {name: "Craft Supplies & Tools", photo_url: "https://img0.etsystatic.com/062/1/7874461/il_570xN.787131090_gd7a.jpg"},
+  {name: "Home & Living", photo_url: "https://img1.etsystatic.com/059/1/10208431/il_570xN.740985501_8uhx.jpg"},
+  {name: "Art & Collectibles", photo_url: "https://img0.etsystatic.com/022/0/6571804/il_570xN.485475578_6fc4.jpg"},
+  {name: "Clothing", photo_url: "https://img1.etsystatic.com/104/0/6595242/il_570xN.927957047_s6q9.jpg"},
+  {name: "Accessories", photo_url: "https://img1.etsystatic.com/051/0/5564587/il_570xN.692994637_2j59.jpg"},
+  {name: "Paper & Party Supplies", photo_url: "https://img1.etsystatic.com/121/0/10737433/il_570xN.865103641_itdv.jpg"},
+  {name: "Bath & Beauty", photo_url: "https://img0.etsystatic.com/109/0/8708016/il_570xN.950157696_5q99.jpg"},
+  {name: "Bags & Purses", photo_url: "https://img1.etsystatic.com/134/0/12105512/il_570xN.1015811987_6ggw.jpg"},
+  {name: "Weddings", photo_url: "https://img1.etsystatic.com/110/1/12712691/il_570xN.1013080819_sq74.jpg"},
+  {name: "Toys & Games", photo_url: "https://img0.etsystatic.com/005/0/7149498/il_570xN.376036392_bda4.jpg"},
+  {name: "Books", photo_url: "https://img1.etsystatic.com/047/0/9568544/il_570xN.738419205_rstq.jpg"},
+  {name: "Movies & Music", photo_url: "https://img1.etsystatic.com/035/0/6222402/il_570xN.640425981_dh7i.jpg"},
+  {name: "Electronics & Accessories", photo_url: "https://img1.etsystatic.com/129/1/8763836/il_570xN.862001657_emym.jpg"},
+  {name: "Pet Supplies", photo_url: "https://img1.etsystatic.com/040/0/8657363/il_570xN.527417903_rg7a.jpg"},
+  {name: "Shoes", photo_url: "https://img0.etsystatic.com/052/2/7222521/il_570xN.681098638_9a69.jpg"}
 ]
 
 
