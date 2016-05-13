@@ -1,14 +1,24 @@
 <% if @review == nil %>
   <p> No reviews yet </p>
 <% else %>
-  <div class="well">
+  <div class="reviews well">
+    <%= link_to 'Add New Review', new_product_review_path(product_id: @product.id), class: "btn btn-success new-review" %>
+    <hr>
     <% @review.each do |review| %>
-    <div class="row">
-      <p> Reviewed by: <%= review.user_id ? User.find(review.user_id).username : "Anonymous" %></p>
-      <p> Rating: <%= review.rating %> </p>
-      <p> Comment: <%= review.comment %> </p>
-    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+          <span class="glyphicon glyphicon-star"></span>
+
+          <%= review.user_id ? User.find(review.user_id).username : "Anonymous" %>
+        <p> Rating: <%= review.rating %> </p>
+        <p> <%= review.comment %> </p>
+        </div>
+      </div>
+      <hr>
     <% end %>
   </div>
 <% end %>
-<%= link_to 'Add New Review', new_product_review_path(product_id: @product.id) %>

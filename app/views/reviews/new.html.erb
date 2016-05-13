@@ -1,13 +1,13 @@
 <h3> Add a Review: </h3>
-<%= form_for [@product, @review], url: "/products/#{@product.id}/reviews", html: { method: :post } do |f| %>
+<%= form_for [@product, @review], url: "/products/#{@product.id}/reviews", html: { method: :post }, class: "form" do |f| %>
 
   <p>
     <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
+    <%= f.text_area :comment %>
   </p>
   <p>
     <%= f.label :rating %>
-    <%= f.select :rating, options_for_select((1..5).to_a) %>
+    <%= f.select :rating, options_for_select((1..5).to_a), class: "dropdown" %>
   </p>
     <%= f.hidden_field :product_id, value: @product.id %><br>
 
@@ -15,6 +15,6 @@
       <%= f.hidden_field :user_id, value: current_user.id %>
     <% end %>
   <p>
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </p>
 <% end %>
