@@ -24,7 +24,7 @@
               <tr>
                 <td>
                   <a href="#">
-                      <img src=<%="#{cart_item.product.photo_url}"%> alt="">
+                      <%= image_tag cart_item.product.photo_url %>
                   </a>
                 </td>
                 <td><a href=<%="/products/#{cart_item.product.id}"%>><%=cart_item.product.name.capitalize%></a>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                     <%= hidden_field_tag(:id, cart_item.id) %>
                     <%= select_tag(:quantity,  options_for_select((1..cart_item.product.inventory).to_a, cart_item.quantity), id: "quantity"  ) %></div>
-                    <%= submit_tag"update"   %>
+                    <%= submit_tag"Edit", class: "btn btn-primary"   %>
                 </td>
 
                 <td><%=  number_to_currency(cart_item.product.price) %></td>
@@ -93,19 +93,19 @@
                 <div class="flipper">
                   <div class="front">
                     <a href=<%="products/#{@products[x].id}"%>>
-                      <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+                      <%= image_tag @products[x].photo_url %>
                     </a>
                   </div>
                   <div class="back">
                     <a href=<%="products/#{@products[x].id}"%>>
-                      <img src=<%="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+                      <%= image_tag @products[x].photo_url, class: "img-responsive" %>
                     </a>
                   </div>
                 </div>
               </div>
 
               <a href=<%="products/#{@products[x].id}"%> class="invisible">
-                <img src="#{@products[x].photo_url}"%> alt="" class="img-responsive">
+                <%= image_tag @products[x].photo_url%>
               </a>
               <div class="text">
                   <h3><%="#{@products[x].name}"%></h3>
