@@ -1,14 +1,12 @@
 <div class="displaycontainer">
-
-<% @show.each do |thing| %>
-<div class="browse_images">
-  <%= link_to product_path(thing), class: 'thumbnail' do %>
-
-    <%= image_tag thing.photo_url, class: "img-responsive" %>
-  <%end%>
-
-  <%= link_to thing[:name],product_path(thing) %>
-   <br />
-</div>
+  <ul>
+  <% @show.each do |thing| %>
+  <!-- <div class="browse_images"> -->
+    <%= link_to product_path(thing), class: 'product-thumbnail' do %>
+    <li>
+      <%= image_tag thing.photo_url, class: "img-responsive" %>
+      <%= link_to thing[:name],product_path(thing) %>
+    <%end%>
+  </li>
 <% end %>
 </div>

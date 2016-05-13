@@ -13,18 +13,37 @@
  *= require_tree .
  *= require_self
  */
-
+body{
+  padding-top: 0;
+}
  .navbar {
   min-height: 10px;
   border-radius: 0;
  }
 
 
+ul li {
+  display: inline-block;
+}
+
+ul li a {
+  text-align: center;
+  margin-left: 30px;
+}
+
 .thumbnail{
   margin: 0;
   padding: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 200px;
+  width: 175px;
   display: inline-block !important;
   }
+
+.thumbnail img{
+  height: 100%;
+}
 
 .displaycontainer{
   display: flex;
