@@ -1,4 +1,4 @@
 <h1><%= @product.name %></h1>
-  <img class="img-responsive" width="15%" src=<%="#{@product.photo_url}"%> /><br />
+  <%= image_tag  @product.photo_url, class: "img-responsive" %> <br />
   <%= @product.description %><br />
   <%= number_to_currency(@product.price) %><br />

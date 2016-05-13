@@ -39,55 +39,5 @@
 				<!-- END MENU -->
 			</div>
 		</div>
-		<div class="col-md-9">
-      <div class="profile-content">
-        <h2>Welcome to <strong><%= @user.username.capitalize %>'s</strong> store.</h2>
-          <% @products.each do |product|%>
-            <% @product = product %>
-            <div class="product">
-              <div class="thumbnail">
-                <!-- IMAGE CONTAINER-->
-                <img class="prodcut_image" src=<%= product.product_pic %> class="img-responsive" alt="">
-                <!--END IMAGE CONTAINER-->
-              <!-- CAPTION -->
-              </div>
-              <!--END CAPTION -->
-              <!-- CAPTION -->
-            <div class="caption">
-              <h4 class="product_name"><%= @product.name%></h3>
-              <div class="inventory"><%= "In Stock: #{@product.inventory}" %><br /></div>
 
-              <p class="description"><%= @product.description%></p>
-              <div class="row-fluid">
-                <div class="span6">
-                  <div class="price"><p class="lead"><%= number_to_currency(@product.price)%></p></div>
-                </div>
-                <div class="span6">
-                    <% if @item_exists_in_cart.empty? %>
-                      <% @product.inventory == 0? @choice = 0 : @choice = 1 %>
-                      <%= form_tag(controller: "products", method: "post") do%>
-                        <%= select_tag(:quantity, options_for_select((0..@product.inventory).to_a, selected: @choice), id: "quantity") %>
-                        <%= hidden_field_tag(:product_id, @product.id) %>
-                        <%= button_tag(type: "submit", class: "btn btn-success") do %>
-                          <i class="glyphicon glyphicon-shopping-cart"></i>
-                          Add to Cart
-                        <% end %>
-                      <%end%>
-                    <%else%>
-                      <p>Added to cart.</p>
-                    <%end%>
-                </div>
-              </div>
-            </div>
-            <!--END CAPTION -->
-          </div>
-        <%end%>
-          <!-- END: THUMBNAIL -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<center>
-<strong>Powered by <a href="http://j.mp/metronictheme" target="_blank">TEAm</a></strong>
-</center>
+      <%= render partial: 'account_products' %>

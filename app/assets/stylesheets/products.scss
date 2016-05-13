@@ -1,12 +1,27 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.product {
+.whole-product {
   width: 30%;
-  display: inline-table;
+  display: inline-block;
   text-align: center;
   padding-top: 1px;
-    padding-bottom: 8px;
+  padding-bottom: 8px;
+  margin: .7rem;
+  float: left;
+  margin-top: 5rem;
+}
+
+.product {
+  height: 30rem;
+}
+
+.thumbnail {
+  height: 26rem;
+}
+
+.product .thumbnail img {
+  max-height: 17rem;
 }
 
 .product_name {
