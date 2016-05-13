@@ -4,8 +4,8 @@
   <% @user = params[:user_id] %>
   <% @product.in_stock? ? inventory_class ="success" : inventory_class = "danger" %>
   <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
-  <%= link_to "Edit Product here",  edit_user_product_path(@user, @product), class: 'btn btn-success'%>
-  <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this vendor?' } do %>
+  <%= link_to "Edit Product",  edit_user_product_path(@user, @product), class: 'btn btn-success'%>
+  <%= link_to user_product_path(@user, @product.id), class: "btn btn-danger", method: :delete, data: {confirm: 'Are you sure you want to delete this product?' } do %>
     <i class="glyphicon glyphicon-trash"></i> Delete
   <% end %>
 <% else %>

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   post '/browse' => 'products#index'
   get '/browse/categories/:id' => 'products#category', as: :category
   get '/sign_up' => 'users#new'
-
+  patch '/users/:user_id/products/:id/retired' => 'products#retire', as: :retire
+  get '/addcategories' => 'products#new_cats', as: :new_cats
+  post '/addcategories' => 'products#update_new_cats'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'

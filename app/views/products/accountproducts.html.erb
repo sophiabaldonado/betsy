@@ -86,7 +86,7 @@
               <i class="glyphicon glyphicon-edit"></i> Edit Product
             <% end %>
             <% if @product.retired == false %>
-              <%= link_to user_product_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
+              <%= link_to retire_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
               <i class="glyphicon glyphicon-remove"></i> Retire
               <% end %>
             <% else %>
@@ -100,7 +100,10 @@
           <%end%>
         <%else%>
           <p>Sign up to be a merchant again!<p>
-        <%end%>
+        <%end%><br /><br />
+        <%= link_to new_cats_path, class: 'btn btn-primary' do %>
+        <i class="glyphicon glyphicon-edit"></i> New Category
+        <% end %>
       </div>
 		</div>
 	</div>
