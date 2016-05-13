@@ -110,16 +110,16 @@ body {
   min-height: 460px;
 }
 
-.bio {
-  color: #747577;
-  font-size: 14px;
-  position: absolute;
-  font-weight: 400;
-  background-color: white;
-  width: 205px;
-  top: auto;
-  bottom: auto;
-  margin-top: 140px;
-  height: 107px;
-
+.bio
+{
+    color: #8A8D94;
+    font-size: 14px;
+    position: absolute;
+    font-weight: 400;
+    width: 100%;
+    display: -webkit-inline-box;
+    position: inherit;
+    height: 107px;
+    margin-top: 18px;
+    margin-left: 4px;
 }

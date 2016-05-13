@@ -1,7 +1,24 @@
 // Place all the styles related to the products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.product {
+  width: 30%;
+  display: inline-table;
+}
 
+.bio
+{
+    color: #8A8D94;
+    font-size: 14px;
+    position: absolute;
+    font-weight: 400;
+    width: 100%;
+    display: -webkit-inline-box;
+    position: inherit;
+    height: 107px;
+    margin-top: 18px;
+    margin-left: 4px;
+}
 .widget-products li>a:after {
     content: "\f138";
     font-family: FontAwesome;
