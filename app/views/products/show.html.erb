@@ -1,6 +1,6 @@
 <%= render '/shared/showproduct' %>
 
-<% if request.env['PATH_INFO'] != "/users/#{params[:user_id]}/products" && current_user == params[:user_id]%>
+<% if request.env['PATH_INFO'] != "/users/#{params[:user_id]}/products" && current_user == params[:user_id] && params[:user_id] != nil%>
   <% @user = params[:user_id] %>
   <% @product.in_stock? ? inventory_class ="success" : inventory_class = "danger" %>
   <div class="danger"><%= "In Stock: #{@product.inventory}"%></div>
