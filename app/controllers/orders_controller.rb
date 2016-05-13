@@ -8,16 +8,23 @@ class OrdersController < ApplicationController
       @user = User.find(current_user.id)
       @order = Order.new
       @order_items = OrderItem.where(:product_id => @user.products)
+
       if '/sold' == request.env['PATH_INFO']
         @order_items_orders = @order_items.map { |item| item.order_id }
         @orders = Order.where(id: @order_items_orders)
       else
         @orders = Order.where(user_id: @user.id)
       end
+      @orders.each do |x|
+        if Time.now.to_i > (x.updated_at.to_i + 172800)
+          x.update(:status => "paid")
+        end
+      end
       params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
       @total = all_orders_revenue(@display_orders)
       @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
       @status = params[:status] if params[:status]
+
     else
       redirect_to login_path
     end
@@ -29,12 +36,16 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
       #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
-    else # if they're a customer
+    elsif current_user.nil? # if they're a customer
       @order = Order.find(params[:order_id])
+      @order_items = OrderItem.where(:order_id => @order.id)
+    else # if they're a customer
+      @order = Order.find(params[:user_id])
       # if current_user
       #   @user = User.find(session[:user_id])
       # end
       @order_items = OrderItem.where(:order_id => @order.id)
+
     end
 
   end
