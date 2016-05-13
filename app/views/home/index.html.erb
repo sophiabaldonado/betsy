@@ -3,8 +3,12 @@
 
 
 
-<h2> Featured Product: </h2>
-<%=image_tag randomized_image  %>
-<% @products.each do |prod| %>
-  <%= image_tag prod.photo_url %>
+<h2> Featured Products: </h2>
+<%= 8.times each do |image| %>
+  <%=image_tag randomized_image  %>
 <% end %>
+<!-- <% @products.each do |prod| %>
+  <%= image_tag prod.photo_url %>
+<% end %> -->
+
+<%= image_tag "african-baskets.png" %>

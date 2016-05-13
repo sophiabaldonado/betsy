@@ -9,4 +9,16 @@ module ApplicationHelper
   def cart_count(items)
     items.reduce(0) { |sum, item| sum + item.quantity }
   end
+
+  def current_page
+    request.env['PATH_INFO']
+  end
+
+  def any_product_path
+    current_page == "/products" || current_page == "/products/#{params[:id]}"
+  end
+
+  def any_checkout_path
+    current_page == "/checkout" || current_page == "/billings/new"
+  end
 end
