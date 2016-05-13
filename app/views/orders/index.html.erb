@@ -3,18 +3,20 @@
   <% if merchant_fulfillment_view %>
     <table class="table">
       <tr>
-        <th></th>
+        <th>Status:</th>
+        <th>Total Revenue:</th>
+        <th>Number of Orders:</th>
       </tr>
       <tr>
         <td>
           <%= form_tag({}, {method: :get}) do %>
-            <%= label_tag :status %>
+            <%= label_tag :filter_by %>
             <%= select_tag(:status, options_for_select(@statuses, selected: params[:status])) %>
             <%= submit_tag "Update", class: "btn" %>
           <% end %>
         </td>
-        <p>Total Revenue: </p><%= number_to_currency(@total) %>
-        <p>Number of Orders: </p><%= @display_orders.count %>
+        <td><%= number_to_currency(@total) %></td>
+        <td><%= @display_orders.count %></td>
       </tr>
     </table>
   <% end %>
