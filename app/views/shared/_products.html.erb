@@ -1,9 +1,10 @@
 <div class="displaycontainer">
 
 <% @show.each do |thing| %>
-<div class="displayimages">
+<div class="browse_images">
   <%= link_to product_path(thing), class: 'thumbnail' do %>
-    <img class="img-responsive" src=<%="#{thing.photo_url}"%> />
+
+    <%= image_tag thing.photo_url, class: "img-responsive" %>
   <%end%>
 
   <%= link_to thing[:name],product_path(thing) %>
