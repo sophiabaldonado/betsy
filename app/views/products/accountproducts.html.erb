@@ -92,7 +92,6 @@
                 <%= link_to product_path(product.id) do %>
                   <%= image_tag product.photo_url, class: "img-responsive" %>
                 <% end %>
-                <p>meow</p>
                 <!--END IMAGE CONTAINER-->
                 <!-- CAPTION -->
                 <div class="caption">
@@ -105,7 +104,7 @@
             <!-- PROD. ITEM -->
             <div>
             <%= link_to edit_user_product_path(@user, product), class: 'btn btn-success' do %>
-              <i class="glyphicon glyphicon-edit"></i> Edit Product
+              <i class="glyphicon glyphicon-edit"></i> Edit
             <% end %>
             <% if @product.retired == false %>
               <%= link_to retire_path(@user, @product.id), class: "btn btn-warning", action: :retire, data: {confirm: 'Are you sure you want to retire this product?',  method: :patch } do %>
