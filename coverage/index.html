@@ -14,14 +14,14 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-13T21:45:15-07:00">2016-05-13T21:45:15-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-05-13T22:14:45-07:00">2016-05-13T22:14:45-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">4.37%</span></span>
+    (<span class="covered_percent"><span class="red">5.07%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
@@ -32,9 +32,9 @@
   <a name="AllFiles"></a>
   <div>
     <b>25</b> files in total.
-    <b>733</b> relevant lines. 
-    <span class="green"><b>32</b> lines covered</span> and
-    <span class="red"><b>701</b> lines missed </span>
+    <b>730</b> relevant lines. 
+    <span class="green"><b>37</b> lines covered</span> and
+    <span class="red"><b>693</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -222,12 +222,12 @@
       
       <tr>
         <td class="strong"><a href="#cfae9547d81e889be43289deafb10aacb2401e22" class="src_link" title="app/models/cart_item.rb">app/models/cart_item.rb</a></td>
-        <td class="red strong">0.0 %</td>
+        <td class="green strong">100.0 %</td>
         <td>8</td>
-        <td>8</td>
+        <td>5</td>
+        <td>5</td>
         <td>0</td>
-        <td>8</td>
-        <td>0.0</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -426,20 +426,20 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="red">28.83%</span></span>
+    (<span class="covered_percent"><span class="red">34.26%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.32
+         0.37
        </span>
     </span> hits/line)
   </h2>
   <a name="Models"></a>
   <div>
     <b>9</b> files in total.
-    <b>111</b> relevant lines. 
-    <span class="green"><b>32</b> lines covered</span> and
-    <span class="red"><b>79</b> lines missed </span>
+    <b>108</b> relevant lines. 
+    <span class="green"><b>37</b> lines covered</span> and
+    <span class="red"><b>71</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -467,12 +467,12 @@
       
       <tr>
         <td class="strong"><a href="#cfae9547d81e889be43289deafb10aacb2401e22" class="src_link" title="app/models/cart_item.rb">app/models/cart_item.rb</a></td>
-        <td class="red strong">0.0 %</td>
+        <td class="green strong">100.0 %</td>
         <td>8</td>
-        <td>8</td>
+        <td>5</td>
+        <td>5</td>
         <td>0</td>
-        <td>8</td>
-        <td>0.0</td>
+        <td>1.0</td>
       </tr>
       
       <tr>
@@ -4931,60 +4931,60 @@
         <div class="source_table" id="cfae9547d81e889be43289deafb10aacb2401e22">
   <div class="header">
     <h3>app/models/cart_item.rb</h3>
-    <h4><span class="red">0.0 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>8</b> relevant lines. 
-      <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>8</b> lines missed.</span>
+      <b>5</b> relevant lines. 
+      <span class="green"><b>5</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
   <pre>
     <ol>
       
-        <li class="missed" data-hits="0" data-linenumber="1">
-          
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
           
           <code class="ruby">class CartItem &lt; ActiveRecord::Base</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="2">
-          
+        <li class="covered" data-hits="1" data-linenumber="2">
+          <span class="hits">1</span>
           
           <code class="ruby">  belongs_to :product</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="3">
-          
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
           
           <code class="ruby">  belongs_to :user</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="4">
+        <li class="never" data-hits="" data-linenumber="4">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="5">
-          
+        <li class="covered" data-hits="1" data-linenumber="5">
+          <span class="hits">1</span>
           
           <code class="ruby">  validates :quantity,   presence: true, numericality: { greater_than: 0 }</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="6">
-          
+        <li class="covered" data-hits="1" data-linenumber="6">
+          <span class="hits">1</span>
           
           <code class="ruby">  validates :product_id, presence: true</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="7">
+        <li class="never" data-hits="" data-linenumber="7">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="8">
+        <li class="never" data-hits="" data-linenumber="8">
           
           
           <code class="ruby">end</code>

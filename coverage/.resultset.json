@@ -79,6 +79,16 @@
         1,
         null
       ],
+      "/Users/cristal/C5/projects/betsy/app/models/cart_item.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/cristal/C5/projects/betsy/app/controllers/application_controller.rb": [
         0,
         0,
@@ -752,16 +762,6 @@
         0,
         0
       ],
-      "/Users/cristal/C5/projects/betsy/app/models/cart_item.rb": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
       "/Users/cristal/C5/projects/betsy/app/models/order.rb": [
         0,
         0,
@@ -814,6 +814,6 @@
         0
       ]
     },
-    "timestamp": 1463201115
+    "timestamp": 1463202885
   }
 }
