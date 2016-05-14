@@ -4,8 +4,16 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+billing1:
+  first_name: "Bentley"
+  last_name: "Schreifels"
+  cc: 2222222222222222
+  cvv: 222
+  email: "bentley@cutie.com"
+  billing_zip: 98118
+  address: "cutie street"
+  city: "Seattle"
+  state: "WA"
+  zip: 98118
+  expiration_date: "09/16"
+  user_id: 1

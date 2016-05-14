@@ -8,5 +8,4 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal products(:p_one).user_id, users(:mike).user_id
   end
 
-
 end
