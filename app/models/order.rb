@@ -8,8 +8,8 @@ class Order < ActiveRecord::Base
   validates :billing_id, presence: true
   validates :order_number, presence: true, uniqueness: true
 
-  def orders_by_status(status)
-    @orders.map { |order| order.order_number if order.status == status }
+  def orders_by_status(orders, status)
+    orders.select { |order| order.order_number if order.status == status }
   end
 
   def billing
