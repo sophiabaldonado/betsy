@@ -12,12 +12,14 @@
   margin-top: 5rem;
 }
 
+
 .img-responsive{
   margin: 30px;
   padding: 0;
   height: 200px;
   width: 175px;
 }
+
 .product {
   height: 30rem;
 }
@@ -54,10 +56,6 @@ text-transform: uppercase;
 font-family: -webkit-pictograph;
 background-color: rgba(158, 158, 158, 0.13);
 margin-bottom: 5px;
-}
-.product:hover{
-    background: lightgray;
-    color: black;
 }
 
 .price {
@@ -267,7 +265,3 @@ label {
     // width: 95%;
     display: inline-block !important;
 }
-
-// .displayimages {
-//   width: 30%;
-// }
