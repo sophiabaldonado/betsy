@@ -16,3 +16,4 @@ carol:
   email: "cbrady@tv.com"
   password_digest: <%= BCrypt::Password.create('password', cost: 1) %>
   merchant: false
+  photo_url: https://pbs.twimg.com/profile_images/378800000825366505/ee5752df616efa87ee76f1db873670ca.jpeg
