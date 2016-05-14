@@ -5,8 +5,7 @@ class ProductTest < ActiveSupport::TestCase
   #   assert true
   # end
   test "product must belong to a user" do
-    assert_equal products(:p_one).user_id,
+    assert_equal 1, products(:p_one).user_id
   end
 
-  end
 end
