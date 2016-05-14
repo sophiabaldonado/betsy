@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
     cart_items.reduce(0) { |sum, item| price_by_quantity(item) }
   end
 
-  def orders_by_status(status)
-    @orders.select { |order| order if order.status == status }
+  def orders_by_status(orders, status)
+    orders.select { |order| order if order.status == status }
   end
 
 end

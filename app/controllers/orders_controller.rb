@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
           x.update(:status => "paid")
         end
       end
-      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(params[:status])
+      params[:status] == "all orders" || params[:status].nil? ? @display_orders = @orders : @display_orders = orders_by_status(@orders, params[:status])
       @total = all_orders_revenue(@display_orders)
       @statuses = ["all orders", "paid", "pending", "complete", "cancelled"]
       @status = params[:status] if params[:status]

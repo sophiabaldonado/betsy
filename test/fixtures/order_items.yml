@@ -2,9 +2,9 @@
 
 one:
   quantity: 1
-  name: MyString
+  name: product_name
   price: 9.99
-  status: MyString
+  status: pending
   order_id: 1
   product_id: 1
 
