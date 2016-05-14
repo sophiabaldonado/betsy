@@ -22,8 +22,8 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal 1, order.orders_by_status(@orders, "pending").count
   end
 
-  test "" do
-    assert_equal orders(:two).billing.id == 2
+  test "order two has a billing with id 1" do
+    assert_equal orders(:two).billing.id == 1
   end
 
 end
