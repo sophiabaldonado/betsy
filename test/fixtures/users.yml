@@ -15,11 +15,11 @@ mike:
   product_id: 1
 
 
-mike:
+carol:
   user_id: 2
   username: "Carol_bb"
   email: "cbrady@tv.com"
   password: "CarolPassword"
   password_confirmation: "CarolPassword"
-  merchant: true
+  merchant: false
   product_id: 2
