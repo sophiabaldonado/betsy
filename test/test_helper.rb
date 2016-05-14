@@ -6,7 +6,8 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :users, :products, :reviews, :billings
+
+  fixtures :users, :products, :categories, :product_categories, :reviews, :billings
   # THIS IS THE LINE WE COMMENTED OUT:
   # fixtures :all
 
