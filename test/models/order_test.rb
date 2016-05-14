@@ -23,7 +23,7 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   test "order two has a billing with id 1" do
-    assert_equal orders(:two).billing.id == 1
+    assert_equal 1, orders(:two).billing.id
   end
 
 end
