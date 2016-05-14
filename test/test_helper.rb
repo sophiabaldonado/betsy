@@ -6,8 +6,12 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+<<<<<<< Updated upstream
 
   fixtures :all
+=======
+  fixtures :users, :products, :orders, :order_items
+>>>>>>> Stashed changes
   # THIS IS THE LINE WE COMMENTED OUT:
   # fixtures :all
 
