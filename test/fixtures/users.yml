@@ -5,17 +5,14 @@
 # below each fixture, per the syntax in the comments below
 #
 mike:
-  user_id: 1
+  id: 1
   username: "Mike_bb"
   email: "mbrady@tv.com"
-  password: "MikePassword"
-  password_confirmation: "MikePassword"
+  password_digest: <%= BCrypt::Password.create('password', cost: 1) %>
   merchant: true
-  product_id: 1
 carol:
-  user_id: 2
+  id: 2
   username: "Carol_bb"
   email: "cbrady@tv.com"
   password_digest: <%= BCrypt::Password.create('password', cost: 1) %>
   merchant: false
-  product_id: 2
