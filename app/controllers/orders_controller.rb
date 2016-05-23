@@ -59,8 +59,11 @@ class OrdersController < ApplicationController
     else
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
+    @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
+    #@shipping = CALL TO SHIPPING API HERE
     # raise
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
+
   end
 
   def create
