@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   include OrdersHelper
-  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show]
+  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping]
 
 
   def index
@@ -60,6 +60,12 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
     # raise
+    # @shipping_info = {
+    #   :country => "USA",
+    #   :state => "WA",
+    #   :city => "Seattle",
+    #   :zip => "98888"
+    # }
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 
@@ -113,6 +119,11 @@ class OrdersController < ApplicationController
     @cart_item.delete
     redirect_to action: "new"
   end
+  
+  def shipping
+    raise
+    puts params
+  end
 
   private
   def update_cart_params
@@ -127,4 +138,6 @@ class OrdersController < ApplicationController
   def billing_params
     params.permit(billing: [:first_name, :last_name, :cc, :cvv, :expiration_date, :email, :billing_zip, :address, :address2, :city, :state, :zip, :user_id])
   end
+
+
 end

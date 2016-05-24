@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root 'home#index'
+  post '/shipping' => 'orders#shipping', as: :shipping
 
   post '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   delete '/checkout' => 'orders#destroy'
   resources :products, only: [:index, :show]
 
-  post '/shipping' => 'application#shipping', as: :shipping
+  # post '/shipping' => 'application#shipping'
 
 
   resources :products, only: [:index, :show] do
