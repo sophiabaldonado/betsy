@@ -59,13 +59,6 @@ class OrdersController < ApplicationController
     else
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
-    # raise
-    # @shipping_info = {
-    #   :country => "USA",
-    #   :state => "WA",
-    #   :city => "Seattle",
-    #   :zip => "98888"
-    # }
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 
@@ -119,13 +112,29 @@ class OrdersController < ApplicationController
     @cart_item.delete
     redirect_to action: "new"
   end
-  
+
   def shipping
+    if current_user
+      @cart_items = current_user.cart_items
+    else
+      @cart_items = CartItem.where(session_id: session[:session_id])
+    end
+
+    #Currently hard coding each item to weigh a pound. Therefore quantity = weight.
+    quantity = 0
+    @cart_items.each do |item|
+      quantity += item.quantity
+    end
+
     raise
-    puts params
+
+    ShippingServiceWrapper.get_quote()
+
   end
 
+###### PRIVATE STARTS HERE!!!!!!! ######
   private
+
   def update_cart_params
     params.permit(:quantity, :id)
   end

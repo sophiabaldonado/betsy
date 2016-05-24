@@ -5,7 +5,7 @@ class ShippingServiceWrapper
 
   #Do we need an initializer? Do we need new instances of ShippingService OR will the fancy gem ActiveShipping take care of that for us?
 
-  def self.get_quote(query,)
+  def self.get_quote(shipping_info, package_info)
     #Is this a get or a post? We're not sure yet, but you must know, future smarter self! Look how great you are!
 
     # Sending: Country, State, City, Zip
