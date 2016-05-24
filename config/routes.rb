@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   delete '/checkout' => 'orders#destroy'
   resources :products, only: [:index, :show]
 
+  post '/shipping' => 'application#shipping', as: :shipping
 
 
   resources :products, only: [:index, :show] do
