@@ -1,7 +1,7 @@
 require 'httparty'
 
 class ShippingServiceWrapper
-  BASE_URL = "http://API_GOES_HERE" #This is where our API base url will go, once we have deployed it to heroku.
+  BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/" #This is where our API base url will go, once we have deployed it to heroku.
 
   #Do we need an initializer? Do we need new instances of ShippingService OR will the fancy gem ActiveShipping take care of that for us?
 
