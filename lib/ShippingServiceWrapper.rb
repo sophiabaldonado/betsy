@@ -13,14 +13,14 @@ class ShippingServiceWrapper
     @quotes = HTTParty.post(BASE_URL + "The rest of the url",
     body: {
       shipping_info: {
-        country: "#{params[:country]}",
-        state: "#{params[:state]}",
-        city: "#{params[:city]}",
-        zip: "#{params[:zip]}" }
+        country: "#{shipping_info[:country]}",
+        state: "#{shipping_info[:state]}",
+        city: "#{shipping_info[:city]}",
+        zip: "#{shipping_info[:zip]}" },
       package_info: {
-        weight: "#{params[:weight]}",
-        height: "#{params[:height]}",
-        width: "#{params[:width]}",
+        weight: "#{package_info[:weight]}",
+        height: "#{package_info[:height]}",
+        width: "#{package_info[:width]}",
         units: :imperial
         } }.to_json)
 

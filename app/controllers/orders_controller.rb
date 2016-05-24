@@ -1,3 +1,5 @@
+require_relative '../../lib/ShippingServiceWrapper'
+
 class OrdersController < ApplicationController
   include OrdersHelper
   skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping]
