@@ -10,7 +10,7 @@ class ShippingServiceWrapper
 
     # Sending: Country, State, City, Zip
     # Sending: Weight, Height, Weight, Units (set to imperial as 'units: :imperil')
-    @quotes = HTTParty.post(BASE_URL + "The rest of the url",
+    @quotes = HTTParty.post(BASE_URL + "shipping/search",
     body: {
       shipping_info: {
         country: "#{shipping_info[:country]}",
