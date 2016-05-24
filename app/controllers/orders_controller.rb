@@ -90,9 +90,11 @@ class OrdersController < ApplicationController
           @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
         end
         if current_user
-          redirect_to user_order_path(current_user.id, @order.id)
+          render :get_estimate
+          # redirect_to user_order_path(current_user.id, @order.id)
         else
-          redirect_to checkout_confirmation_path(@order.id)
+          render :get_estimate
+          # redirect_to checkout_confirmation_path(@order.id)
         end
       else
 
