@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   post '/cart' => 'orders#update_cart'
   #post '/products/:id' => 'products#create_review', as: :create_review
   get '/checkout' => 'orders#new', as: :new_order
+
+  get '/checkout/shipping' => 'orders#shipping', as: :shipping
   get '/checkout/estimate' => 'orders#get_estimate', as: :estimate
+  post '/checkout/estimate' => 'orders#get_estimate'
+
   post '/checkout' => 'orders#create'
   get '/checkout/:order_id' => 'orders#show', as: :checkout_confirmation
   post '/browse' => 'products#index'

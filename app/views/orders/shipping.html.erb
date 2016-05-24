@@ -1,5 +1,5 @@
-<h3> Billing Info: </h3>
-<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+<h3> Shipping Info: </h3>
+<%= form_for estimate_path, html: { method: :post } do |f| %>
 
   <p>
     <%= f.label :first_name %><br>
@@ -33,27 +33,11 @@
     <%= f.label :zip %><br>
     <%= f.text_field :zip %>
   </p>
-  <p>
-    <%= f.label :billing_zip %><br>
-    <%= f.text_field :billing_zip %>
-  </p>
-  <p>
-    <%= f.label :cc %><br>
-    <%= f.text_field :cc %>
-  </p>
-  <p>
-    <%= f.label :cvv %><br>
-    <%= f.text_field :cvv %>
-  </p>
-  <p>
-    <%= f.label :expiration_date %><br>
-    <%= f.text_field :expiration_date %>
-  </p>
 
     <% if current_user %>
       <%= f.hidden_field :user_id, value: @user.id %><br>
     <% end %>
   <p>
-    <%= f.submit "Checkout", class: "btn btn-primary" %>
+    <%= f.submit "To Shipping Estimate", class: "btn btn-primary" %>
   </p>
 <% end %>

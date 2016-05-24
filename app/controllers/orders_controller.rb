@@ -1,7 +1,7 @@
 require 'httparty'
 class OrdersController < ApplicationController
   include OrdersHelper
-  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show]
+  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping, :get_estimate]
 
 
   def index
@@ -63,11 +63,18 @@ class OrdersController < ApplicationController
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 
-  def get_estimate()
+  def shipping
+
+    
+  end
+
+  def get_estimate
     @zip = params[:zip]
+    @city = params[:city]
+    @state = params[:state]
     @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
-    @post = "HTTParty.post(http://localhost3000/v1/zip=#{zip}&items=#{number_items}"
-    @estimate = "HTTParty.get(http://localhost3000/v1/zip=#{zip}&items=#{number_items}"
+    @post = "HTTParty.post(http://localhost3000/v1/zip=#{@zip}&items=#{number_items}"
+    @estimate = "HTTParty.get(http://localhost3000/v1/zip=#{@zip}&items=#{number_items}"
     render :get_estimate
   end
 
@@ -91,19 +98,17 @@ class OrdersController < ApplicationController
           @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
         end
         if current_user
-          render :get_estimate
-          # redirect_to user_order_path(current_user.id, @order.id)
+          redirect_to user_order_path(current_user.id, @order.id)
         else
-          render :get_estimate
-          # redirect_to checkout_confirmation_path(@order.id)
+          redirect_to checkout_confirmation_path(@order.id)
         end
       else
 
-        render :get_estimate
+        render "/billings/new"
       end
     else
 
-        render :get_estimate
+        render "/billings/new"
     end
   end
 
