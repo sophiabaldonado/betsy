@@ -69,12 +69,19 @@ class OrdersController < ApplicationController
   end
 
   def get_estimate
-    @zip = params[:zip]
-    @city = params[:city]
-    @state = params[:state]
+    @zip = params["/checkout/estimate"][:zip]
+    @city = params["/checkout/estimate"][:city]
+    @state = params["/checkout/estimate"][:state]
+    if current_user
+      @cart_items = CartItem.all.where(user_id: session[:user_id])
+    else
+      @cart_items = CartItem.all.where(session_id: session[:session_id])
+    end
     @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
-    @post = "HTTParty.post(http://localhost3000/v1/zip=#{@zip}&items=#{number_items}"
-    @estimate = "HTTParty.get(http://localhost3000/v1/zip=#{@zip}&items=#{number_items}"
+    @post = HTTParty.post("http://localhost:3000/v1/zip=#{@zip}&items=#{@number_items}", 
+    :body => { "carrier": "#{suggestion_id}" }.to_json,
+    :headers => { "Content-Type" => "application/json" } )
+    @estimate = HTTParty.get("http://localhost:3000/v1/zip=#{@zip}&items=#{@number_items}").parsed_response
     render :get_estimate
   end
 
