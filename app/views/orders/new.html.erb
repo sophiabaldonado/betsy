@@ -60,6 +60,27 @@
             </table>
           </div>
 
+                    <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="2">Shipping Quote</th>
+                </tr>
+              </thead>
+                <% form_tag PATH do %>
+                  <%= label_tag :country %>
+                  <%= text_field_tag :country %>
+                  <%= label_tag :state %>
+                  <%= text_field_tag :state %>
+                  <%= label_tag :city %>
+                  <%= text_field_tag :city %>
+                  <%= label_tag :zip %>
+                  <%= text_field_tag :zip %>
+                  <%= submit_tag("Get Shipping Options") %>
+                <% end %>
+              <tbody>
+              </tbody>
+
           <div class="box-footer">
             <div class="pull-left">
                 <a href="/products" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
