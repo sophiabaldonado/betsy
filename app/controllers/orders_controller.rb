@@ -121,14 +121,19 @@ class OrdersController < ApplicationController
     end
 
     #Currently hard coding each item to weigh a pound. Therefore quantity = weight.
-    quantity = 0
+    @quantity = 0
     @cart_items.each do |item|
-      quantity += item.quantity
+      @quantity += item.quantity
     end
 
-    raise
+    #Currently hard coding the dimmensions as SOMETHING so that we can move on to API.
+    @packing_info = {
+      "quantity" => @quantity,
+      "height" => 15,
+      "width" => 15
+    }
 
-    ShippingServiceWrapper.get_quote()
+    @rates = ShippingServiceWrapper.get_quote(params, @packing_info)
 
   end
 
