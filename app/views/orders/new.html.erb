@@ -69,10 +69,6 @@
                 <a href="/billings/new" class="btn btn-primary"> Proceed to Checkout</a>
             </div>
 
-            <div class="pull-right">
-              <button class="btn btn-default"><i class="fa fa-refresh"></i>Update Cart</button>
-            </div>
-
           </div>
           <!-- </form> -->
         </div>
@@ -118,7 +114,7 @@
         </div>
       </div>
       <!-- /.col-md-9 -->
-
+    <% if @shipping_estimates %>
       <div class="col-md-3">
         <div class="box" id="order-summary">
           <div class="box-header">
@@ -135,7 +131,7 @@
                 </tr>
                 <tr>
                   <td>Shipping and handling</td>
-                  <th>$10.00</th>
+                  <th><%=@shipping_estimates%></th>
                 </tr>
                 <tr>
                   <td>Tax</td>
@@ -151,6 +147,7 @@
 
         </div>
       </div>
+      <%end%>
       <!-- /.col-md-3 -->
     </div>
     <!-- /.container -->

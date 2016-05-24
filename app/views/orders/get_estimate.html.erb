@@ -1,0 +1,8 @@
+ <% @estimate.each do |carrier, services| %>
+  <%= carrier %>:
+  <br />
+  <% services.each do |service|%>
+  <%=service[0]%> <%= service[1]%>
+  <%end%>
+  <br />
+<%end%>

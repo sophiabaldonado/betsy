@@ -59,11 +59,15 @@ class OrdersController < ApplicationController
     else
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
-    @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
-    #@shipping = CALL TO SHIPPING API HERE
-    # raise
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
+  end
 
+  def get_estimate()
+    @zip = params[:zip]
+    @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
+    @post = "HTTParty.post(http://localhost3000/v1/zip=#{zip}&items=#{number_items}"
+    @estimate = "HTTParty.get(http://localhost3000/v1/zip=#{zip}&items=#{number_items}"
+    render :get_estimate
   end
 
   def create
@@ -91,10 +95,12 @@ class OrdersController < ApplicationController
           redirect_to checkout_confirmation_path(@order.id)
         end
       else
-        render "/billings/new"
+
+        render :get_estimate
       end
     else
-        render "/billings/new"
+
+        render :get_estimate
     end
   end
 
