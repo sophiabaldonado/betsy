@@ -1,4 +1,5 @@
 require 'httparty'
+require 'json'
 class OrdersController < ApplicationController
   include OrdersHelper
   skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping, :get_estimate]
@@ -65,7 +66,7 @@ class OrdersController < ApplicationController
 
   def shipping
 
-    
+
   end
 
   def get_estimate
@@ -78,10 +79,13 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.all.where(session_id: session[:session_id])
     end
     @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
-    @post = HTTParty.post("http://localhost:3000/v1/zip=#{@zip}&items=#{@number_items}", 
-    :body => { "carrier": "#{suggestion_id}" }.to_json,
-    :headers => { "Content-Type" => "application/json" } )
-    @estimate = HTTParty.get("http://localhost:3000/v1/zip=#{@zip}&items=#{@number_items}").parsed_response
+    # @post = HTTParty.post("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}",
+    # :body => { "carrier": ["services"] }.to_json,
+    # :headers => { "Content-Type" => "application/json" } )
+    # @post.code
+    @estimate = HTTParty.get("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}&city=#{@city}&state=#{@state}").parsed_response
+    # @response = @estimate.code
+
     render :get_estimate
   end
 
