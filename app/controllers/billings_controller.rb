@@ -9,6 +9,12 @@ class BillingsController < ApplicationController
 
   def new
     if current_user
+      @cart_items = current_user.cart_items
+    else
+      @cart_items = CartItem.where(session_id: session[:session_id])
+    end
+    @subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+)
+    if current_user
       @billing = Billing.find_by(user_id: session[:user_id])
       unless @billing
         @billing = Billing.new
@@ -21,6 +27,7 @@ class BillingsController < ApplicationController
     else
       @user = User.new
     end
+    render :new
   end
 
   def create

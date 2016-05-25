@@ -57,3 +57,37 @@
     <%= f.submit "Checkout", class: "btn btn-primary" %>
   </p>
 <% end %>
+
+
+  <div class="col-md-3">
+    <div class="box" id="order-summary">
+      <div class="box-header">
+        <h3>Order summary</h3>
+      </div>
+      <p class="text-muted">Shipping and additional costs are calculated based on company policies.</p>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Order subtotal</td>
+              <th><%= number_to_currency(@subtotal) %></th>
+            </tr>
+            <tr>
+              <td>Shipping and handling</td>
+              <th><%=params[:carrier_choice]%></th>
+            </tr>
+            <tr>
+              <td>Tax</td>
+              <th><%= number_to_currency(@subtotal * 0.10) %></th>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <th><%= number_to_currency(@subtotal * 1.1 + 10) %></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
