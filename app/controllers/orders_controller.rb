@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    
+
     # @subtotal = params[:subtotal]
 
     #if they're a merchant:
@@ -50,7 +50,6 @@ class OrdersController < ApplicationController
       #   @user = User.find(session[:user_id])
       # end
       @order_items = OrderItem.where(:order_id => @order.id)
-
     end
   end
 
@@ -86,11 +85,21 @@ class OrdersController < ApplicationController
   end
 
   def create
+
+    if current_user
+      @cart = Order.find_by(id: session[:user_id])
+    else
+      @cart = Order.all.last
+    end
     @carrier_type = params["billing"]["carrier_type"]
     @carrier_price = params["billing"]["carrier_price"]
-    @subtotal = params[:subtotal]
-    @shipping_cost = HTTParty.post("http://localhost:3000/v1/carriers/selected/?carrier=#{@carrier_type}&price=#{@carrier_price}").parsed_response
-
+    # @subtotal = params[:subtotal]
+    @shipping_cost = HTTParty.post("http://localhost:3000/v1/carriers/selected/?carrier=#{@carrier_type}&price=#{@carrier_price}",
+    :body => {
+      "carrier_type": "#{@carrier_type}",
+      "carrier_price": "#{@carrier_price}"
+    }.to_json,
+    :headers => {"Content-Type" => "application/json" } )
 
     @billing = Billing.new(billing_params[:billing])
     if @billing.save
@@ -110,6 +119,8 @@ class OrdersController < ApplicationController
           item.destroy
           @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
         end
+
+
         if current_user
           redirect_to user_order_path(current_user.id, @order.id)
         else
