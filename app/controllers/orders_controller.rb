@@ -128,11 +128,10 @@ class OrdersController < ApplicationController
       @quantity += item.quantity
     end
 
-    #Currently hard coding the dimmensions as SOMETHING so that we can move on to API.
+    #Currently hard coding the dimensions as SOMETHING so that we can move on to API.
     @packing_info = {
       "quantity" => @quantity,
-      "height" => 15,
-      "width" => 15
+      "dimensions" => [15, 15, 15]
     }
 
     @rates = ShippingServiceWrapper.get_quote(params, @packing_info)

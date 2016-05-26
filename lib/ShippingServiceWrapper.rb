@@ -1,15 +1,13 @@
 require 'httparty'
 
 class ShippingServiceWrapper
-  BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/" #This is where our API base url will go, once we have deployed it to heroku.
-
-  #Do we need an initializer? Do we need new instances of ShippingService OR will the fancy gem ActiveShipping take care of that for us?
+  BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/"
 
   def self.get_quote(destination_info, package_info)
-    #Is this a get or a post? We're not sure yet, but you must know, future smarter self! Look how great you are!
 
-    # Sending: Country, State, City, Zip
-    # Sending: Weight, Height, Weight, Units (set to imperial as 'units: :imperil')
+    # Sending: Origin - Country, State, City, Zip
+    # Sending: Destination - Country, State, City, Zip
+    # Sending: Weight, Height, Weight, Length
     @quotes = HTTParty.post(BASE_URL + "shipping/search",
     body: {
       origin_info: {
@@ -26,9 +24,11 @@ class ShippingServiceWrapper
         weight: "#{package_info[:weight]}",
         height: "#{package_info[:height]}",
         width: "#{package_info[:width]}",
-        units: :imperial
+        length: "#{package_info[:length]}"
         } }.to_json)
 
+    raise
+    return @quotes
     #should we make @quotes into an instance of ShippingService? Do we need to?
   end
 end
