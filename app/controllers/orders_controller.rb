@@ -33,7 +33,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-
     # @subtotal = params[:subtotal]
 
     #if they're a merchant:
@@ -51,6 +50,10 @@ class OrdersController < ApplicationController
       # end
       @order_items = OrderItem.where(:order_id => @order.id)
     end
+    @carrier_type = @order.carrier_type
+    @carrier_price = @order.carrier_price
+    @tracking = HTTParty.get("http://localhost:3000/v1/carriers/selected/?carrier_type=#{@carrier_type}&carrier_price=#{@carrier_price}").parsed_response
+    @tracking_number = @tracking["#{@carrier_type}"]
   end
 
   def new
@@ -94,12 +97,12 @@ class OrdersController < ApplicationController
     @carrier_type = params["billing"]["carrier_type"]
     @carrier_price = params["billing"]["carrier_price"]
     # @subtotal = params[:subtotal]
-    @shipping_cost = HTTParty.post("http://localhost:3000/v1/carriers/selected/?carrier=#{@carrier_type}&price=#{@carrier_price}",
-    :body => {
-      "carrier_type": "#{@carrier_type}",
-      "carrier_price": "#{@carrier_price}"
-    }.to_json,
-    :headers => {"Content-Type" => "application/json" } )
+
+    # :body => {
+    #   "carrier_type": "#{@carrier_type}",
+    #   "carrier_price": "#{@carrier_price}"
+    # }.to_json,
+    # :headers => {"Content-Type" => "application/json" } )
 
     @billing = Billing.new(billing_params[:billing])
     if @billing.save
