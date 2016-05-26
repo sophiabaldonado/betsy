@@ -2,7 +2,7 @@ require_relative '../../lib/ShippingServiceWrapper'
 
 class OrdersController < ApplicationController
   include OrdersHelper
-  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping]
+  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping, :update_cart_with_shipping]
 
 
   def index
@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new(status: "pending")
     @order.save!
+    session[:order_id] = @order.id
     new_helper
   end
 
@@ -70,7 +71,8 @@ class OrdersController < ApplicationController
       @user_id = session[:user_id] if session[:user_id]
       @billing_id = @billing.id
       @order_number = order_number
-      @order = Order.new(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order = Order.find(id: session[:order_id])
+      @order.update(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
@@ -143,16 +145,20 @@ class OrdersController < ApplicationController
 
 
     new_helper
-    # params[:rates] = @rates
-    # redirect_to :controller => 'users', :action => 'edit', :id => 1, :param_a => 1, :param_b => 2
-    # redirect_to :controller => 'orders', :action => 'new', :rates => @rates
+    render :new
+  end
+
+  def update_cart_with_shipping
+    @order = Order.find(session[:order_id])
+    @order.update(shipping_rate: params["order"]["shipping_rate"])
+    @rates = nil
+    new_helper
     render :new
   end
 
   def new_helper
+    @order = Order.find(session[:order_id])
     @products = Product.where(deleted: false, retired: false).where("inventory > 0")
-    session[:order_id] = @order.id
-    raise
     if current_user
       @cart_items = current_user.cart_items
     else
