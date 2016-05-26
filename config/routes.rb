@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   post '/checkout' => 'orders#create'
   get '/checkout/:order_id' => 'orders#show', as: :checkout_confirmation
+  post '/checkout/:order_id' => 'orders#show'
+  
   post '/browse' => 'products#index'
   get '/browse/categories/:id' => 'products#category', as: :category
   get '/sign_up' => 'users#new'
