@@ -1,5 +1,5 @@
 <h3> Billing Info: </h3>
-<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+<%= form_for [@user, @billing], url: checkout_path(@carrier_type, @carrier_price, @subtotal), html: { method: :post } do |f| %>
 
   <p>
     <%= f.label :first_name %><br>
@@ -53,6 +53,9 @@
     <% if current_user %>
       <%= f.hidden_field :user_id, value: @user.id %><br>
     <% end %>
+    <%= f.hidden_field :carrier_price, value: @carrier_price %>
+    <%= f.hidden_field :carrier_type, value: @carrier_type %>
+    <%= f.hidden_field :subtotal, value: @subtotal %>
   <p>
     <%= f.submit "Checkout", class: "btn btn-primary" %>
   </p>
@@ -64,7 +67,6 @@
       <div class="box-header">
         <h3>Order summary</h3>
       </div>
-      <p class="text-muted">Shipping and additional costs are calculated based on company policies.</p>
 
       <div class="table-responsive">
         <table class="table">

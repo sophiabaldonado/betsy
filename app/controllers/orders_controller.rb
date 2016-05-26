@@ -2,7 +2,7 @@ require 'httparty'
 require 'json'
 class OrdersController < ApplicationController
   include OrdersHelper
-  skip_before_action :require_login, only: [:new, :update_cart, :destroy, :create, :show, :shipping, :get_estimate]
+  skip_before_action :require_login, only: [:index, :new, :update_cart, :destroy, :create, :show, :shipping, :get_estimate]
 
 
   def index
@@ -33,10 +33,13 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @carrier_type = params["billing"]["carrier_type"]
+    @carrier_price = params["billing"]["carrier_price"]
+    @subtotal = params[:subtotal]
+
     #if they're a merchant:
     if current_user && "/users/#{current_user.id}/sold/#{params[:id]}" == request.env['PATH_INFO']
       @order = Order.find(params[:id])
-      #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
     elsif current_user.nil? # if they're a customer
       @order = Order.find(params[:order_id])
@@ -50,7 +53,6 @@ class OrdersController < ApplicationController
       @order_items = OrderItem.where(:order_id => @order.id)
 
     end
-
   end
 
   def new
@@ -88,6 +90,12 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @carrier_type = params["billing"]["carrier_type"]
+    @carrier_price = params["billing"]["carrier_price"]
+    @subtotal = params[:subtotal]
+    @shipping_cost = HTTParty.post("http://localhost:3000/v1/carriers/selected/?carrier=#{@carrier_type}&price=#{@carrier_price}").parsed_response
+
+
     @billing = Billing.new(billing_params[:billing])
     if @billing.save
       if current_user

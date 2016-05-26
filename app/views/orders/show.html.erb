@@ -1,16 +1,20 @@
+<%= params %>
+
 <h2>Order #<%= @order.order_number %></h2>
 
 <h3>Items:</h3>
-  <% @order_items.each do |item| %>
   <ul>
+  <% @order_items.each do |item| %>
     <li>Product: <%= link_to item.name, product_path(item.product_id) %></li>
     <li>Quantity: <%= item.quantity %></li>
     <li>Price: <%= number_to_currency(price_by_quantity(item)) %></li>
     <li>Status: <%= item.status.capitalize %></li>
     <li>Purchased By: <%= @order.user_id.nil?? "guest" : @order.user.username %></li>
     <li>Purchased On: <%= item.created_at.strftime("%B %d %Y") %></li>
-  </ul>
   <% end %>
+    <li>Shipping Method: <%= @carrier_type %></li>
+    <li>Shipping Cost: <%= @carrier_price %></li>
+  </ul>
 
 <h3>Order Total: <%= number_to_currency(total_revenue(@order)) %></h3>
 

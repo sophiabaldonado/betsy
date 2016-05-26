@@ -33,6 +33,7 @@ class BillingsController < ApplicationController
   end
 
   def create
+
     @billing = Billing.new(billing_params[:billing])
   end
 
