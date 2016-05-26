@@ -79,10 +79,7 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.all.where(session_id: session[:session_id])
     end
     @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
-    # @post = HTTParty.post("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}",
-    # :body => { "carrier": ["services"] }.to_json,
-    # :headers => { "Content-Type" => "application/json" } )
-    # @post.code
+
     @estimate = HTTParty.get("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}&city=#{@city}&state=#{@state}").parsed_response
     # @response = @estimate.code
 

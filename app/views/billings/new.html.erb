@@ -1,5 +1,5 @@
 <h3> Billing Info: </h3>
-<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+<%= form_for [@user, @billing], url: orders_path(), html: { method: :post } do |f| %>
 
   <p>
     <%= f.label :first_name %><br>
