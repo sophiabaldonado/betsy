@@ -1,8 +1,7 @@
 require 'httparty'
 
 class ShippingServiceWrapper
-  # BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/"
-  BASE_URL = "http://localhost:3001/"
+  BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/"
 
   def self.get_quote(destination_info, package_info)
 
