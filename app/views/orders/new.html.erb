@@ -77,19 +77,10 @@
                   
                   <%= submit_tag %>
                   <% else %>
-                      <% rates_array = [] %>
-
-                      <% @rates[0].each do |option| %>
-                        <% rates_array << ["#{option[0]}: #{number_to_currency(option[1])}", option[1]] %>
-                      <% end %>
-                      <% @rates[1].each do |option| %>
-                        <% rates_array << ["#{option[0]}: #{number_to_currency(option[1])}", option[1]] %>
-                      <% end %>
-
-
-                    <%= form_for @rates, url: checkout_path, method: :patch do |f| %>
+                    <%= form_for @order, url: new_order_path, method: :patch do |f| %>
                       <%= f.label :'Shipping Options' %>
-                      <%= f.select :shipping_rate, options_for_select(rates_array) %>
+                      <%= f.select :shipping_rate, options_for_select(@rates_array) %>
+                      <%= f.submit :'Proceed to Checkout' %>
                       <% end %>
                     <% end %>
                 </td>
@@ -104,9 +95,9 @@
                 <a href="/products" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continue shopping</a>
             </div>
 
-            <div class="pull-right">
+<!--             <div class="pull-right">
                 <a href="/billings/new" class="btn btn-primary"> Proceed to Checkout</a>
-            </div>
+            </div> -->
 
             <div class="pull-right">
               <button class="btn btn-default"><i class="fa fa-refresh"></i>Update Cart</button>

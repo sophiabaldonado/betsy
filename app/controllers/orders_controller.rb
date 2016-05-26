@@ -129,7 +129,17 @@ class OrdersController < ApplicationController
       length: "15"
     }
 
-    @rates = ShippingServiceWrapper.get_quote(params, @packing_info) 
+    @rates = ShippingServiceWrapper.get_quote(params, @packing_info).parsed_response
+    # creating array for drop down menu in view
+    @rates_array = []
+    @rates[0].each do |option|
+      @rates_array << ["#{option[0]}: #{number_to_currency(option[1])}", option[1]]
+    end
+    @rates[1].each do |option|
+      @rates_array << ["#{option[0]}: #{number_to_currency(option[1])}", option[1]]
+    end
+
+
     new_helper
     # params[:rates] = @rates
     # redirect_to :controller => 'users', :action => 'edit', :id => 1, :param_a => 1, :param_b => 2
@@ -146,6 +156,11 @@ class OrdersController < ApplicationController
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
+  end
+
+  def number_to_currency(price_in_cents)
+   return nil if price_in_cents.nil?
+   "$" + sprintf('%.2f', (price_in_cents / 100.0))
   end
 
 ###### PRIVATE STARTS HERE!!!!!!! ######
