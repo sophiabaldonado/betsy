@@ -54,6 +54,8 @@ class OrdersController < ApplicationController
   end
 
   def new
+    @order = Order.new(status: "pending")
+    @order.save!
     new_helper
   end
 
@@ -149,7 +151,8 @@ class OrdersController < ApplicationController
 
   def new_helper
     @products = Product.where(deleted: false, retired: false).where("inventory > 0")
-    @order = Order.new
+    session[:order_id] = @order.id
+    raise
     if current_user
       @cart_items = current_user.cart_items
     else
