@@ -1,31 +1,35 @@
 require 'httparty'
 
 class ShippingServiceWrapper
-  BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/"
+  # BASE_URL = "https://betsyshippingserviceapi.herokuapp.com/"
+  BASE_URL = "http://localhost:3001/"
 
   def self.get_quote(destination_info, package_info)
 
     # Sending: Origin - Country, State, City, Zip
     # Sending: Destination - Country, State, City, Zip
     # Sending: Weight, Height, Weight, Length
-    @quotes = HTTParty.post(BASE_URL + "shipping/search",
-    body: {
-      origin_info: {
-        country: "United States",
-        state: "Washington",
-        city: "Seattle",
-        zip: "98103" },
-      destination_info: {
-        country: "#{destination_info[:country]}",
-        state: "#{destination_info[:state]}",
-        city: "#{destination_info[:city]}",
-        zip: "#{destination_info[:zip]}" },
-      package_info: {
-        weight: "#{package_info[:weight]}",
-        height: "#{package_info[:height]}",
-        width: "#{package_info[:width]}",
-        length: "#{package_info[:length]}"
-        } }.to_json)
+    thing = {
+      "origin_info": {
+        "country": "United States",
+        "state": "WA",
+        "city": "Seattle",
+        "zip": "98103" },
+        "destination_info": {
+          "country": destination_info[:country],
+          "state": destination_info[:state],
+          "city": destination_info[:city],
+          "zip": destination_info[:zip] },
+          "package_info": {
+            "weight": package_info[:weight],
+            "height": package_info[:height],
+            "width": package_info[:width],
+            "length": package_info[:length]
+            } }
+
+    @quotes = HTTParty.post(BASE_URL + "shipping/search", headers: {"Accept" => "application/json"},
+    body: thing.to_json)
+
 
     raise
     return @quotes

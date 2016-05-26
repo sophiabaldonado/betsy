@@ -4,11 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :keep_cart_items
   before_action :require_login
+  skip_before_action :verify_authenticity_token, if: :json_request?
 
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+
 
   def keep_cart_items(cart_items)
     unless cart_items.nil?
@@ -41,4 +43,9 @@ class ApplicationController < ActionController::Base
     orders.select { |order| order if order.status == status }
   end
 
+  protected
+  
+  def json_request?
+    request.format.json?
+  end
 end
