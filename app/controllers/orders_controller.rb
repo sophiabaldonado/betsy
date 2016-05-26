@@ -54,14 +54,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @products = Product.where(deleted: false, retired: false).where("inventory > 0")
-    @order = Order.new
-    if current_user
-      @cart_items = current_user.cart_items
-    else
-      @cart_items = CartItem.where(session_id: session[:session_id])
-    end
-    @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
+    new_helper
   end
 
   def create
@@ -136,7 +129,23 @@ class OrdersController < ApplicationController
       length: "15"
     }
 
-    @rates = ShippingServiceWrapper.get_quote(params, @packing_info)
+    @rates = ShippingServiceWrapper.get_quote(params, @packing_info) 
+    new_helper
+    # params[:rates] = @rates
+    # redirect_to :controller => 'users', :action => 'edit', :id => 1, :param_a => 1, :param_b => 2
+    # redirect_to :controller => 'orders', :action => 'new', :rates => @rates
+    render :new
+  end
+
+  def new_helper
+    @products = Product.where(deleted: false, retired: false).where("inventory > 0")
+    @order = Order.new
+    if current_user
+      @cart_items = current_user.cart_items
+    else
+      @cart_items = CartItem.where(session_id: session[:session_id])
+    end
+    @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 
 ###### PRIVATE STARTS HERE!!!!!!! ######

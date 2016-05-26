@@ -31,5 +31,6 @@ class ShippingServiceWrapper
 
 
     return @quotes
+    redirect_to new
   end
 end
