@@ -33,9 +33,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @carrier_type = params["billing"]["carrier_type"]
-    @carrier_price = params["billing"]["carrier_price"]
-    @subtotal = params[:subtotal]
+    
+    # @subtotal = params[:subtotal]
 
     #if they're a merchant:
     if current_user && "/users/#{current_user.id}/sold/#{params[:id]}" == request.env['PATH_INFO']
@@ -106,7 +105,7 @@ class OrdersController < ApplicationController
       @user_id = session[:user_id] if session[:user_id]
       @billing_id = @billing.id
       @order_number = order_number
-      @order = Order.new(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order = Order.new(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id, carrier_type: @carrier_type, carrier_price: @carrier_price)
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)

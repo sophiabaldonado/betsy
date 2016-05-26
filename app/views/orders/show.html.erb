@@ -12,8 +12,8 @@
     <li>Purchased By: <%= @order.user_id.nil?? "guest" : @order.user.username %></li>
     <li>Purchased On: <%= item.created_at.strftime("%B %d %Y") %></li>
   <% end %>
-    <li>Shipping Method: <%= @carrier_type %></li>
-    <li>Shipping Cost: <%= @carrier_price %></li>
+    <li>Shipping Method: <%= @order.carrier_type %></li>
+    <li>Shipping Cost: <%= @order.carrier_price %></li>
   </ul>
 
 <h3>Order Total: <%= number_to_currency(total_revenue(@order)) %></h3>
