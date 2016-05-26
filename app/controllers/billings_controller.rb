@@ -8,6 +8,8 @@ class BillingsController < ApplicationController
   end
 
   def new
+      @carrier_price = params[:carrier].split(',').first.to_f/100
+      @carrier_type =params[:carrier].split(',').last
     if current_user
       @cart_items = current_user.cart_items
     else

@@ -74,8 +74,10 @@
               <th><%= number_to_currency(@subtotal) %></th>
             </tr>
             <tr>
-              <td>Shipping and handling</td>
-              <th><%=params[:carrier_choice]%></th>
+              <td>Shipping Carrier:</td> <th><%= @carrier_type %></th>
+              <tr>
+              <td>Shipping Cost:</td> <th><%= number_to_currency(@carrier_price) %></th>
+              </tr>
             </tr>
             <tr>
               <td>Tax</td>
@@ -83,7 +85,7 @@
             </tr>
             <tr class="total">
               <td>Total</td>
-              <th><%= number_to_currency(@subtotal * 1.1 + 10) %></th>
+              <th><%= number_to_currency(@subtotal * 1.1 + @carrier_price) %></th>
             </tr>
           </tbody>
         </table>

@@ -84,8 +84,6 @@ class OrdersController < ApplicationController
     # :headers => { "Content-Type" => "application/json" } )
     # @post.code
     @estimate = HTTParty.get("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}&city=#{@city}&state=#{@state}").parsed_response
-    # @response = @estimate.code
-
     render :get_estimate
   end
 

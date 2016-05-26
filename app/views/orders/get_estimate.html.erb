@@ -1,4 +1,4 @@
-<%= form_tag new_billing_path[:carrier_choice], method: :get do %>
+<%= form_tag new_billing_path, method: :get do %>
 
   <% @estimate.each do |carrier, services| %>
       <%= carrier %>:
