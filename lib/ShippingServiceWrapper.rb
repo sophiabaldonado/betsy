@@ -26,12 +26,10 @@ class ShippingServiceWrapper
             "length": package_info[:length]
             } }
 
-    @quotes = HTTParty.post(BASE_URL + "shipping/search", headers: {"Accept" => "application/json"},
+    @quotes = HTTParty.post(BASE_URL + "shipping/search", headers: {"Content-Type" => "application/json", "Accept" => "application/json"},
     body: thing.to_json)
 
 
-    raise
     return @quotes
-    #should we make @quotes into an instance of ShippingService? Do we need to?
   end
 end
