@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
     end
     @carrier_type = @order.carrier_type
     @carrier_price = @order.carrier_price
-    @tracking = HTTParty.get("http://localhost:3000/v1/carriers/selected/?carrier_type=#{@carrier_type}&carrier_price=#{@carrier_price}").parsed_response
+    @tracking = HTTParty.get("http://shipping-traverse.herokuapp.com/v1/carriers/selected/?carrier_type=#{@carrier_type}&carrier_price=#{@carrier_price}").parsed_response
     @tracking_number = @tracking["#{@carrier_type}"]
   end
 
@@ -83,7 +83,7 @@ class OrdersController < ApplicationController
     end
     @number_items = @cart_items.map { |item| item.quantity}.reduce(:+)
 
-    @estimate = HTTParty.get("http://localhost:3000/v1/carriers/?zip=#{@zip}&items=#{@number_items}&city=#{@city}&state=#{@state}").parsed_response
+    @estimate = HTTParty.get("http://shipping-traverse.herokuapp.com/v1/carriers/?zip=#{@zip}&items=#{@number_items}&city=#{@city}&state=#{@state}").parsed_response
     render :get_estimate
   end
 

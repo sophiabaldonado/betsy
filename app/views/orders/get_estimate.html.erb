@@ -1,5 +1,8 @@
 <%= form_tag new_billing_path, method: :get do %>
 
+<% if @estimate.empty? %>
+	<p>Invalid address. Please try again.</p>
+<% end %>
   <% @estimate.each do |carrier, services| %>
       <%= carrier %>:
       <br />
@@ -7,7 +10,7 @@
 
     <% services.each do |service|%>
       <%= radio_button_tag(:carrier, "#{service[1]}, #{service[0]}") %>
-      <%= label_tag(:carrier_choice, "#{service[0]}, #{service[1]}") %>
+      <%= label_tag(:carrier_choice, "#{service[0]}, $#{service[1]/100.0}") %><br>
     <%end%>
     <br />
   <%end%>
