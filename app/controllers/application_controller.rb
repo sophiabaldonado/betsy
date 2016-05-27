@@ -50,11 +50,13 @@ class ApplicationController < ActionController::Base
   def new_helper
     @order = Order.find(session[:order_id])
     @products = Product.where(deleted: false, retired: false).where("inventory > 0")
+
     if current_user
       @cart_items = current_user.cart_items
     else
       @cart_items = CartItem.where(session_id: session[:session_id])
     end
+
     @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
   end
 end

@@ -100,7 +100,7 @@ PRODUCTS = [
     retired: false, user_id: 1, deleted: false
   },
   {
-    name: "Incense Holder", price: 12.50, description: "Incense holder!",
+    name: "Incense Holder", price: 12.00, description: "Incense holder!",
     inventory: 200, photo_url: "incense-holder-2.png",
     retired: false, user_id: 6, deleted: false
   },
@@ -150,7 +150,7 @@ PRODUCTS = [
     retired: false, user_id: 3, deleted: false
   },
   {
-    name: "Felted Necklace", price: 22.50, description: "Hand dyed felt necklace",
+    name: "Felted Necklace", price: 22.00, description: "Hand dyed felt necklace",
     inventory: 60, photo_url: "felted-necklace-1.png",
     retired: false, user_id: 5, deleted: false
   },

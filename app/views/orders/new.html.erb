@@ -62,25 +62,31 @@
                 <tr>
                 <td>
                 <% if @rates == nil || @rates["status"] != "200" %>
+
                 <%= form_tag shipping_path %>
                   <%= label_tag :country %>
                   <%= text_field_tag :country %>
+
                   <%= label_tag :state %>
                   <%= text_field_tag :state %>
 
                   <%= label_tag :city %>
                   <%= text_field_tag :city %>
+
                   <%= label_tag :zip %>
                   <%= text_field_tag :zip %>
 
                   <%= submit_tag %>
+
                   <% else %>
-                    <%= form_for @order, url: shipping_update_path, method: :post do |f| %>
-                      <%= f.label :'Shipping Options' %>
-                      <%= f.select :shipping_rate, options_for_select(@rates_array) %>
-                      <%= f.submit :'Proceed to Checkout' %>
-                      <% end %>
-                    <% end %>
+
+                  <%= form_for @order, url: shipping_update_path, method: :post do |f| %>
+                    <%= f.label :'Shipping Options' %>
+                    <%= f.select :shipping_rate, options_for_select(@rates_array) %>
+
+                    <%= f.submit :'Proceed to Checkout' %>
+                  <% end %>
+                <% end %>
                 </td>
                 </tr>
               </tfoot>
@@ -148,7 +154,6 @@
           <div class="box-header">
             <h3>Order summary</h3>
           </div>
-          <p class="text-muted">Shipping and additional costs are calculated based on company policies.</p>
 
           <div class="table-responsive">
             <table class="table">
