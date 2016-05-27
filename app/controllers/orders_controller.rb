@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
 
   def create
 
-    @billing = Billing.new(billing_params[:billing])
+    @billing = Billing.new
     if @billing.save
       if current_user
         @cart_items = CartItem.all.where(user_id: session[:user_id])
