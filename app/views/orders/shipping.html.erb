@@ -1,0 +1,43 @@
+<h3> Shipping Info: </h3>
+<%= form_for estimate_path, html: { method: :post } do |f| %>
+
+  <p>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :address2 %><br>
+    <%= f.text_field :address2 %>
+  </p>
+  <p>
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state %><br>
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip %>
+  </p>
+
+    <% if current_user %>
+      <%= f.hidden_field :user_id, value: @user.id %><br>
+    <% end %>
+  <p>
+    <%= f.submit "To Shipping Estimate", class: "btn btn-primary" %>
+  </p>
+<% end %>

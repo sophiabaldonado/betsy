@@ -1,5 +1,5 @@
-<h3> Billing/Shipping Info: </h3>
-<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+<h3> Billing Info: </h3>
+<%= form_for [@user, @billing], url: checkout_path(@carrier_type, @carrier_price, @subtotal), html: { method: :post } do |f| %>
 
   <p>
     <%= f.label :first_name %><br>
@@ -53,7 +53,45 @@
     <% if current_user %>
       <%= f.hidden_field :user_id, value: @user.id %><br>
     <% end %>
+    <%= f.hidden_field :carrier_price, value: @carrier_price %>
+    <%= f.hidden_field :carrier_type, value: @carrier_type %>
+    <%= f.hidden_field :subtotal, value: @subtotal %>
   <p>
     <%= f.submit "Checkout", class: "btn btn-primary" %>
   </p>
 <% end %>
+
+
+  <div class="col-md-3">
+    <div class="box" id="order-summary">
+      <div class="box-header">
+        <h3>Order summary</h3>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Order subtotal</td>
+              <th><%= number_to_currency(@subtotal) %></th>
+            </tr>
+            <tr>
+              <td>Shipping Carrier:</td> <th><%= @carrier_type %></th>
+              <tr>
+              <td>Shipping Cost:</td> <th><%= number_to_currency(@carrier_price) %></th>
+              </tr>
+            </tr>
+            <tr>
+              <td>Tax</td>
+              <th><%= number_to_currency(@subtotal * 0.10) %></th>
+            </tr>
+            <tr class="total">
+              <td>Total</td>
+              <th><%= number_to_currency(@subtotal * 1.1 + @carrier_price) %></th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
