@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
   def create
 
     @billing = Billing.new
-    if @billing.save
+    if @billing.save(validate: false)
       if current_user
         @cart_items = CartItem.all.where(user_id: session[:user_id])
       else
@@ -72,7 +72,7 @@ class OrdersController < ApplicationController
       @user_id = session[:user_id] if session[:user_id]
       @billing_id = @billing.id
       @order_number = order_number
-      @order = Order.find(id: session[:order_id])
+      @order = Order.find(session[:order_id])
       @order.update(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       @order.update(shipping_rate: params["order"]["shipping_rate"])
       @rates = nil
