@@ -129,14 +129,15 @@ class OrdersController < ApplicationController
 
     
     @rates = ShippingServiceWrapper.get_quote(params, @packing_info).parsed_response
-    if @rates["status"] != "200"
+    # we wanted to use: || @rates["status"] != "200"
+    if @rates.class != Array 
       flash[:alert] = "Invalid shipping data, try again."
       new_helper
       # redirect_to '/checkout'
       render :new
       return
     end
-
+    flash[:alert] = nil
 
     # creating array for drop down menu in view
     @rates_array = []
