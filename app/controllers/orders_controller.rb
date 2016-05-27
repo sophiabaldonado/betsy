@@ -73,10 +73,10 @@ class OrdersController < ApplicationController
       @billing_id = @billing.id
       @order_number = order_number
       @order = Order.find(session[:order_id])
-      @order.update(status: "pending", total: ((total_order_revenue(@cart_items) * 100) + shipping), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      total_in_pennies = (total_order_revenue(@cart_items) * 100)
+      @order.update(status: "pending", total: (total_in_pennies + shipping + (total_in_pennies * 0.1)), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       @order.update(shipping_rate: params["order"]["shipping_rate"])
       @rates = nil
-      raise
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
