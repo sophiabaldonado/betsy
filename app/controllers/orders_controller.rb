@@ -50,7 +50,6 @@ class OrdersController < ApplicationController
       @order_items = OrderItem.where(:order_id => @order.id)
 
     end
-    raise
   end
 
   def new
@@ -73,7 +72,7 @@ class OrdersController < ApplicationController
       @billing_id = @billing.id
       @order_number = order_number
       @order = Order.find(session[:order_id])
-      @order.update(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order.update(status: "pending", total: (total_order_revenue(@cart_items) + params["order"]["shipping_rate"].to_i), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       @order.update(shipping_rate: params["order"]["shipping_rate"])
       @rates = nil
       if @order.save
