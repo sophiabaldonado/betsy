@@ -130,7 +130,10 @@ class OrdersController < ApplicationController
     
     @rates = ShippingServiceWrapper.get_quote(params, @packing_info).parsed_response
     if @rates["status"] != "200"
+      new_helper
+      # redirect_to '/checkout'
       render :new
+      return
     end
 
 
