@@ -28,6 +28,8 @@ class BillingsController < ApplicationController
 
   def create
     @billing = Billing.new(billing_params[:billing])
+    new_helper
+    redirect_to '/orders/show'
   end
 
   def update

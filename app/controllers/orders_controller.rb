@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
       #@user = User.find(session[:user_id])
       @order_items = OrderItem.where(:product_id => @user.products)
     elsif current_user.nil? # if they're a customer
-      @order = Order.find(params[:order_id])
+      @order = Order.find(session[:order_id])
       @order_items = OrderItem.where(:order_id => @order.id)
 
     else # if they're a customer
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
       @order_items = OrderItem.where(:order_id => @order.id)
 
     end
-
+    raise
   end
 
   def new
