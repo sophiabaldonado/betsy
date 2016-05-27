@@ -75,7 +75,7 @@
 
                   <%= submit_tag %>
                   <% else %>
-                    <%= form_for @order, url: shipping_update_path, method: :patch do |f| %>
+                    <%= form_for @order, url: shipping_update_path, method: :post do |f| %>
                       <%= f.label :'Shipping Options' %>
                       <%= f.select :shipping_rate, options_for_select(@rates_array) %>
                       <%= f.submit :'Proceed to Checkout' %>

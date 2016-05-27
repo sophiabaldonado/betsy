@@ -61,6 +61,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+
     @billing = Billing.new(billing_params[:billing])
     if @billing.save
       if current_user
@@ -73,6 +74,8 @@ class OrdersController < ApplicationController
       @order_number = order_number
       @order = Order.find(id: session[:order_id])
       @order.update(status: "pending", total: total_order_revenue(@cart_items), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
+      @order.update(shipping_rate: params["order"]["shipping_rate"])
+      @rates = nil
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
@@ -148,12 +151,13 @@ class OrdersController < ApplicationController
     render :new
   end
 
-  def update_cart_with_shipping
-    @order = Order.find(session[:order_id])
-    @order.update(shipping_rate: params["order"]["shipping_rate"])
-    @rates = nil
-    redirect_to "/billings/new"
-  end
+  # def update_cart_with_shipping
+  #   @order = Order.find(session[:order_id])
+  #   @order.update(shipping_rate: params["order"]["shipping_rate"])
+  #   @rates = nil
+  #   # create
+  #   redirect_to "/billings/new"
+  # end
 
 ###### PRIVATE STARTS HERE!!!!!!! ######
   private

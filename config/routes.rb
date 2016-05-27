@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   post '/shipping' => 'orders#shipping', as: :shipping
-  patch '/checkout' => 'orders#update_cart_with_shipping', as: :shipping_update
+  post '/checkout' => 'orders#create', as: :shipping_update
 
   post '/products/:id' => 'products#create_cart', as: :create_cart
   post '/cart' => 'orders#update_cart'
