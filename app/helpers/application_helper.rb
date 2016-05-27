@@ -21,4 +21,13 @@ module ApplicationHelper
   def any_checkout_path
     current_page == "/checkout" || current_page == "/billings/new"
   end
+
+  def flash_class(level)
+    case level
+        when :notice then "alert alert-info"
+        when :success then "alert alert-success"
+        when :error then "alert alert-error"
+        when :alert then "alert alert-error"
+    end
+  end
 end

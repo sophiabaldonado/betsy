@@ -1,5 +1,5 @@
 <h3> Billing/Shipping Info: </h3>
-<%= form_for [@user, @billing], url: orders_path, html: { method: :post } do |f| %>
+<%= form_for [@user, @billing], url: billings_path, html: { method: :post } do |f| %>
 
   <p>
     <%= f.label :first_name %><br>
@@ -51,9 +51,21 @@
   </p>
 
     <% if current_user %>
-      <%= f.hidden_field :user_id, value: @user.id %><br>
+      <%= f.hidden_field :user_id, value: current_user.id %><br>
     <% end %>
   <p>
     <%= f.submit "Checkout", class: "btn btn-primary" %>
   </p>
 <% end %>
+
+<div class="table-responsive">
+  <table class="table">
+    <tbody>
+      <tr class="total">
+        <td>Total</td>
+        <% shipping = sprintf('%.2f', (@order.total.to_i / 100.0)) %>
+        <th><%= "$" + shipping %></th>
+      </tr>
+    </tbody>
+  </table>
+</div>

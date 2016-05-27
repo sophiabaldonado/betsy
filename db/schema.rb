@@ -11,27 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512224153) do
+ActiveRecord::Schema.define(version: 20160527201257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "billings", force: :cascade do |t|
-    t.string   "first_name",      null: false
-    t.string   "last_name",       null: false
-    t.string   "email",           null: false
-    t.string   "cc",              null: false
-    t.integer  "cvv",             null: false
-    t.integer  "billing_zip",     null: false
-    t.string   "address",         null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "cc"
+    t.integer  "cvv"
+    t.integer  "billing_zip"
+    t.string   "address"
     t.string   "address2"
-    t.string   "city",            null: false
-    t.string   "state",           null: false
-    t.integer  "zip",             null: false
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
     t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "expiration_date", null: false
+    t.string   "expiration_date"
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -63,13 +63,14 @@ ActiveRecord::Schema.define(version: 20160512224153) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "status",            null: false
-    t.datetime "confirmation_date", null: false
-    t.integer  "billing_id",        null: false
+    t.string   "confirmation_date"
+    t.integer  "billing_id"
     t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "order_number",      null: false
-    t.decimal  "total",             null: false
+    t.integer  "order_number"
+    t.integer  "total"
+    t.string   "shipping_rate"
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -81,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160512224153) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name",        null: false
-    t.decimal  "price",       null: false
+    t.integer  "price",       null: false
     t.string   "description"
     t.integer  "user_id",     null: false
     t.integer  "inventory",   null: false

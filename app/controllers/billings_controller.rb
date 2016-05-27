@@ -1,12 +1,6 @@
 class BillingsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
 
-  def index
-  end
-
-  def show
-  end
-
   def new
     if current_user
       @billing = Billing.find_by(user_id: session[:user_id])
@@ -16,19 +10,20 @@ class BillingsController < ApplicationController
     else
       @billing = Billing.new
     end
+
     if current_user
       @user = User.find(session[:user_id])
     else
       @user = User.new
     end
+
+    new_helper
   end
 
   def create
     @billing = Billing.new(billing_params[:billing])
-  end
-
-  def update
-
+    new_helper
+    redirect_to '/orders/show'
   end
 end
 
