@@ -61,6 +61,11 @@
                 </tr>
                 <tr>
                 <td>
+                  <% flash.each do |key, value| %>
+                  <div class="<%= flash_class(key) %>">
+                    <%= value %>
+                  </div>
+                <% end %>
                 <% if @rates == nil || @rates["status"] != "200" %>
 
                 <%= form_tag shipping_path %>
