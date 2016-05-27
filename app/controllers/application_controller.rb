@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :keep_cart_items
   before_action :require_login
-  #skip_before_action :verify_authenticity_token, if: :json_request?
 
 
   def current_user
@@ -43,9 +42,19 @@ class ApplicationController < ActionController::Base
     orders.select { |order| order if order.status == status }
   end
 
-  # protected
-  #
-  # def json_request?
-  #   request.format.json?
-  # end
+  def number_to_currency(price_in_cents)
+   return nil if price_in_cents.nil?
+   "$" + sprintf('%.2f', (price_in_cents / 100.0))
+  end
+
+  def new_helper
+    @order = Order.find(session[:order_id])
+    @products = Product.where(deleted: false, retired: false).where("inventory > 0")
+    if current_user
+      @cart_items = current_user.cart_items
+    else
+      @cart_items = CartItem.where(session_id: session[:session_id])
+    end
+    @cart_items.empty?? (@subtotal = 0) : (@subtotal = @cart_items.map { |item| item.quantity * item.product.price }.reduce(:+))
+  end
 end

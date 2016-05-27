@@ -16,11 +16,14 @@ class BillingsController < ApplicationController
     else
       @billing = Billing.new
     end
+
     if current_user
       @user = User.find(session[:user_id])
     else
       @user = User.new
     end
+
+    new_helper
   end
 
   def create
