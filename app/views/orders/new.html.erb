@@ -61,7 +61,7 @@
                 </tr>
                 <tr>
                 <td>
-                <% if @rates == nil %>
+                <% if @rates == nil || @rates["status"] != "200" %>
                 <%= form_tag shipping_path %>
                   <%= label_tag :country %>
                   <%= text_field_tag :country %>

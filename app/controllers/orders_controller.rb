@@ -137,7 +137,12 @@ class OrdersController < ApplicationController
       length: "15"
     }
 
+    
     @rates = ShippingServiceWrapper.get_quote(params, @packing_info).parsed_response
+    if @rates["status"] != "200"
+      render :new
+    end
+
     # creating array for drop down menu in view
     @rates_array = []
     @rates[0].each do |option|
