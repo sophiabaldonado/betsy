@@ -75,6 +75,7 @@ class OrdersController < ApplicationController
       @order.update(status: "pending", total: (total_order_revenue(@cart_items) + params["order"]["shipping_rate"].to_i), confirmation_date: Time.now, order_number: @order_number, billing_id: @billing_id, user_id: @user_id)
       @order.update(shipping_rate: params["order"]["shipping_rate"])
       @rates = nil
+      raise
       if @order.save
         @cart_items.each do |item|
           @order_item = OrderItem.new(quantity: item.quantity, name: item.product.name, price: item.product.price*item.quantity, status: "pending", order_id: @order.id, product_id: item.product.id)
@@ -82,17 +83,17 @@ class OrdersController < ApplicationController
           item.destroy
           @order_item.product.update(inventory: @order_item.product.inventory - @order_item.quantity)
         end
-        if current_user
-          redirect_to user_order_path(current_user.id, @order.id)
-        else
-          redirect_to checkout_confirmation_path(@order.id)
-        end
+    #     if current_user
+    #       redirect_to user_order_path(current_user.id, @order.id)
+    #     else
+    # raise
+    #       # redirect_to checkout_confirmation_path(@order.id)
+    #     end
       else
         render "/billings/new"
       end
-    else
-        render "/billings/new"
     end
+        render "/billings/new"
   end
 
   def update_cart
