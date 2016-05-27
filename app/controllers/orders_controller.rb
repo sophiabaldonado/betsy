@@ -152,8 +152,7 @@ class OrdersController < ApplicationController
     @order = Order.find(session[:order_id])
     @order.update(shipping_rate: params["order"]["shipping_rate"])
     @rates = nil
-    new_helper
-    render :new
+    redirect_to "/billings/new"
   end
 
   def new_helper
